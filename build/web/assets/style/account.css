@@ -1,0 +1,179 @@
+/* --- GLOBAL LAYOUT --- */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #fefefe 0%, #e9f5ef 60%, #d1ecd7 100%);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* --- CARD --- */
+.sign-up-container {
+  width: 90%;
+  max-width: 480px;
+  padding: 2.5rem 2rem 3rem;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.11);
+  animation: cardPop 0.7s ease-out both;
+}
+
+@keyframes cardPop {
+  0%   { opacity: 0; transform: translateY(25px) scale(0.97); }
+  60%  { opacity: 1; transform: translateY(-6px) scale(1.02); }
+  100% { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+/* --- LOGO --- */
+.sign-up-logo-img {
+  width: 200px;
+  display: block;
+  margin: 0 auto 1.5rem;
+}
+
+/* --- HEADINGS --- */
+.sign-up-title {
+  text-align: center;
+  color: #0ca371;
+  font-size: 2.2rem;
+  margin-bottom: 0.25rem;
+}
+
+.sign-up-tagline,
+.sign-up-subtitle {
+  text-align: center;
+  color: #555;
+}
+
+.sign-up-tagline {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+.sign-up-subtitle {
+  font-size: 0.95rem;
+  margin-bottom: 1.6rem;
+}
+
+/* --- FORM LAYOUT --- */
+.sign-up-form {
+  display: flex;
+  flex-direction: column;
+  margin-right: 30px;
+}
+
+/* Field wrapper */
+.sign-up-field {
+  position: relative;
+  margin-bottom: 1.2rem;
+}
+
+/* INPUT */
+.sign-up-input {
+  width: 100%;
+  padding: 0.9rem 0.9rem 0.4rem;
+  border: 1.5px solid #cfd8dc;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.25s, box-shadow 0.25s;
+  background: transparent;
+}
+
+/* Focus Glow */
+.sign-up-input:focus {
+  border-color: #0ca371;
+  box-shadow: 0 0 0 3px rgba(12, 163, 113, 0.15);
+  border: none;
+}
+
+/* FLOATING LABEL */
+.sign-up-label {
+  position: absolute;
+  top: 0.5rem;
+  left: 0.9rem;
+  font-size: 1rem;
+  color: #757575;
+  pointer-events: none;
+  transition: 0.25s ease;
+}
+
+/* Float effect */
+.sign-up-input:focus + .sign-up-label,
+.sign-up-input:not(:placeholder-shown) + .sign-up-label {
+  top: 0.3rem;
+  font-size: 0.60rem;
+  color: #0ca371;
+  letter-spacing: 0.02em;
+}
+
+/* BUTTONS */
+.sign-up-btn-create,
+.sign-up-btn-login {
+  display: block;
+  text-align: center;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: transform 0.25s, box-shadow 0.25s, background 0.25s, color 0.25s;
+}
+
+.sign-up-btn-create {
+  background: #0ca371;
+  color: #fff;
+  padding: 0.85rem;
+  border: none;
+  margin-top: 0.4rem;
+}
+
+.sign-up-btn-create:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 7px rgba(12, 163, 113, 0.25);
+}
+
+.sign-up-btn-login {
+  margin-top: 1rem;
+  color: #0ca371;
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.sign-up-btn-login:hover {
+  color: #08945e;
+  text-decoration: underline;
+}
+
+/* --- FOOTER --- */
+.sign-up-footer {
+  margin-top: 2.2rem;
+  text-align: center;
+}
+
+.sign-up-footer-icons a {
+  margin: 0 0.55rem;
+  color: #616161;
+  font-size: 1.35rem;
+  transition: transform 0.25s, color 0.25s;
+}
+
+.sign-up-footer-icons a:hover {
+  transform: scale(1.25) rotate(6deg);
+  color: #0ca371;
+}
+
+.sign-up-footer-text {
+  margin-top: 1.1rem;
+  font-size: 0.93rem;
+  color: #888;
+}
+
+/* --- MEDIA QUERY --- */
+@media (max-width: 480px) {
+  .sign-up-container {
+    padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .sign-up-title {
+    font-size: 1.9rem;
+  }
+}

@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;600;900&family=Love+Light&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: "Gabarito", sans-serif;
+  font-size: clamp(16px, 2vw, 18px);
+  overflow-x: hidden;
+}
+
+.landing-container {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.landing-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 10;
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.logo-img {
+  height: 40px;
+}
+
+.landing-ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+.landing-ul a {
+  cursor: pointer;
+  transition: color 0.2s;
+  color: #088159;
+  text-decoration: none;
+}
+
+.landing-ul a:hover {
+  color: #52ce8a;
+}
+
+.landing-body-main-container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  flex-direction: row;
+}
+
+.landing-left-container {
+  width: 50%;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: white;
+}
+
+.landing-left-container h2 {
+  font-family: "Love Light", cursive;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  color: #0ca371;
+  margin-bottom: 1rem;
+}
+
+.landing-left-container p {
+  font-size: clamp(1rem, 1.5vw, 1.1rem);
+  line-height: 1.6;
+  max-width: 95%;
+}
+
+.left-btn {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.left-btn button {
+  padding: 0.75rem 1.5rem;
+  font-size: clamp(0.9rem, 1.2vw, 1rem);
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.shop-btn-left {
+  background: #0ca371;
+  color: white;
+}
+
+.log-btn-left {
+  background: #e5e5e5;
+  color: #0ca371;
+}
+
+.left-btn button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.landing-right-container {
+  width: 50%;
+  background-image: url('../icons/banner-land.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+/* Ensure the image scales correctly */
+.landing-banner-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* Footer */
+.landing-footer {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  color: #8b8b8b;
+  z-index: 10;
+}
+
+.footer-icons i{
+    color: #616161;
+    margin: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-icons i:hover {
+  transform: scale(1.2) rotate(5deg);
+  color: #14c98c; /* your brand green */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  html, body {
+    overflow-y: auto;
+  }
+
+  .landing-body-main-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .landing-left-container,
+  .landing-right-container {
+    width: 100%;
+    height: 50vh;
+  }
+
+  .landing-header {
+    position: static;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .landing-ul {
+    font-size: clamp(0.9rem, 1.5vw, 1rem);
+    color: #333;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .landing-footer {
+    position: relative;
+    margin: 1rem 0;
+    justify-content: center;
+  }
+}
