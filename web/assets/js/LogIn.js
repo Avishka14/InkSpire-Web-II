@@ -29,19 +29,19 @@ async function LogIn() {
              //window location = home
              
             } else {
-                $(".sign-up-btn-create").notify("Something went wrong Please try again Later", "error");
+                $.notify("Something went wrong Please try again Later", "error");
             }
 
 
         } else {
 
-            $(".sign-up-btn-create").notify(json.message, "error");
+            $.notify(json.message, "error");
         }
 
 
 
     } else {
-        console.log("ERRRORR");
+         $.notify("ERROR OCCURED !", "error");
     }
 
 
