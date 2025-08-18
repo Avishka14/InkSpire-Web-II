@@ -26,7 +26,7 @@ async function LogIn() {
 
             if (json.message === "200") {
              
-             //window location = home
+             window.location = "http://localhost:8080/InkSpire/home/home.html";
              
             } else {
                 $.notify("Something went wrong Please try again Later", "error");
