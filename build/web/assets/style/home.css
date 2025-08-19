@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Love+Light&display=swap');
+
+.crousel-container {
+    width: 98%;
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.carousel {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 40px;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Fade Animation */
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.slide:nth-child(1) {
+    animation: fade 12s infinite;
+}
+
+.slide:nth-child(2) {
+    animation: fade 12s infinite 4s;
+}
+
+.slide:nth-child(3) {
+    animation: fade 12s infinite 8s;
+}
+
+.home-heading-container{
+    margin: 30px;
+}
+.home-heading-p {
+  font-size: clamp(2rem, 6vw, 5rem); 
+  font-family: "Love Light", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
