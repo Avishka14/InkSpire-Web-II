@@ -1,72 +1,149 @@
 @import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Love+Light&display=swap');
 
 .crousel-container {
-    width: 98%;
-    height: 90vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+  width: 95%;
+  height: 95vh;      
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;    
 }
 
 .carousel {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    border-radius: 40px;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 40px;
 }
 
 .slide {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 1s ease-in-out;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transition: opacity 1s ease-in-out;
+  background-size: cover;
+  background-position: center;
 }
 
-.slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+
+.slide h2,
+.slide button {
+  position: absolute;
+  left: 10%;              
+  color: #ffffff;
+  text-align: left;
 }
 
-/* Fade Animation */
+.slide h2 {
+  top: 30%;
+  font-size: clamp(1.5rem, 3vw, 3rem);
+  font-weight: 600;
+  width: 50%;
+}
+
+.slide button {
+  top: 90%;
+  display: inline-block;
+  padding: 14px 34px;
+  border: none;
+  border-radius: 50px;
+  font-size: clamp(0.9rem, 2vw, 1.3rem); /* responsive font size */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  color: #fff8dc;
+  cursor: pointer;
+  background: linear-gradient(#187553, #187553, #b8860b);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+
+/* Background layer */
+.slide button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #d4af37, #b8860b);
+  z-index: -2;
+}
+
+/* Hover overlay */
+.slide button::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 0%;
+  height: 100%;
+  background: #ffd700; /* bright gold overlay */
+  transition: all 0.3s ease;
+  border-radius: 50px;
+  z-index: -1;
+}
+
+/* Hover effect */
+.slide button:hover {
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.slide button:hover::before {
+  width: 100%;
+}
+
+
+/* Individual slides with background images */
+.slide-one {
+  background-image: url("../img/fgf.jpg");
+}
+
+.slide-two {
+  background-image: url("../img/5487851.jpg");
+}
+
+.slide-three {
+  background-image: url("../img/Amazing-Old-Book-Desktop-Wallpapers.jpg");
+}
+
+/* Fade Animation for slides */
 @keyframes fade {
-    0% {
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    30% {
-        opacity: 1;
-    }
-    40% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 0;
-    }
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  30% { opacity: 1; }
+  40% { opacity: 0; }
+  100% { opacity: 0; }
 }
 
-.slide:nth-child(1) {
-    animation: fade 12s infinite;
+/* Fade Animation for text/button */
+@keyframes textFade {
+  0%, 40%, 100% { opacity: 0; }
+  10%, 30% { opacity: 1; }
 }
 
-.slide:nth-child(2) {
-    animation: fade 12s infinite 4s;
-}
+/* Assign timing to each slide – ✅ slower cycle */
+.slide:nth-child(1) { animation: fade 21s infinite; }
+.slide:nth-child(2) { animation: fade 21s infinite 7s; }
+.slide:nth-child(3) { animation: fade 21s infinite 14s; }
 
-.slide:nth-child(3) {
-    animation: fade 12s infinite 8s;
-}
+.slide:nth-child(1) h2,
+.slide:nth-child(1) button { animation-delay: 0s; }
+
+.slide:nth-child(2) h2,
+.slide:nth-child(2) button { animation-delay: 7s; }
+
+.slide:nth-child(3) h2,
+.slide:nth-child(3) button { animation-delay: 14s; }
+
 
 .home-heading-container{
     margin: 30px;
 }
 .home-heading-p {
-  font-size: clamp(2rem, 6vw, 5rem); 
+  font-size: clamp(2rem, 5vw, 4rem); 
   font-family: "Love Light", cursive;
   font-weight: 400;
   font-style: normal;
@@ -184,3 +261,80 @@
     justify-content: center;
   }
 }
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr 3fr;   /* Left big, right side */
+  grid-template-rows: auto auto;
+  gap: 20px;
+  margin: 20px;
+}
+
+/* Base item style */
+.item {
+  position: relative;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+  min-height: 200px;
+}
+
+.item img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 0.7;
+}
+
+.item .content {
+  position: relative;
+  z-index: 1;
+}
+
+.item h2 {
+  margin-bottom: 10px;
+  font-size: 30px;
+  color: white;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 3);
+}
+
+.item .btn {
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 15px;
+  color: #FFC403;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 3);
+}
+
+
+
+/* Grid placement */
+.item1 { grid-row: 1 / span 2; }     /* Tall left */
+.item2 { grid-column: 2; grid-row: 1; }  /* Top-right */
+.item3 { grid-column: 2; grid-row: 2; }  /* Bottom-right-left */
+.item4 { grid-column: 3; grid-row: 2; }  /* Bottom-right-right */
+
+/* FIX: Define 3 columns when needed */
+.grid-container {
+  grid-template-columns: 2fr 1.5fr 1.5fr; /* Left big, two right columns */
+}
+
+/* Responsive: stack on small screens */
+@media (max-width: 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+  .item1, .item2, .item3, .item4 {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 250px;
+  }
+}
+
