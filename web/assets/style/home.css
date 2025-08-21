@@ -71,3 +71,116 @@
   font-weight: 400;
   font-style: normal;
 }
+
+.searchbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: #fff;
+  border-bottom: 1px solid rgba(15, 157, 88, 0.2);
+  flex-wrap: wrap;
+}
+
+/* Sell Items link */
+.searchbar a {
+  font-weight: bold;
+  color: #0f9d58;
+  text-decoration: none;
+  margin-right: 20px;
+  transition: color 0.3s ease;
+}
+
+.searchbar a:hover {
+  color: #0b7c44;
+}
+
+/* Search Form */
+.searchbar form {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  max-width: 400px;
+}
+
+.searchbar input {
+  width: 100%;
+  padding: 10px 15px;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  background: rgba(15, 157, 88, 0.05); /* invisible modern look */
+  outline: none;
+  color: #0f9d58;
+  transition: all 0.3s ease;
+}
+
+.searchbar input:focus {
+  border-color: #0f9d58;
+  background: #fff;
+  box-shadow: 0 0 8px rgba(15, 157, 88, 0.3);
+}
+
+/* Search Button */
+.searchbar button {
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 8px 15px;
+  border: none;
+  background: #0f9d58;
+  color: #fff;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.searchbar button:hover {
+  background: #0b7c44;
+}
+
+/* Right side links */
+.searchbar ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.searchbar ul li {
+  cursor: pointer;
+  color: #0f9d58;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.searchbar ul li:hover {
+  color: #0b7c44;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .searchbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .searchbar form {
+    order: 1;
+    width: 100%;
+  }
+
+  .searchbar a {
+    order: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .searchbar ul {
+    order: 2;
+    justify-content: center;
+  }
+}
