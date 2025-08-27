@@ -1,11 +1,12 @@
-/* --- GLOBAL LAYOUT --- */
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Love+Light&display=swap');
+
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background: radial-gradient(circle at top, #fefefe 0%, #e9f5ef 60%, #d1ecd7 100%);
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Gabarito", sans-serif;
 }
 
 /* --- CARD --- */

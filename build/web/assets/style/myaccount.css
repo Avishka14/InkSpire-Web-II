@@ -1,7 +1,8 @@
-/* -------- Global -------- */
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Love+Light&display=swap');
+
 body {
   margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: 'Gabarito', sans-serif;
   background: #f9fafb;
   color: #222;
   overflow-x: hidden; /* prevent horizontal scroll */
