@@ -19,3 +19,4 @@ async function loadHtml() {
 
 }
 
+document.addEventListener("DOMContentLoaded", loadHtml);
