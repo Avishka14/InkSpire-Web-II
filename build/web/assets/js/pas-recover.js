@@ -26,13 +26,11 @@ async function sendMail() {
         const result = await response.json();
 
         if (result.status) {
-//            document.getElementById("get-code-section").style.display = "none";
-//            document.getElementById("password-section").style.display = "block";
             
             $.notify("Code Has send to your email!", "success");
             
         } else {
-            $.notify("Something went wrong Please try again Later", "error");
+            $.notify("Invalid E-Mail Address", "error");
         }
     } else {
         $.notify("Something went wrong Please try again Later", "error");
@@ -65,6 +63,41 @@ async function verifyCode(){
    
     }else{
          $.notify("Verification Code is Invalid !", "error");
+    }
+    
+    
+}
+
+
+async function updateUserPassword(){
+        
+    const data = {
+        newPassword: document.getElementById("new-password").value,
+        confirmPassword:document.getElementById("confirm-password").value
+    };
+    
+    const dataJson = JSON.stringify(data);
+    
+    const response = await fetch("http://localhost:8080/InkSpire/PasswordChange", {
+           method:"POST",      
+           header: {
+                "Content-Type": "application/json"
+           },
+          body:dataJson
+    });
+    
+    if(response.ok){
+        const json = await response.json();
+        
+        if(json.status){
+             $.notify(json.message, "success");
+       
+        }else{
+              $.notify(json.message, "error");
+              console.log("error" +json.message);
+        }
+        
+        
     }
     
     
