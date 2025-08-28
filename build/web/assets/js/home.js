@@ -14,9 +14,10 @@ async function loadSection(file, targetId) {
 }
 
 
-async function loadHtml() {
-    loadSection("Header.html", "header-div");
+ function loadHtml() {
+   loadSection("Header.html", "header-div");
     loadSection("footer.html", "footer-content");
+    loadCategories();
 
 }
 
@@ -64,3 +65,40 @@ function sideNav() {
             closeMenu();
     });
 }  
+
+
+async function loadCategories(){
+    
+    const response = await fetch("http://localhost:8080/InkSpire/LoadCategory");
+    console.log("hello");
+    
+    if(response.ok){
+        
+        const json = await response.json();
+        
+        if(json.status){
+            
+          const ul =  document.getElementById("category-ul");
+            
+            json.categoryList.forEach(item => {
+               const li = document.createElement("li");
+               li.value = item.id;
+               li.innerHTML = `<i class="bi bi-book"></i> ${item.value}`;
+               ul.appendChild(li);
+                
+               console.log(json.categoryList);
+                
+            });
+            
+        }else{
+            console.log("Error ss");
+            
+        }
+
+        
+    }else{
+          console.log("Error sfdfds");
+        
+    }
+    
+}
