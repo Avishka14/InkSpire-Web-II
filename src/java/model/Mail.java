@@ -15,7 +15,7 @@ public class Mail {
     private static final String APP_EMAIL = "";        //Sender Mail
     private static final String APP_PASSWORD = "";   //app password   
 
-    public static void sendMail(String email, String subject, String htmlContent) {
+    public static boolean sendMail(String email, String subject, String htmlContent) {
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -41,6 +41,8 @@ public class Mail {
 
             System.out.println("Email sent successfully!");
 
+            return true;
+            
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
