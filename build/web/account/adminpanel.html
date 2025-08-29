@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InkSpire Admin Panel</title>
+  <link rel="stylesheet" href="../assets/style/adminpanel.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="left">
+      <i class="bi bi-arrow-left-circle" onclick="history.back()"></i>
+      <span><strong>Admin:</strong> John Doe</span>
+    </div>
+    <nav>
+      <a href="#"><i class="bi bi-house-door"></i> Home</a>
+      <a href="#"><i class="bi bi-inbox"></i> Inbox</a>
+    </nav>
+  </header>
+
+  <!-- Layout -->
+  <div class="account-layout">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <ul>
+        <li class="active" data-tab="listings"><i class="bi bi-box-seam"></i> Listings</li>
+        <li data-tab="stats"><i class="bi bi-bar-chart-line"></i> Stats</li>
+        <li data-tab="users"><i class="bi bi-people"></i> User Management</li>
+        <li data-tab="admins"><i class="bi bi-person-gear"></i> Admin Management</li>
+        <li data-tab="offers"><i class="bi bi-gift"></i> Offers</li>
+        <li data-tab="utility"><i class="bi bi-tools"></i> Utility Manager</li>
+        <li data-tab="addlisting"><i class="bi bi-plus-circle"></i> Add Listings</li>
+      </ul>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+
+      <!-- Listing Management -->
+      <div id="listings" class="tab-panel active">
+        <h1>Listing Management</h1>
+        <div class="listings-grid">
+          <div class="listing-card" data-date="2025-08-01" data-price="120">
+            <img src="https://via.placeholder.com/220x150" alt="Book">
+            <h3>The Great Novel</h3>
+            <p class="price">$120</p>
+            <p>Listed: 2025-08-01</p>
+            <button class="bre-button">Approve</button>
+            <button class="danger bre-button">Decline</button>
+          </div>
+          <div class="listing-card" data-date="2025-08-05" data-price="80">
+            <img src="https://via.placeholder.com/220x150" alt="Book">
+            <h3>Science Fiction Tales</h3>
+            <p class="price">$80</p>
+            <p>Listed: 2025-08-05</p>
+            <button class="bre-button">Approve</button>
+            <button class="danger bre-button">Decline</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div id="stats" class="tab-panel">
+        <h1>Platform Statistics</h1>
+        <div class="status-cards">
+          <div class="card"><h2>Active Listings</h2><p>320</p></div>
+          <div class="card"><h2>Orders Placed</h2><p>540</p></div>
+          <div class="card"><h2>Delivered Orders</h2><p>500</p></div>
+          <div class="card"><h2>Canceled Orders</h2><p>40</p></div>
+          <div class="card"><h2>Total Earnings</h2><p>$52,300</p></div>
+        </div>
+      </div>
+
+      <!-- User Management -->
+      <div id="users" class="tab-panel">
+        <h1>User Management</h1>
+        <table class="user-table">
+          <thead>
+            <tr><th>Name</th><th>Email</th><th>Role</th><th>Joined</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Alice</td><td>alice@mail.com</td><td>Seller</td><td>2025-07-01</td></tr>
+            <tr><td>Bob</td><td>bob@mail.com</td><td>Buyer</td><td>2025-07-20</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Admin Management -->
+      <div id="admins" class="tab-panel">
+        <h1>Admin Management</h1>
+
+        <div class="listing-form">
+          <h2>Add New Admin</h2>
+          <form id="addAdminForm">
+            <label>Name</label>
+            <input type="text" id="adminName" placeholder="Enter name" required>
+            <label>Email</label>
+            <input type="email" id="adminEmail" placeholder="Enter email" required>
+            <label>Password</label>
+            <input type="password" id="adminPassword" placeholder="Enter password" required>
+            <button type="submit" class="bre-button">Add Admin</button>
+          </form>
+        </div>
+
+        <h2>Existing Admins</h2>
+        <table class="user-table" id="adminsTable">
+          <thead>
+            <tr>
+              <th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Super Admin</td>
+              <td>superadmin@inkspire.com</td>
+              <td>Super</td>
+              <td>2025-01-01</td>
+              <td>
+                <button class="bre-button edit-btn">Edit</button>
+                <button class="danger bre-button delete-btn">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Offers -->
+      <div id="offers" class="tab-panel">
+        <h1>Offers</h1>
+        <div class="listing-form">
+          <h2>Add Offer</h2>
+          <form>
+            <label>Offer Type</label>
+            <select><option>Discount</option><option>Free Shipping</option><option>Buy 1 Get 1</option></select>
+            <label>Offer Value</label>
+            <input type="text" placeholder="Enter value (e.g. 20%)">
+            <button type="submit" class="bre-button">Add Offer</button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Utility Manager -->
+      <div id="utility" class="tab-panel">
+        <h1>Utility Manager</h1>
+        <h2>Add New Category</h2>
+        <input type="text" placeholder="Enter category name">
+        <button class="bre-button">Add Category</button>
+        <h2>Upload Announcement</h2>
+        <textarea placeholder="Write announcement..."></textarea>
+        <button class="bre-button">Upload</button>
+      </div>
+
+      <!-- Add Listings -->
+      <div id="addlisting" class="tab-panel">
+        <h1>Add Admin Listing</h1>
+        <div class="listing-form">
+          <form>
+            <label>Product Name</label>
+            <input type="text" placeholder="Product Name">
+            <label>Description</label>
+            <textarea placeholder="Enter description"></textarea>
+            <label>Category</label>
+            <select><option>Books</option><option>Electronics</option></select>
+            <label>Price</label>
+            <input type="number" placeholder="0.00">
+            <label>Upload Image</label>
+            <input type="file" accept="image/*">
+            <button type="submit" class="bre-button">Add Listing</button>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    Developed By Avishka Chamod
+  </footer>
+
+
+  <script src="../assets/js/adminpanel.js"></script>
+</body>
+</html>
