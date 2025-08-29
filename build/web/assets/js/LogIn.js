@@ -1,5 +1,5 @@
 async function LogIn() {
-
+      
     const data = {
         email: document.getElementById("loginEmail").value,
         password: document.getElementById("loginPassword").value
@@ -27,6 +27,10 @@ async function LogIn() {
             if (json.message === "200") {
              
              window.location = "http://localhost:8080/InkSpire/home/home.html";
+             
+            }else if(json.message === "600"){
+                
+             window.location = "http://localhost:8080/InkSpire/account/adminpanel.html";
              
             } else {
                 $.notify("Something went wrong Please try again Later", "error");
