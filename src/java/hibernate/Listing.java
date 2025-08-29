@@ -2,6 +2,8 @@
 package hibernate;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,7 +24,7 @@ public class Listing implements Serializable{
     private int id;
     
     @Column(name = "listing_date")
-    private Date listing_date;
+    private Timestamp listing_date;
     
     @Column(name = "price")
     private double price;
@@ -34,6 +36,10 @@ public class Listing implements Serializable{
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    
+    @ManyToOne
+    @JoinColumn(name = "listing_approval_id")
+    private ListingApproval listingId;
 
     public Listing() {
     }
@@ -46,11 +52,11 @@ public class Listing implements Serializable{
         this.id = id;
     }
 
-    public Date getListing_date() {
+    public Timestamp getListing_date() {
         return listing_date;
     }
 
-    public void setListing_date(Date listing_date) {
+    public void setListing_date(Timestamp listing_date) {
         this.listing_date = listing_date;
     }
 
@@ -76,6 +82,14 @@ public class Listing implements Serializable{
 
     public void setProduct(Product product) {
         this.product = product;
+    }
+
+    public ListingApproval getListingId() {
+        return listingId;
+    }
+
+    public void setListingId(ListingApproval listingId) {
+        this.listingId = listingId;
     }
     
     
