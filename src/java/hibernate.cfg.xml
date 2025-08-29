@@ -15,5 +15,6 @@
     <mapping class="hibernate.Listing" />
     <mapping class="hibernate.Product" />
     <mapping class="hibernate.Seller" />
+    <mapping class="hibernate.ListingApproval" />
   </session-factory>
 </hibernate-configuration>
