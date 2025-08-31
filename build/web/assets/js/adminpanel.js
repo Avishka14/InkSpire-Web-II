@@ -47,18 +47,21 @@ function loadSelect(selectId , list , property){
 
 async function saveProductAdmin() {
     const productId = Math.floor(100000 + Math.random() * 900000);
-    const title = document.getElementById("title").value;
-    const description = document.getElementById("description").value;
+    const title = document.getElementById("title").value.trim();
+    const description = document.getElementById("description").value.trim();
     const categoryId = document.getElementById("category").value;
     const conditionId = document.getElementById("condition").value;
     const itemAvailabilityId = "1";
-    const price = document.getElementById("price").value;
+    const price = document.getElementById("price").value.trim();
     const sellerId = "1";
     const approvalId = "1";
-
     const image1 = document.getElementById("img1").files[0];
-    const image2 = document.getElementById("img2").files[0];
-    const image3 = document.getElementById("img3").files[0];
+
+    // 🚨 Frontend validation
+    if (!title || !description || !categoryId || !conditionId || !price || !image1) {
+        $.notify("All fields including product image are required.", "error");
+        return;
+    }
 
     const form = new FormData();
     form.append("productId", productId);
@@ -71,8 +74,6 @@ async function saveProductAdmin() {
     form.append("price", price);
     form.append("approvalId", approvalId);
     form.append("image1", image1);
-    form.append("image2", image2);
-    form.append("image3", image3);
 
     try {
         const response = await fetch("http://localhost:8080/InkSpire/AddProduct", {
@@ -85,20 +86,24 @@ async function saveProductAdmin() {
             return;
         }
 
-
         const json = await response.json();
 
         if (json.status) {
-            $.notify(json.message || "Product added successfully!", "success");
+            $.notify(json.message || "Listing added successfully!", "success");
             clearProductForm();
+        } else if (json.message === "4004") {
+            $.notify("All fields are required to add a listing", "error");
         } else {
-            $.notify(json.message || "Something went wrong. Please try again later.", "error");
+            $.notify(json.message || "Listing addition failed!", "error");
         }
     } catch (error) {
         console.error("Request failed:", error);
         $.notify("Network error. Please check your connection.", "error");
     }
 }
+
+
+
 
 function clearProductForm() {
     document.getElementById("title").value = "";
@@ -107,6 +112,4 @@ function clearProductForm() {
     document.getElementById("condition").value = "";
     document.getElementById("price").value = "";
     document.getElementById("img1").value = "";
-    document.getElementById("img2").value = "";
-    document.getElementById("img3").value = "";
 }
