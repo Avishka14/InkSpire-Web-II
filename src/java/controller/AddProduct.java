@@ -54,11 +54,14 @@ public class AddProduct extends HttpServlet {
             String price = request.getParameter("price");
             String sellerId = request.getParameter("sellerId");
             String approvalId = request.getParameter("approvalId");
+            Part part1 = request.getPart("image1");
 
+            // 🚨 Ensure image is provided BEFORE saving product
             if (productId == null || title == null || categoryId == null || conditionId == null
-                    || itemAvailabilityId == null || price == null || sellerId == null || approvalId == null) {
+                    || itemAvailabilityId == null || price == null || sellerId == null || approvalId == null
+                    || part1 == null || part1.getSize() == 0) {
                 responseObject.addProperty("status", false);
-                responseObject.addProperty("message", "Missing required parameters.");
+                responseObject.addProperty("message", "Missing required parameters or product image.");
                 response.getWriter().write(gson.toJson(responseObject));
                 return;
             }
@@ -97,40 +100,44 @@ public class AddProduct extends HttpServlet {
             listing.setSeller(seller);
             session.save(listing);
 
-            tx.commit();
-
-            // === File uploads ===
-            Part part1 = request.getPart("image1");
-            Part part2 = request.getPart("image2");
-            Part part3 = request.getPart("image3");
-
+            // === Save image before commit ===
             File productFolder = new File(UPLOAD_DIR, productId);
             if (!productFolder.exists()) {
                 productFolder.mkdirs();
             }
 
-            savePartToFile(part1, new File(productFolder, "image1.png"));
-            savePartToFile(part2, new File(productFolder, "image2.png"));
-            savePartToFile(part3, new File(productFolder, "image3.png"));
+            File imageFile = new File(productFolder, "image1.png");
+            try {
+                savePartToFile(part1, imageFile);
+            } catch (IOException ioEx) {
+                if (tx != null) tx.rollback(); // rollback product save if image fails
+                responseObject.addProperty("status", false);
+                responseObject.addProperty("message", "Failed to save product image.");
+                response.getWriter().write(gson.toJson(responseObject));
+                return;
+            }
 
-            // === Success response ===
+            // Commit only if image + product save worked
+            tx.commit();
+
             responseObject.addProperty("status", true);
             responseObject.addProperty("message", "Product added successfully.");
-            responseObject.addProperty("productId", productId);
             response.getWriter().write(gson.toJson(responseObject));
 
         } catch (NumberFormatException e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             responseObject.addProperty("status", false);
             responseObject.addProperty("message", "Invalid number format in request parameters.");
             response.getWriter().write(new Gson().toJson(responseObject));
         } catch (HibernateException e) {
-            e.printStackTrace();
             if (tx != null) tx.rollback();
+            e.printStackTrace();
             responseObject.addProperty("status", false);
             responseObject.addProperty("message", "Database error while saving product.");
             response.getWriter().write(new Gson().toJson(responseObject));
         } catch (Exception e) {
+            if (tx != null) tx.rollback();
             e.printStackTrace();
             responseObject.addProperty("status", false);
             responseObject.addProperty("message", "Unexpected error: " + e.getMessage());
