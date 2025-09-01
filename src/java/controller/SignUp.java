@@ -2,13 +2,19 @@ package controller;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import hibernate.HibernateUtill;
+import hibernate.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 @WebServlet(name = "SignUp", urlPatterns = {"/SignUp"})
 public class SignUp extends HttpServlet {
@@ -40,7 +46,27 @@ public class SignUp extends HttpServlet {
              responseObject.addProperty("message", "Password Must Include More than ,\n 8 Character Long and Uppercase , Lowercase ,\n Digit and a Special Character!");
         }else{
             
+            Session session = HibernateUtill.getSessionFactory().openSession();
             
+            Criteria criteria = session.createCriteria(User.class);
+            criteria.add(Restrictions.eq("email", email));
+            
+              if (!criteria.list().isEmpty()) {
+                responseObject.addProperty("message", "User with this E-Mail already Extists!");
+              }else{
+                  
+                  User user = new User();
+                  user.setFirstName(fname);
+                  user.setEmail(email);
+                  user.setLastName(lname);
+                  user.setPassword(password);
+                  user.setRegDate(new Date());
+                  
+                  session.save(user);
+                  session.beginTransaction().commit();
+               
+                  responseObject.addProperty("status", true);
+              }
         }
         
         String responseJson = gson.toJson(responseObject);
@@ -50,3 +76,4 @@ public class SignUp extends HttpServlet {
     }
 
 }
+

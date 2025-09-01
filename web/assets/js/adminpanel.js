@@ -113,3 +113,37 @@ function clearProductForm() {
     document.getElementById("price").value = "";
     document.getElementById("img1").value = "";
 }
+
+
+async function addNewCategory(){
+    
+    
+    const newCateJson = JSON.stringify({
+        newCategory:document.getElementById("new-category-input").value  
+    });
+    
+    const response = await fetch("http://localhost:8080/InkSpire/LoadCategory" , {
+        method:"POST",
+        header:{
+           "Content-Type":"application/json"
+        },
+        body:newCateJson
+    });
+    
+    if(response.ok){
+         const json = await response.json();
+         
+         if(json.status){
+              $.notify("Successfully Added Category.", "success");
+        
+        }else{
+              $.notify( json.message|| "Network error. Please check your connection.", "error");
+         }
+        
+        
+    }else{
+          $.notify("Network error. Please check your connection.", "error");
+    }
+    
+    
+}

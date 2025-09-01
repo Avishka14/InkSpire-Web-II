@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 @WebServlet(name = "LoadCategory", urlPatterns = {"/LoadCategory"})
 public class LoadCategory extends HttpServlet {
@@ -39,6 +40,48 @@ public class LoadCategory extends HttpServlet {
         response.getWriter().write(gson.toJson(responseObject));
     
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       
+         Gson gson = new Gson();
+         JsonObject data = gson.fromJson(request.getReader(), JsonObject.class);
+         String newCategory = data.get("newCategory").getAsString();
+         
+         JsonObject responseObject = new JsonObject();
+         responseObject.addProperty("status", Boolean.FALSE);
+         
+         if(newCategory.isEmpty()){
+              responseObject.addProperty("message", "Please insert the Category name");
+         }else{
+             
+             Session session = HibernateUtill.getSessionFactory().openSession();
+             
+             Criteria c = session.createCriteria(Category.class);
+             c.add(Restrictions.eq("value", newCategory));
+             
+             if(c.list().isEmpty()){
+                 
+                 Category category = new Category();
+                 category.setValue(newCategory);
+                 session.save(category);
+                 session.beginTransaction().commit();           
+                 responseObject.addProperty("status", true);
+                 
+             }else{
+                 responseObject.addProperty("message", "The Category Already Extists!");
+             }
+             
+             session.close();
+         }
+        
+        String responseText = gson.toJson(responseObject);
+        response.setContentType("application/json");
+        response.getWriter().write(responseText);
+        
+    }
+    
+    
 
    
 

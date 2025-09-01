@@ -26,6 +26,8 @@ async function signUp(){
         
         if(json.status){
             
+              window.location.href = "http://localhost:8080/InkSpire/home/home.html";
+              console.log("success");
         }else{
              $.notify(json.message, "error");
         }
