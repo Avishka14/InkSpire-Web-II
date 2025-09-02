@@ -14,33 +14,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// Toggle offer listings
-$(document).on("click", ".toggle-listings", function() {
-  let listings = $(this).closest(".offer-card").find(".offer-listings");
-  listings.toggleClass("hidden");
-
-  $(this).text(listings.hasClass("hidden") ? "View Listings" : "Hide Listings");
-});
-
-// Delete offer
-$(document).on("click", ".delete-offer-btn", function() {
-  let offerId = $(this).closest(".offer-card").data("offer-id");
-  $.notify("Offer " + offerId + " deleted", "success");
-  $(this).closest(".offer-card").remove();
-});
-
-// Assign product to offer
-$("#assignProductBtn").on("click", function() {
-  let productId = $("#productIdInput").val();
-  let offerId = $("#offerSelect").val();
-
-  if (productId && offerId) {
-    $.notify("Product " + productId + " assigned to offer " + offerId, "success");
-    $("#productIdInput").val("");
-  } else {
-    $.notify("Please enter product ID and select an offer", "error");
-  }
-});
 
 
 async function loadListingData(){
@@ -145,8 +118,7 @@ function clearProductForm() {
 
 
 async function addNewCategory(){
-    
-    
+ 
     const newCateJson = JSON.stringify({
         newCategory:document.getElementById("new-category-input").value  
     });
@@ -175,4 +147,117 @@ async function addNewCategory(){
     }
     
     
+}
+
+
+async function addNewOffers(){
+    
+    const newOffer = JSON.stringify({
+        newOffer : document.getElementById("offerValue").value
+    });
+    
+    const response = await fetch("http://localhost:8080/InkSpire/AddOffer" , {
+       method:"POST",
+       header:{
+           "Content-Type":"application/json"
+       },
+       body:newOffer
+        
+    });
+    
+    if(response.ok){
+        const json = await response.json();
+        
+        if(json.status){
+            $.notify(json.message, "success");
+        }else{
+             $.notify(json.message, "error");
+        }
+   
+    
+    }else{
+         $.notify("Network error. Please check your connection.", "error");
+    }
+    
+}
+
+async function loadOffers() {
+    try {
+        const response = await fetch("http://localhost:8080/InkSpire/AddOffer");
+
+        if (!response.ok) {
+            console.error("Network error: ", response.status);
+            return;
+        }
+
+        const json = await response.json();
+
+        if (!json.status) {
+            $.notify("Network error. Please check your connection.", "error");
+            return;
+        }
+
+        const container = document.getElementById("offersList");
+        container.innerHTML = ""; 
+
+        json.offerList.forEach(offer => {
+
+            const card = document.createElement("div");
+            card.className = "offer-card";
+            card.dataset.offerId = offer.id;
+
+
+            card.innerHTML = `
+                <div class="offer-header">
+                    <h3> ${offer.offerTypeName}</h3>
+                </div>
+                <div class="offer-actions">
+                    <button class="bre-button small toggle-listings">View Listings</button>
+                    <button class="danger bre-button small delete-offer-btn">Delete</button>
+                </div>
+                <div class="offer-listings hidden">
+                    <h4>Listings under this offer:</h4>
+                    <ul>
+                        ${offer.listings.map(listing => `<li>Product ID: ${listing.id} – ${listing.productTitle}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+
+
+            container.appendChild(card);
+
+
+            const toggleBtn = card.querySelector(".toggle-listings");
+            const listingsDiv = card.querySelector(".offer-listings");
+            toggleBtn.addEventListener("click", () => {
+                listingsDiv.classList.toggle("hidden");
+            });
+
+
+            const deleteBtn = card.querySelector(".delete-offer-btn");
+            deleteBtn.addEventListener("click", async () => {
+                if (confirm("Are you sure you want to delete this offer?")) {
+                    
+                  const response = await fetch(`http://localhost:8080/InkSpire/AddOffer?id=${offer.id}` ,{
+                      method:"DELETE"
+                  });
+                  
+                    const json = await response.json();
+             
+                  if (json.status) {
+                  $.notify("Offer deleted successfully.", "success");
+                        loadOffers();
+                      
+        } else {
+            $.notify(json.message || "Failed to delete offer.", "error");
+        }
+                  
+                }
+            });
+        });
+
+    } catch (error) {
+        console.error("Error loading offers: ", error);
+        $.notify("An unexpected error occurred.", "error");
+    }
 }
