@@ -10,7 +10,7 @@
   <script src="http://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>  
 
 </head>
-<body onload="loadListingData();">
+<body onload="loadListingData(); loadOffers();">
 
   <!-- Header -->
   <header>
@@ -141,39 +141,18 @@
       <!-- Add Offer Form -->
       <div class="listing-form">
         <h2>Add Offer</h2>
-        <form id="addOfferForm">
-
+       
           <label>Offer Name</label>
           <input type="text" id="offerValue" placeholder="Enter value ">
 
-          <button type="submit" class="bre-button full">Add Offer</button>
-        </form>
+          <button type="submit" class="bre-button full" onclick="addNewOffers();">Add Offer</button>
+
       </div>
 
       <!-- Offer List -->
       <h2>Existing Offers</h2>
       <div id="offersList" class="offers-grid">
-        <!-- Example Offer Card -->
-        <div class="offer-card" data-offer-id="1">
-          <div class="offer-header">
-            <h3>Discount - 20%</h3>
-            <span class="offer-id">ID: 1</span>
-          </div>
-          <p>Created: 2025-08-15</p>
-          <div class="offer-actions">
-            <button class="bre-button small toggle-listings">View Listings</button>
-            <button class="danger bre-button small delete-offer-btn">Delete</button>
-          </div>
-
-          <!-- Collapsible Listings -->
-          <div class="offer-listings hidden">
-            <h4>Listings under this offer:</h4>
-            <ul>
-              <li>Product ID: 101 – The Great Novel</li>
-              <li>Product ID: 105 – Science Fiction Tales</li>
-            </ul>
-          </div>
-        </div>
+   
       </div>
     </div>
 
