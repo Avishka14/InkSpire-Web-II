@@ -131,19 +131,75 @@
       </div>
 
       <!-- Offers -->
-      <div id="offers" class="tab-panel">
-        <h1>Offers</h1>
-        <div class="listing-form">
-          <h2>Add Offer</h2>
-          <form>
-            <label>Offer Type</label>
-            <select><option>Discount</option><option>Free Shipping</option><option>Buy 1 Get 1</option></select>
-            <label>Offer Value</label>
-            <input type="text" placeholder="Enter value (e.g. 20%)">
-            <button type="submit" class="bre-button">Add Offer</button>
-          </form>
+      <!-- Offers -->
+<div id="offers" class="tab-panel">
+  <h1>Offers Management</h1>
+
+  <div class="offers-layout">
+    <!-- Left Column: Offer Management -->
+    <div class="offers-left">
+      <!-- Add Offer Form -->
+      <div class="listing-form">
+        <h2>Add Offer</h2>
+        <form id="addOfferForm">
+
+          <label>Offer Name</label>
+          <input type="text" id="offerValue" placeholder="Enter value ">
+
+          <button type="submit" class="bre-button full">Add Offer</button>
+        </form>
+      </div>
+
+      <!-- Offer List -->
+      <h2>Existing Offers</h2>
+      <div id="offersList" class="offers-grid">
+        <!-- Example Offer Card -->
+        <div class="offer-card" data-offer-id="1">
+          <div class="offer-header">
+            <h3>Discount - 20%</h3>
+            <span class="offer-id">ID: 1</span>
+          </div>
+          <p>Created: 2025-08-15</p>
+          <div class="offer-actions">
+            <button class="bre-button small toggle-listings">View Listings</button>
+            <button class="danger bre-button small delete-offer-btn">Delete</button>
+          </div>
+
+          <!-- Collapsible Listings -->
+          <div class="offer-listings hidden">
+            <h4>Listings under this offer:</h4>
+            <ul>
+              <li>Product ID: 101 – The Great Novel</li>
+              <li>Product ID: 105 – Science Fiction Tales</li>
+            </ul>
+          </div>
         </div>
       </div>
+    </div>
+
+    <!-- Right Column: Assign Product -->
+    <div class="offers-right">
+      <div class="listing-form">
+        <h2>Assign Product to Offer</h2>
+        <label>Product ID</label>
+        <input type="text" id="productIdInput" placeholder="Enter Product ID">
+
+        <label>Select Offer</label>
+        <select id="offerSelect">
+          <option value="1">Discount - 20%</option>
+          <option value="2">Free Shipping</option>
+        </select>
+
+        <button class="bre-button full" id="assignProductBtn">Add to Offer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+          <!-- Offers -->
+      
+     
 
       <!-- Utility Manager -->
       <div id="utility" class="tab-panel">

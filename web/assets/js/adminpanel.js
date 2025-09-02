@@ -14,6 +14,35 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Toggle offer listings
+$(document).on("click", ".toggle-listings", function() {
+  let listings = $(this).closest(".offer-card").find(".offer-listings");
+  listings.toggleClass("hidden");
+
+  $(this).text(listings.hasClass("hidden") ? "View Listings" : "Hide Listings");
+});
+
+// Delete offer
+$(document).on("click", ".delete-offer-btn", function() {
+  let offerId = $(this).closest(".offer-card").data("offer-id");
+  $.notify("Offer " + offerId + " deleted", "success");
+  $(this).closest(".offer-card").remove();
+});
+
+// Assign product to offer
+$("#assignProductBtn").on("click", function() {
+  let productId = $("#productIdInput").val();
+  let offerId = $("#offerSelect").val();
+
+  if (productId && offerId) {
+    $.notify("Product " + productId + " assigned to offer " + offerId, "success");
+    $("#productIdInput").val("");
+  } else {
+    $.notify("Please enter product ID and select an offer", "error");
+  }
+});
+
+
 async function loadListingData(){
     
     const response = await fetch("http://localhost:8080/InkSpire/LoadListingData");
