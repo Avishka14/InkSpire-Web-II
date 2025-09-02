@@ -179,6 +179,75 @@
       color: #555;
     }
     .user-list tr:hover { background: #f5fdf9; }
+    
+    
+    /* Layout */
+.offers-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.offers-left, .offers-right {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Offer Cards */
+.offers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.offer-card {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.offer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offer-id {
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.offer-actions {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.offer-listings {
+  margin-top: 0.8rem;
+  padding: 0.8rem;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+.offer-listings.hidden {
+  display: none;
+}
+
+/* Buttons */
+.bre-button.full {
+  width: 100%;
+}
+
+.bre-button.small {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+}
+
 
     /* -------- Animations -------- */
     @keyframes fadeInUp {
