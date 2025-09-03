@@ -110,8 +110,6 @@ async function saveProductAdmin() {
 function clearProductForm() {
     document.getElementById("title").value = "";
     document.getElementById("description").value = "";
-    document.getElementById("category").value = "";
-    document.getElementById("condition").value = "";
     document.getElementById("price").value = "";
     document.getElementById("img1").value = "";
 }

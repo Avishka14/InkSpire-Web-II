@@ -5,11 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InkSpire Admin Panel</title>
   <link rel="stylesheet" href="../assets/style/adminpanel.css">
-   <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>  
-
 </head>
 <body onload="loadListingData(); loadOffers(); loadSelectorOffers();">
 
@@ -37,6 +36,7 @@
         <li data-tab="offers"><i class="bi bi-gift"></i> Offers</li>
         <li data-tab="utility"><i class="bi bi-tools"></i> Utility Manager</li>
         <li data-tab="addlisting"><i class="bi bi-plus-circle"></i> Add Listings</li>
+        <li data-tab="listingmanager"><i class="bi bi-pencil-square"></i> Listing Manager</li>
       </ul>
     </aside>
 
@@ -132,53 +132,37 @@
       </div>
 
       <!-- Offers -->
-      <!-- Offers -->
-<div id="offers" class="tab-panel">
-  <h1>Offers Management</h1>
-
-  <div class="offers-layout">
-    <!-- Left Column: Offer Management -->
-    <div class="offers-left">
-      <!-- Add Offer Form -->
-      <div class="listing-form">
-        <h2>Add Offer</h2>
-       
-          <label>Offer Name</label>
-          <input type="text" id="offerValue" placeholder="Enter value ">
-
-          <button type="submit" class="bre-button full" onclick="addNewOffers();">Add Offer</button>
-
+      <div id="offers" class="tab-panel">
+        <h1>Offers Management</h1>
+        <div class="offers-layout">
+          <!-- Left Column: Offer Management -->
+          <div class="offers-left">
+            <!-- Add Offer Form -->
+            <div class="listing-form">
+              <h2>Add Offer</h2>
+              <label>Offer Name</label>
+              <input type="text" id="offerValue" placeholder="Enter value ">
+              <button type="submit" class="bre-button full" onclick="addNewOffers();">Add Offer</button>
+            </div>
+            <!-- Offer List -->
+            <h2>Existing Offers</h2>
+            <div id="offersList" class="offers-grid"></div>
+          </div>
+          <!-- Right Column: Assign Product -->
+          <div class="offers-right">
+            <div class="listing-form">
+              <h2>Assign Product to Offer</h2>
+              <label>Listing ID</label>
+              <input type="number" id="productIdInput" placeholder="Enter Listing ID">
+              <label>Select Offer</label>
+              <select id="offerSelect">
+                  <option>Select</option>
+              </select>
+              <button class="bre-button full" id="assignProductBtn" onclick="addNewProductOffer();">Add to Offer</button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <!-- Offer List -->
-      <h2>Existing Offers</h2>
-      <div id="offersList" class="offers-grid">
-   
-      </div>
-    </div>
-
-    <!-- Right Column: Assign Product -->
-    <div class="offers-right">
-      <div class="listing-form">
-        <h2>Assign Product to Offer</h2>
-        <label>Listing ID</label>
-        <input type="number" id="productIdInput" placeholder="Enter Listing ID">
-
-        <label>Select Offer</label>
-        <select id="offerSelect">
-            <option>Select</option>
-        </select>
-
-        <button class="bre-button full" id="assignProductBtn" onclick="addNewProductOffer();">Add to Offer</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-      
-          <!-- Offers -->
-      
-     
 
       <!-- Utility Manager -->
       <div id="utility" class="tab-panel">
@@ -195,32 +179,67 @@
       <div id="addlisting" class="tab-panel">
         <h1>Add Admin Listing</h1>
         <div class="listing-form">
-      
-            <label>Product Title</label>
-            <input type="text" placeholder="Product Name" id="title">
-            <label>Description</label>
-            <textarea placeholder="Enter description" id="description"></textarea>
+          <label>Product Title</label>
+          <input type="text" placeholder="Product Name" id="title">
+          <label>Description</label>
+          <textarea placeholder="Enter description" id="description"></textarea>
+          <label>Category</label>
+          <select id="category">
+              <option> Select </option> 
+          </select>
+          <label>Condition</label>
+          <select id="condition">
+              <option> Select </option>  
+          </select>
+          <label>Price</label>
+          <input type="number" placeholder="0.00" id="price">
+          <label>Upload Image</label>
+          <input type="file" accept="image/*"  id="img1" >
+          <button type="submit" class="bre-button" onclick="saveProductAdmin();">Add Listing</button>
+        </div>
+      </div>
+
+      <!-- Listing Manager -->
+      <div id="listingmanager" class="tab-panel">
+        <h1>Listing Manager</h1>
+
+        <!-- Search Section -->
+        <div class="listing-form">
+          <h2>Search Listing</h2>
+          <label>Enter Listing ID</label>
+          <input type="number" id="listingIdInput" placeholder="Enter ID">
+          <button class="bre-button">Load Listing</button>
+        </div>
+
+        <!-- Details Section -->
+        <div class="listing-form" id="listingDetails">
+          <h2>Listing Details</h2>
+          <label>Product Title</label>
+          <input type="text" id="editTitle">
          
-            <label>Category</label>
-            <select id="category">
-                <option> Select </option> 
-            </select>
-            
-            <label>Condition</label>
-            <select id="condition">
-                <option> Select </option>  
-            </select>
-            
-            <label>Price</label>
-            <input type="number" placeholder="0.00" id="price">
-            
-            
-            <label>Upload Image</label>
-            <input type="file" accept="image/*"  id="img1" >
-           
-            <button type="submit" class="bre-button" onclick="saveProductAdmin();">Add Listing</button>
-        
-   
+          <label>Description</label>
+          <textarea id="editDescription"></textarea>
+         
+             <label>Category</label>
+          <select >
+              <option> Select </option> 
+          </select>
+         
+             <label>Condition</label>
+          <select >
+              <option> Select </option> 
+          </select>
+         
+          <label>Price</label>
+          <input type="number" id="editPrice">
+         
+          <label>Status</label>
+          <input type="text" id="editStatus">
+         
+          <div style="margin-top:15px;">
+            <button class="bre-button">Update Listing</button>
+            <button class="danger bre-button">Mark as Sold</button>
+          </div>
         </div>
       </div>
 
@@ -231,7 +250,6 @@
   <footer>
     Developed By Avishka Chamod
   </footer>
-
 
   <script src="../assets/js/adminpanel.js"></script>
 </body>
