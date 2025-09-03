@@ -5,8 +5,8 @@
         <group>
             <file>file:/C:/Users/avish/Documents/NetBeansProjects/InkSpire/web/account/adminpanel.html</file>
             <file>file:/C:/Users/avish/Documents/NetBeansProjects/InkSpire/web/assets/js/adminpanel.js</file>
-            <file>file:/C:/Users/avish/Documents/NetBeansProjects/InkSpire/src/java/controller/AddProduct.java</file>
-            <file>file:/C:/Users/avish/Documents/NetBeansProjects/InkSpire/web/account/passwordrecover.html</file>
+            <file>file:/C:/Users/avish/Documents/NetBeansProjects/InkSpire/src/java/controller/AddOffer.java</file>
+            <file>file:/C:/Users/avish/Documents/NetBeansProjects/InkSpire/src/java/hibernate/Offers.java</file>
             <file>file:/C:/Users/avish/Documents/NetBeansProjects/InkSpire/src/java/hibernate.cfg.xml</file>
         </group>
     </open-files>
