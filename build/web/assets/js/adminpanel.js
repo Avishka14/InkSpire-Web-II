@@ -261,3 +261,70 @@ async function loadOffers() {
         $.notify("An unexpected error occurred.", "error");
     }
 }
+
+async function loadSelectorOffers(){
+ 
+    const response = await fetch("http://localhost:8080/InkSpire/LoadOffers");
+    
+    if(response.ok){
+       
+       const json = await response.json();
+        
+       const select = document.getElementById("offerSelect");
+        
+       json.offerTypeList.forEach(item => {      
+       const option = document.createElement("option");
+        option.value = item.id;
+        option.innerHTML = item.value;
+        option.id = item.id;
+        select.appendChild(option);
+        
+    });
+        
+    }else{
+         $.notify("An unexpected error occurred.", "error");
+    }
+ 
+ 
+}
+
+async function addNewProductOffer(){
+    
+    const select = document.getElementById("offerSelect");
+    const selectedOption = select.options[select.selectedIndex];
+    
+    const newOffer = JSON.stringify({
+        offerProduct:document.getElementById("productIdInput").value,
+        offerId:selectedOption.id
+    });
+    
+    console.log(newOffer);
+    
+    
+    const response = await fetch("http://localhost:8080/InkSpire/LoadOffers" , {
+        method:"POST",
+        headers:{
+           "Content-Type":"application/json"
+        },
+        body:newOffer
+    });
+    
+    if(response.ok){
+         const json = await response.json();
+         
+         if(json.status){
+              $.notify("Successfully Added Offer. Please Refresh!", "success");
+            await  loadOffers();
+        
+        }else{
+              $.notify( json.message|| "Network error. Please check your connection.", "error");
+         }
+        
+        
+    }else{
+          $.notify("Network error. Please check your connection.", "error");
+    }
+    
+    
+    
+}

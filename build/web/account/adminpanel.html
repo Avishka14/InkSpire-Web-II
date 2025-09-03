@@ -5,12 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>InkSpire Admin Panel</title>
   <link rel="stylesheet" href="../assets/style/adminpanel.css">
+   <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>  
 
 </head>
-<body onload="loadListingData(); loadOffers();">
+<body onload="loadListingData(); loadOffers(); loadSelectorOffers();">
 
   <!-- Header -->
   <header>
@@ -160,16 +161,15 @@
     <div class="offers-right">
       <div class="listing-form">
         <h2>Assign Product to Offer</h2>
-        <label>Product ID</label>
-        <input type="text" id="productIdInput" placeholder="Enter Product ID">
+        <label>Listing ID</label>
+        <input type="number" id="productIdInput" placeholder="Enter Listing ID">
 
         <label>Select Offer</label>
         <select id="offerSelect">
-          <option value="1">Discount - 20%</option>
-          <option value="2">Free Shipping</option>
+            <option>Select</option>
         </select>
 
-        <button class="bre-button full" id="assignProductBtn">Add to Offer</button>
+        <button class="bre-button full" id="assignProductBtn" onclick="addNewProductOffer();">Add to Offer</button>
       </div>
     </div>
   </div>
