@@ -32,7 +32,6 @@
         <li class="active" data-tab="listings"><i class="bi bi-box-seam"></i> Listings</li>
         <li data-tab="stats"><i class="bi bi-bar-chart-line"></i> Stats</li>
         <li data-tab="users"><i class="bi bi-people"></i> User Management</li>
-        <li data-tab="admins"><i class="bi bi-person-gear"></i> Admin Management</li>
         <li data-tab="offers"><i class="bi bi-gift"></i> Offers</li>
         <li data-tab="utility"><i class="bi bi-tools"></i> Utility Manager</li>
         <li data-tab="addlisting"><i class="bi bi-plus-circle"></i> Add Listings</li>
@@ -92,44 +91,6 @@
         </table>
       </div>
 
-      <!-- Admin Management -->
-      <div id="admins" class="tab-panel">
-        <h1>Admin Management</h1>
-
-        <div class="listing-form">
-          <h2>Add New Admin</h2>
-          <form id="addAdminForm">
-            <label>Name</label>
-            <input type="text" id="adminName" placeholder="Enter name" required>
-            <label>Email</label>
-            <input type="email" id="adminEmail" placeholder="Enter email" required>
-            <label>Password</label>
-            <input type="password" id="adminPassword" placeholder="Enter password" required>
-            <button type="submit" class="bre-button">Add Admin</button>
-          </form>
-        </div>
-
-        <h2>Existing Admins</h2>
-        <table class="user-table" id="adminsTable">
-          <thead>
-            <tr>
-              <th>Name</th><th>Email</th><th>Role</th><th>Joined</th><th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Super Admin</td>
-              <td>superadmin@inkspire.com</td>
-              <td>Super</td>
-              <td>2025-01-01</td>
-              <td>
-                <button class="bre-button edit-btn">Edit</button>
-                <button class="danger bre-button delete-btn">Delete</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
 
       <!-- Offers -->
       <div id="offers" class="tab-panel">

@@ -102,3 +102,55 @@ async function loadCategories(){
     }
     
 }
+
+
+async function loadDailyDeals(){
+    
+    const response = await fetch("http://localhost:8080/InkSpire/LoadDailyDeals");
+    
+    if(response.ok){
+        
+        const json = await response.json();
+        
+        
+        if(json.dailyDeals && json.dailyDeals.length > 0){
+              renderProducts(json.dailyDeals);
+        }else{
+              $.notify("Daily Deals not Found !", "error");
+        }
+        
+        
+    }else{
+          $.notify("Network Error Please Try again later!", "error");
+    }
+    
+    
+}
+
+function renderProducts(products) {
+    const container = document.getElementById("product-container");
+    container.innerHTML = ""; // Clear previous content
+
+    products.forEach(product => {
+        const card = document.createElement("div");
+        card.classList.add("product-card");
+
+        card.innerHTML = `
+            <img src="${product.imageUrl}" alt="${product.productName}" class="product-image"/>
+            <div class="product-content">
+                <h2 class="product-title">${product.productName}</h2>
+                <p class="product-desc">${product.productCategory}</p>
+                <span class="stock-status">In Stock</span>
+                <span class="price">Rs. ${product.productPrice}</span>
+                <div class="product-actions">
+                    <button class="add-to-cart">
+                        <i class="bi bi-heart-fill"></i> Add to Cart
+                    </button>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
