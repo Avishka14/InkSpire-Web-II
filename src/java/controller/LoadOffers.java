@@ -34,7 +34,7 @@ public class LoadOffers extends HttpServlet {
         responseObject.addProperty("status", Boolean.FALSE);
         
         Criteria catCriteria = session.createCriteria(OfferType.class);
-        List<Category> offerTypeList = catCriteria.list();
+        List<OfferType> offerTypeList = catCriteria.list();
         
        
         session.close();

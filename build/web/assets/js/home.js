@@ -154,3 +154,56 @@ function renderProducts(products) {
         container.appendChild(card);
     });
 }
+
+
+async function loadLatestArrivals(){
+    
+     const response = await fetch("http://localhost:8080/InkSpire/LoadLatestProducts");
+     
+        if(response.ok){
+        
+        const json = await response.json();
+        
+        
+        if(json.latestListings && json.latestListings.length > 0){
+              renderLatestProducts(json.latestListings);
+        }else{
+              $.notify("Latest Arrivals not Found !", "error");
+        }
+        
+        
+    }else{
+          $.notify("Network Error Please Try again later!", "error");
+    }
+     
+     
+    
+}
+
+function renderLatestProducts(products) {
+    const container = document.getElementById("latest-arrivals-grid");
+    container.innerHTML = ""; // Clear previous content
+
+    products.forEach(product => {
+        const card = document.createElement("div");
+        card.classList.add("latest-card");
+
+        card.innerHTML = `
+            <img src="${product.imageUrl}" alt="${product.productName}" class="latest-image"/>
+            <div class="latest-content">
+                <h2 class="latest-title">${product.productName}</h2>
+                <p class="latest-desc">${product.productCategory}</p>
+                <span class="stock-status">In Stock</span>
+                <span class="latest-price">Rs. ${product.productPrice}</span>
+                <div class="latest-actions">
+                    <button class="add-to-cart">
+                        <i class="bi bi-heart-fill"></i> Add to Cart
+                    </button>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+        `;
+
+        container.appendChild(card);
+    });
+}
