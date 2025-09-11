@@ -33,7 +33,7 @@ public class LoadLatestProducts extends HttpServlet {
         
         Criteria c = session.createCriteria(Listing.class , "i")
                  .addOrder(Order.desc("i.listing_date"))
-                 .setMaxResults(10);
+                 .setMaxResults(12);
         
         List<Listing> listings = c.list();
         
