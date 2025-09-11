@@ -12,7 +12,7 @@
             href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
             />
     </head>
-    <body onload="loadHtml(); loadDailyDeals();">
+    <body onload="loadHtml(); loadDailyDeals(); loadLatestArrivals();">
         <div class="main-div-home">
             <div id="header-div"> </div>
 
@@ -125,7 +125,7 @@
                         <h1 class="section-heading">🔥 Daily Deals</h1>
                         <div class="product-grid" id="product-container">
                             <!-- Product Card -->
-      
+
                         </div>
                     </div>
                 </section>
@@ -141,30 +141,12 @@
                 </section>
 
 
-                <div class="product-latest-wrapper">
-                    <div class="products-wrapper">
-                        <h1 class="section-heading">🔥 Latest Arrivals</h1>
-                        <div class="product-grid">
+                <div class="latest-section">
+                    <div class="latest-wrapper">
+                        <h1 class="latest-heading">🔥 Latest Arrivals</h1>
+                        <div class="latest-grid" id="latest-arrivals-grid">
                             <!-- Product Card -->
-                            <div class="product-card">
-                                <img
-                                    src="https://picsum.photos/id/1037/600/400"
-                                    alt="Product"
-                                    class="product-image"
-                                    />
-                                <div class="product-content">
-                                    <h2 class="product-title">The Silent Story</h2>
-                                    <p class="product-desc">Fiction</p>
-                                    <span class="stock-status">In Stock</span>
-                                    <span class="price">$19.99</span>
-                                    <div class="product-actions">
-                                        <button class="add-to-cart">
-                                            <i class="bi bi-heart-fill"></i> Add to Cart
-                                        </button>
-                                        <button class="buy-btn">Buy Now</button>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -194,8 +176,8 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            
+
+
                         </div>
                     </div>
                 </div>
@@ -241,11 +223,11 @@
             </section>
 
         </div>
-        
+
         <div id="footer-content"></div>
 
 
         <script src="../assets/js/home.js"></script>
-        <script src="../assets/js/loader.js"> </script>
+        <script src="../assets/js/loader.js"></script>
     </body>
 </html>
