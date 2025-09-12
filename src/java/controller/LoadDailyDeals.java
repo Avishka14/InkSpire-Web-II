@@ -36,7 +36,7 @@ public class LoadDailyDeals extends HttpServlet {
        Criteria criteria = session.createCriteria(Offers.class , "o")
                 .createAlias("o.offerType", "ot")
                .add(Restrictions.eq("ot.id", 3))
-                .setMaxResults(8);
+                .setMaxResults(12);
        
        List<Offers> offers = criteria.list();
         
