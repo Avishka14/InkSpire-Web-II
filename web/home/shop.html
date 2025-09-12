@@ -1,271 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Shop | InkSpire</title>
-        <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-            />
-        <link rel="stylesheet" href="../assets/style/shop.css">
-    </head>
-    <body >
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop | InkSpire</title>
+    <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+    <link rel="stylesheet" href="../assets/style/shop.css" />
+</head>
+<body onload="loadCategories()">
 
-        <div id="header-div"> </div>
+    <div id="header-div"></div>
 
-        <!-- Search Bar -->
-        <div class="searchbar">
-            <form>
-                <input type="text" name="q" placeholder="Search books..." required />
-                <button type="submit"><i class="bi bi-search"></i></button>
-            </form>
-            <ul>
-                <li>Sell Items</li>
-                <li>Help Center</li>
-                <li>News</li>
-            </ul>
-        </div>
+    <!-- Search Bar -->
+    <div class="shop-searchbar">
+        <form>
+            <input type="text" name="q" placeholder="Search books..." required />
+            <button type="submit"><i class="bi bi-search"></i></button>
+        </form>
+        <ul class="shop-nav-links">
+            <li>Sell Items</li>
+            <li>Help Center</li>
+            <li>News</li>
+        </ul>
+    </div>
 
-        <!-- Main Advertisement -->
-        <div class="main-advertisement">
+    <!-- Main Carousel / Advertisement -->
+    <div class="shop-carousel">
+        <div class="shop-banner">
             <h2>✨ Discover Your Next Read</h2>
             <p>Timeless classics, modern bestsellers, and hidden gems. Affordable prices | Wide Collection | Fast Delivery 🚚</p>
         </div>
-
-        <!-- Categories -->
-        <div class="categories">
-            <h2>Book Categories</h2>
-            <ul>
-                <li>Fiction</li>
-                <li>Nonfiction</li>
-                <li>Romance</li>
-                <li>Mystery</li>
-                <li>Science Fiction</li>
-                <li>Biography</li>
-                <li>Travel</li>
-                <li>Cooking</li>
-            </ul>
+        <div class="shop-banner">
+            <h2>📚 Exclusive Deals This Week</h2>
+            <p>Up to 50% off on selected categories!</p>
         </div>
+        <div class="shop-banner">
+            <h2>🎁 Special Offers</h2>
+            <p>Buy 2 Get 1 Free on all Fiction books!</p>
+        </div>
+    </div>
 
-        <!-- Best Selling Products -->
-        <div class="product-section">
-            <h2>🔥 Best Selling</h2>
-            <div class="product-grid">
-                <!-- Repeat 8-12 product cards for example -->
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/101/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">The Silent Story</h2>
-                        <p class="product-desc">Fiction</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$19.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
+    <!-- Categories -->
+    <div class="shop-categories">
+        <h2>Book Categories</h2>
+        <ul id="category-ul"></ul>
+    </div>
+
+    <!-- Shop by InkSpire Official -->
+    <hr/>
+    <div class="shop-section">
+        <h2>🛒 Shop by InkSpire Official</h2>
+        <div class="shop-product-grid">
+            <!-- Product Card Template -->
+            <div class="shop-product-card">
+                <img src="https://picsum.photos/id/101/300/200" class="shop-product-image" />
+                <div class="shop-product-content">
+                    <h3 class="shop-product-title">The Silent Story</h3>
+                    <p class="shop-product-desc">Fiction</p>
+                    <span class="shop-stock-status">In Stock</span>
+                    <span class="shop-price">$19.99</span>
+                    <div class="shop-product-actions">
+                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
+                        <button class="shop-buy-now">Buy Now</button>
                     </div>
                 </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/102/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Mystery of the Night</h2>
-                        <p class="product-desc">Mystery</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$14.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
+            </div>
+            <div class="shop-product-card">
+                <img src="https://picsum.photos/id/102/300/200" class="shop-product-image" />
+                <div class="shop-product-content">
+                    <h3 class="shop-product-title">Mystery of the Night</h3>
+                    <p class="shop-product-desc">Mystery</p>
+                    <span class="shop-stock-status">In Stock</span>
+                    <span class="shop-price">$14.99</span>
+                    <div class="shop-product-actions">
+                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
+                        <button class="shop-buy-now">Buy Now</button>
                     </div>
                 </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/103/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Romance in Paris</h2>
-                        <p class="product-desc">Romance</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$22.50</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/104/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Science Wonders</h2>
-                        <p class="product-desc">Science</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$18.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/105/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Life of Legends</h2>
-                        <p class="product-desc">Biography</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$25.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
+            </div>
+            <div class="shop-product-card">
+                <img src="https://picsum.photos/id/103/300/200" class="shop-product-image" />
+                <div class="shop-product-content">
+                    <h3 class="shop-product-title">Romance in Paris</h3>
+                    <p class="shop-product-desc">Romance</p>
+                    <span class="shop-stock-status">In Stock</span>
+                    <span class="shop-price">$22.50</span>
+                    <div class="shop-product-actions">
+                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
+                        <button class="shop-buy-now">Buy Now</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Banner Section -->
-        <div class="banner-section">
-            <h3>🎁 Special Offer</h3>
-            <p>Buy 2 Get 1 Free on all Fiction books this week only!</p>
-        </div>
-
-        <!-- New Arrivals -->
-        <div class="product-section">
-            <h2>📚 New Arrivals</h2>
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/106/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Adventures Abroad</h2>
-                        <p class="product-desc">Travel</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$21.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
+    <!-- Shop by Local Sellers -->
+    <hr/>
+    <div class="shop-section">
+        <h2>🏬 Shop by Local Sellers</h2>
+        <div class="shop-product-grid">
+            <div class="shop-product-card">
+                <img src="https://picsum.photos/id/104/300/200" class="shop-product-image" />
+                <div class="shop-product-content">
+                    <h3 class="shop-product-title">Science Wonders</h3>
+                    <p class="shop-product-desc">Science</p>
+                    <span class="shop-stock-status">In Stock</span>
+                    <span class="shop-price">$18.99</span>
+                    <div class="shop-product-actions">
+                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
+                        <button class="shop-buy-now">Buy Now</button>
                     </div>
                 </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/107/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Fantasy Worlds</h2>
-                        <p class="product-desc">Fantasy</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$19.50</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/108/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Cooking Delights</h2>
-                        <p class="product-desc">Cooking</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$17.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/109/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Romantic Escapes</h2>
-                        <p class="product-desc">Romance</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$20.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
+            </div>
+            <div class="shop-product-card">
+                <img src="https://picsum.photos/id/105/300/200" class="shop-product-image" />
+                <div class="shop-product-content">
+                    <h3 class="shop-product-title">Life of Legends</h3>
+                    <p class="shop-product-desc">Biography</p>
+                    <span class="shop-stock-status">In Stock</span>
+                    <span class="shop-price">$25.99</span>
+                    <div class="shop-product-actions">
+                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
+                        <button class="shop-buy-now">Buy Now</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Recommended Section -->
-        <div class="banner-section">
-            <h3>💡 Recommended For You</h3>
-            <p>Hand-picked books based on your interests.</p>
-        </div>
-
-        <div class="product-section">
-            <div class="product-grid">
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/110/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Science Mysteries</h2>
-                        <p class="product-desc">Science</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$18.50</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
+    <!-- New Arrivals -->
+    <hr/>
+    <div class="shop-section">
+        <h2>📦 New Arrivals</h2>
+        <div class="shop-product-grid">
+            <div class="shop-product-card">
+                <img src="https://picsum.photos/id/106/300/200" class="shop-product-image" />
+                <div class="shop-product-content">
+                    <h3 class="shop-product-title">Adventures Abroad</h3>
+                    <p class="shop-product-desc">Travel</p>
+                    <span class="shop-stock-status">In Stock</span>
+                    <span class="shop-price">$21.99</span>
+                    <div class="shop-product-actions">
+                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
+                        <button class="shop-buy-now">Buy Now</button>
                     </div>
                 </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/111/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Historic Journeys</h2>
-                        <p class="product-desc">History</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$23.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/112/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Fantasy Kingdoms</h2>
-                        <p class="product-desc">Fantasy</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$19.50</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <img src="https://picsum.photos/id/113/400/300" class="product-image" />
-                    <div class="product-content">
-                        <h2 class="product-title">Romance Tales</h2>
-                        <p class="product-desc">Romance</p>
-                        <span class="stock-status">In Stock</span>
-                        <span class="price">$21.99</span>
-                        <div class="product-actions">
-                            <button class="add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                            <button class="buy-btn">Buy Now</button>
-                        </div>
+            </div>
+            <div class="shop-product-card">
+                <img src="https://picsum.photos/id/107/300/200" class="shop-product-image" />
+                <div class="shop-product-content">
+                    <h3 class="shop-product-title">Fantasy Worlds</h3>
+                    <p class="shop-product-desc">Fantasy</p>
+                    <span class="shop-stock-status">In Stock</span>
+                    <span class="shop-price">$19.50</span>
+                    <div class="shop-product-actions">
+                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
+                        <button class="shop-buy-now">Buy Now</button>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div id="footer-content"></div>
+    <div id="footer-content"></div>
 
-        <script src="../assets/js/loader.js"></script>
-        <script src="../assets/js/shop.js"></script>
-        <script src="../assets/js/home.js"></script>
-
-
-    </body>
+    <script src="../assets/js/loader.js"></script>
+    <script src="../assets/js/shop.js"></script>
+    <script src="../assets/js/home.js"></script>
+</body>
 </html>

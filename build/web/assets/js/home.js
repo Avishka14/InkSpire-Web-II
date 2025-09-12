@@ -16,8 +16,8 @@ async function loadSection(file, targetId) {
 
  function loadHtml() {
    loadSection("Header.html", "header-div");
-    loadSection("footer.html", "footer-content");
-    loadCategories();
+   loadSection("footer.html", "footer-content");
+   loadCategories();
 
 }
 
@@ -70,7 +70,6 @@ function sideNav() {
 async function loadCategories(){
     
     const response = await fetch("http://localhost:8080/InkSpire/LoadCategory");
-    console.log("hello");
     
     if(response.ok){
         
@@ -85,20 +84,15 @@ async function loadCategories(){
                li.value = item.id;
                li.innerHTML = `<i class="bi bi-book"></i> ${item.value}`;
                ul.appendChild(li);
-                
-               console.log(json.categoryList);
-                
+                           
             });
             
         }else{
-            console.log("Error ss");
-            
+             $.notify("Network Error Please Try again later!", "error");
         }
 
-        
     }else{
-          console.log("Error sfdfds");
-        
+         $.notify("Network Error Please Try again later!", "error");
     }
     
 }
