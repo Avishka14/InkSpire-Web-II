@@ -1,0 +1,19 @@
+# Ignore NetBeans private configuration
+nbproject/private/
+
+# Ignore build outputs
+build/
+dist/
+
+# Ignore compiled classes
+*.class
+
+# Ignore logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Ignore IDE specific files
+nbproject/private/
+nbproject/var/
+
