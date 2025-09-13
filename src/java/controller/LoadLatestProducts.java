@@ -31,9 +31,20 @@ public class LoadLatestProducts extends HttpServlet {
         Session session = HibernateUtill.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
         
+         int limit = 12; 
+        try {
+            String limitParam = request.getParameter("limit");
+            if (limitParam != null) {
+                limit = Integer.parseInt(limitParam);
+            }
+        } catch (NumberFormatException e) {
+
+            limit = 12;
+        }
+        
         Criteria c = session.createCriteria(Listing.class , "i")
                  .addOrder(Order.desc("i.listing_date"))
-                 .setMaxResults(12);
+                 .setMaxResults(limit);
         
         List<Listing> listings = c.list();
         
@@ -81,8 +92,5 @@ public class LoadLatestProducts extends HttpServlet {
         response.getWriter().write(gson.toJson(responseObject));
         
     }
-
- 
- 
 
 }

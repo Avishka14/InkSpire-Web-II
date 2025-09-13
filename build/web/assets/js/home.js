@@ -151,8 +151,9 @@ function renderProducts(products) {
 
 
 async function loadLatestArrivals(){
-    
-     const response = await fetch("http://localhost:8080/InkSpire/LoadLatestProducts");
+     
+       const limit = 12;
+       const response = await fetch(`http://localhost:8080/InkSpire/LoadLatestProducts?limit=${limit}`);
      
         if(response.ok){
         
@@ -176,7 +177,12 @@ async function loadLatestArrivals(){
 
 function renderLatestProducts(products) {
     const container = document.getElementById("latest-arrivals-grid");
-    container.innerHTML = ""; // Clear previous content
+    if (!container) {
+        console.error("Grid not found");
+        return;
+    }
+
+    container.innerHTML = ""; // clear old products
 
     products.forEach(product => {
         const card = document.createElement("div");

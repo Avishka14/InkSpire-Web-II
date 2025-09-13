@@ -1,24 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Love+Light&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Norican&display=swap');
 
-body {
-    margin: 0;
-    font-family: 'Gabarito', sans-serif;
-    background: #f9fafb;
-    color: #333;
-}
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400;700;900&family=Love+Light&family=Norican&display=swap');
 
-/* ------------------------
-   Links
------------------------- */
-a {
-    text-decoration: none;
-    color: inherit;
-}
 
-/* ------------------------
-   Search Bar
------------------------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; font-family: 'Gabarito', sans-serif; background: #f9fafb; color: #333; }
+a { text-decoration: none; color: inherit; }
+
+
+a { transition: color 0.3s ease; }
+
+
 .shop-searchbar {
     display: flex;
     justify-content: space-between;
@@ -27,51 +18,71 @@ a {
     background: #fff;
     border-bottom: 1px solid rgba(15, 157, 88, 0.2);
     flex-wrap: wrap;
-    gap: 10px;
 }
+.shop-searchbar a {
+    font-weight: bold;
+    color: #0f9d58;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+}
+.shop-searchbar a:hover { color: #0b7c44; }
 
 .shop-searchbar form {
     flex: 1;
     display: flex;
+    justify-content: center;
     position: relative;
     max-width: 400px;
 }
-
 .shop-searchbar input {
     width: 100%;
-    padding: 6px 12px;
+    padding: 10px 15px;
     border: 2px solid transparent;
-    border-radius: 20px;
+    border-radius: 25px;
     background: rgba(15, 157, 88, 0.05);
     outline: none;
     color: #0f9d58;
-    font-size: 0.85rem;
     transition: all 0.3s ease;
 }
-
 .shop-searchbar input:focus {
     border-color: #0f9d58;
     background: #fff;
-    box-shadow: 0 0 6px rgba(15, 157, 88, 0.15);
+    box-shadow: 0 0 8px rgba(15, 157, 88, 0.18);
 }
-
 .shop-searchbar button {
     position: absolute;
-    right: 3px;
+    right: 5px;
     top: 50%;
     transform: translateY(-50%);
-    padding: 5px 10px;
+    padding: 8px 15px;
     border: none;
     background: #0f9d58;
     color: #fff;
-    border-radius: 18px;
+    border-radius: 20px;
     cursor: pointer;
-    font-size: 0.85rem;
     transition: background 0.3s ease;
 }
-
 .shop-searchbar button:hover { background: #0b7c44; }
 
+.shop-searchbar ul {
+    list-style: none;
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+}
+.shop-searchbar ul li {
+    cursor: pointer;
+    color: #0f9d58;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+.shop-searchbar ul li:hover { color: #0b7c44; }
+
+/* ------------------------
+   Navigation Links
+------------------------ */
 .shop-nav-links {
     display: flex;
     gap: 10px;
@@ -164,105 +175,104 @@ a {
 }
 
 /* ------------------------
-   Product Section
------------------------- */
-.shop-section {
-    max-width: 95%;
-    margin: 30px auto;
-}
-
-.shop-section h2 {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    font-weight: 700;
-    color: #111;
-    padding: 4px 8px;
-    border-radius: 6px;
-}
-
-/* Highlight for specific sections */
-.shop-section.inkspire h2 {
-    background: rgba(15, 157, 88, 0.1);
-    color: #0f9d58;
-    font-weight: 800;
-}
-
-.shop-section.local-sellers h2 {
-    background: rgba(255, 87, 34, 0.1);
-    color: #ff5722;
-    font-weight: 800;
-}
-
-/* ------------------------
-   Product Grid
+   Shop Product Grid
 ------------------------ */
 .shop-product-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
-    justify-content: flex-start;
+    gap: 16px;
+    justify-content: center;
+    padding: 20px;
 }
 
 /* ------------------------
-   Product Card (Fixed Size)
+   Product Card
 ------------------------ */
 .shop-product-card {
-    flex: 0 0 180px; /* fixed width */
-    height: 280px; /* fixed height */
+    flex: 0 0 180px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .shop-product-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 6px 15px rgba(0,0,0,0.08);
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
 
 .shop-product-image {
     width: 100%;
-    height: 140px; /* fixed image height */
+    height: 130px;
     object-fit: cover;
     border-bottom: 1px solid #eee;
     transition: transform 0.3s ease;
 }
 
 .shop-product-card:hover .shop-product-image {
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 .shop-product-content {
-    padding: 8px;
+    flex: 1;
+    padding: 10px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    flex: 1; /* fill remaining space */
 }
 
-/* ------------------------
-   Product Text
------------------------- */
-.shop-product-title { font-size: 0.9rem; font-weight: 700; margin: 0; }
-.shop-product-desc { font-size: 0.75rem; color: #555; margin: 0; }
-.shop-stock-status { font-size: 0.65rem; padding: 2px 5px; border-radius: 4px; background: #e9f7ef; color: #1a7f37; width: fit-content; }
-.shop-price { font-size: 0.85rem; font-weight: 700; color: #ff0055; }
+/* Product Title */
+.shop-product-title {
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
-/* ------------------------
-   Product Actions
------------------------- */
+/* Product Description */
+.shop-product-desc {
+    font-size: 0.7rem;
+    color: #555;
+    margin-bottom: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Stock Status */
+.shop-stock-status {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    background: #e9f7ef;
+    color: #1a7f37;
+    width: fit-content;
+    margin-bottom: 6px;
+}
+
+/* Price */
+.shop-price {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #ff0055;
+    margin-bottom: 8px;
+}
+
+/* Product Actions */
 .shop-product-actions {
     display: flex;
-    gap: 5px;
+    gap: 6px;
     margin-top: auto;
 }
 
 .shop-add-to-cart, .shop-buy-now {
     flex: 1;
-    padding: 5px 6px;
+    padding: 6px 0;
     font-size: 0.75rem;
     border-radius: 6px;
     font-weight: 600;
@@ -272,6 +282,7 @@ a {
     align-items: center;
     gap: 4px;
     border: none;
+    transition: all 0.2s ease;
 }
 
 .shop-add-to-cart {
@@ -297,34 +308,17 @@ a {
 }
 
 /* ------------------------
-   HR Divider
------------------------- */
-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 30px 0;
-}
-
-/* ------------------------
    Responsive - Tablets
 ------------------------ */
 @media (max-width: 768px) {
     .shop-product-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        gap: 12px;
     }
-
-    .shop-product-card {
-        flex: unset;
-        height: 260px;
-    }
-
+    .shop-product-card { height: auto; }
     .shop-product-image { height: 120px; }
-
-    .shop-searchbar {
-        padding: 10px 15px;
-    }
+    .shop-searchbar { padding: 10px 15px; }
 }
 
 /* ------------------------
@@ -335,29 +329,16 @@ hr {
         grid-template-columns: repeat(2, 1fr);
         gap: 8px;
     }
-
-    .shop-product-card {
-        height: 220px;
-    }
-
+    .shop-product-card { height: auto; }
     .shop-product-image { height: 100px; }
-
+    .shop-product-title { font-size: 0.7rem; }
+    .shop-price { font-size: 0.7rem; }
+    .shop-stock-status { font-size: 0.6rem; padding: 2px 4px; }
     .shop-searchbar {
         flex-direction: column;
         align-items: stretch;
         gap: 6px;
     }
-
     .shop-searchbar input { font-size: 0.8rem; padding: 5px 10px; }
     .shop-searchbar button { font-size: 0.8rem; padding: 4px 8px; }
-
-    .shop-product-title { font-size: 0.85rem; }
-    .shop-product-desc { font-size: 0.7rem; }
-    .shop-price { font-size: 0.8rem; }
-    .shop-stock-status { font-size: 0.6rem; padding: 2px 4px; }
-
-    .shop-section h2 {
-        font-size: 1rem;
-        padding: 6px 10px;
-    }
 }
