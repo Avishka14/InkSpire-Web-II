@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shop | InkSpire</title>
     <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     <link rel="stylesheet" href="../assets/style/shop.css" />
 </head>
@@ -53,23 +54,26 @@
     <div class="shop-section">
         <h2 class="shop-section-h2">🛒 Shop by InkSpire Official</h2>
         
-        <h2 class="shop-title-second">Latest Arrivals</h2>
+        <h2 class="shop-title-second">Latest Arrivals📬</h2>
          
          <div class="shop-product-grid" id="shop-product-grid">
             <!-- Product Card Template -->
 
         </div>
+     
     </div>
+    
+    
 
     <!-- Most Popular -->
    <hr class="shop-hr"/>
    
      <div class="shop-section">
-        <h2 class="shop-section-h2">🛒 Most Popular </h2>
+        <h2 class="shop-section-h2">🤩 Daily Deals </h2>
         
-        <h2 class="shop-popular-title"></h2>
+        <h2 class="shop-title-second">Hurry up These are TIME LIMITED offers!🕢</h2>
          
-         <div class="shop-product-grid" id="shop-product-grid">
+         <div class="shop-product-grid" id="shop-daily-grid">
             <!-- Product Card Template -->
 
         </div>
@@ -81,35 +85,15 @@
    <hr class="shop-hr"/>
    
     <div class="shop-section">
-        <h2>📦 New Arrivals</h2>
-        <div class="shop-product-grid">
-            <div class="shop-product-card">
-                <img src="https://picsum.photos/id/106/300/200" class="shop-product-image" />
-                <div class="shop-product-content">
-                    <h3 class="shop-product-title">Adventures Abroad</h3>
-                    <p class="shop-product-desc">Travel</p>
-                    <span class="shop-stock-status">In Stock</span>
-                    <span class="shop-price">$21.99</span>
-                    <div class="shop-product-actions">
-                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                        <button class="shop-buy-now">Buy Now</button>
-                    </div>
-                </div>
-            </div>
-            <div class="shop-product-card">
-                <img src="https://picsum.photos/id/107/300/200" class="shop-product-image" />
-                <div class="shop-product-content">
-                    <h3 class="shop-product-title">Fantasy Worlds</h3>
-                    <p class="shop-product-desc">Fantasy</p>
-                    <span class="shop-stock-status">In Stock</span>
-                    <span class="shop-price">$19.50</span>
-                    <div class="shop-product-actions">
-                        <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add to Cart</button>
-                        <button class="shop-buy-now">Buy Now</button>
-                    </div>
-                </div>
-            </div>
+      <h2 class="shop-section-h2">🧛‍♂️ Ready to Dive into Fiction?</h2>
+      <h2 class="shop-title-second">Discover captivating stories that spark your imagination and keep you hooked from start to finish!✨</h2>
+
+        
+         <div class="shop-product-grid" id="shop-fiction-grid">
+            <!-- Product Card Template -->
+
         </div>
+      
     </div>
 
     <div id="footer-content"></div>
@@ -117,5 +101,6 @@
     <script src="../assets/js/loader.js"></script>
     <script src="../assets/js/shop.js"></script>
     <script src="../assets/js/home.js"></script>
+    <script src="../assets/js/product-category-filter.js"> </script>
 </body>
 </html>

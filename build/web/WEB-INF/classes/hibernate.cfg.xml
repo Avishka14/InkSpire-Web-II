@@ -5,8 +5,8 @@
     <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
     <property name="hibernate.connection.driver_class">com.mysql.cj.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/ink_spire?useSSL=false</property>
-    <property name="hibernate.connection.username">user name here </property>  
-    <property name="hibernate.connection.password">password here </property>
+    <property name="hibernate.connection.username"></property> <!-- user name here -->
+    <property name="hibernate.connection.password"></property> <!-- Password here -->
     <property name="hibernate.show_sql">true</property>
     <mapping class="hibernate.User" />
     <mapping class="hibernate.Category" />
