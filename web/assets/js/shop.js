@@ -22,22 +22,24 @@ async function loadHtml() {
 document.addEventListener("DOMContentLoaded", async function(){
    await loadHtml();
     loadLatestShopArrivals();
+    loadShopDailyDeals();
+    productFilterBy(1);
 });
 
 
 
 async function loadLatestShopArrivals(){
      
-       const limit = 27;
+       const limit = 18;
        const response = await fetch(`http://localhost:8080/InkSpire/LoadLatestProducts?limit=${limit}`);
      
         if(response.ok){
         
         const json = await response.json();
-        
+        const grid = "shop-product-grid";
         
         if(json.latestListings && json.latestListings.length > 0){
-              renderLatestShopProducts(json.latestListings);
+              renderLatestShopProducts(json.latestListings ,grid );
         }else{
               $.notify("Latest Arrivals not Found !", "error");
         }
@@ -51,8 +53,8 @@ async function loadLatestShopArrivals(){
     
 }
 
-function renderLatestShopProducts(products) {
-  const container = document.getElementById("shop-product-grid");
+function renderLatestShopProducts(products , grid) {
+  const container = document.getElementById(grid);
   if (!container) {
     console.error("❌ #shop-product-grid not found in DOM");
     return;
@@ -81,3 +83,29 @@ function renderLatestShopProducts(products) {
     container.appendChild(card);
   });
 }
+
+
+async function loadShopDailyDeals(){
+    
+    const response = await fetch("http://localhost:8080/InkSpire/LoadDailyDeals");
+    
+    if(response.ok){
+        
+        const json = await response.json();
+         const grid = "shop-daily-grid";
+        
+        if(json.dailyDeals && json.dailyDeals.length > 0){
+                   
+              renderLatestShopProducts(json.dailyDeals , grid);
+        }else{
+              $.notify("Daily Deals not Found !", "error");
+        }
+        
+        
+    }else{
+          $.notify("Network Error Please Try again later!", "error");
+    }
+    
+    
+}
+
