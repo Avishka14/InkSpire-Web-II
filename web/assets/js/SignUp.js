@@ -7,7 +7,6 @@ async function signUp(){
          password:document.getElementById("password").value
      });
      
-     console.log(data);
     
     const response = await fetch(
               "http://localhost:8080/InkSpire/SignUp",
@@ -27,7 +26,6 @@ async function signUp(){
         if(json.status){
             
               window.location.href = "http://localhost:8080/InkSpire/home/home.html";
-              console.log("success");
         }else{
              $.notify(json.message, "error");
         }

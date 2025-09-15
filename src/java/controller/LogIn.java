@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.Util;
 import hibernate.HibernateUtill;
 import hibernate.User;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpSession;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -34,9 +35,9 @@ public class LogIn extends HttpServlet {
         responseObject.addProperty("status", Boolean.FALSE);
 
         if (email.equals("admin@gmail.com") && password.equals("12345")) {
-              responseObject.addProperty("status", Boolean.TRUE);
-              responseObject.addProperty("message", "600");
-       
+            responseObject.addProperty("status", Boolean.TRUE);
+            responseObject.addProperty("message", "600");
+
         } else {
 
             if (email.isEmpty()) {
@@ -68,6 +69,11 @@ public class LogIn extends HttpServlet {
                     HttpSession httpSession = request.getSession();
                     responseObject.addProperty("status", Boolean.TRUE);
 
+                    Cookie userIdCookie = new Cookie("userId", String.valueOf(user.getId()));
+                    userIdCookie.setMaxAge(7 * 24 * 60 * 60); 
+                    userIdCookie.setPath("/");
+                    response.addCookie(userIdCookie);
+                    
                     httpSession.setAttribute("user", user);
                     responseObject.addProperty("message", "200");
 
@@ -84,7 +90,5 @@ public class LogIn extends HttpServlet {
         response.getWriter().write(responseJson);
 
     }
-    
-    
 
 }
