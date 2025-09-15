@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,11 +65,18 @@ public class SignUp extends HttpServlet {
                   
                   session.save(user);
                   session.beginTransaction().commit();
+                  
+                    Cookie userIdCookie = new Cookie("userId", String.valueOf(user.getId()));
+                    userIdCookie.setMaxAge(7 * 24 * 60 * 60); 
+                    userIdCookie.setPath("/");
+                    response.addCookie(userIdCookie);
                
                   responseObject.addProperty("status", true);
               }
+              
+              session.close();
+              
         }
-        
         String responseJson = gson.toJson(responseObject);
         response.setContentType("application/json");
         response.getWriter().write(responseJson);
