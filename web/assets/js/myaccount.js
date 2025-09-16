@@ -22,18 +22,22 @@ async function loadMyAccHeader() {
 
 
 
-const sidebarItems = document.querySelectorAll(".sidebar li");
-const tabPanels = document.querySelectorAll(".tab-panel");
+$(document).ready(function () {
 
-sidebarItems.forEach(item => {
-  item.addEventListener("click", () => {
-    sidebarItems.forEach(i => i.classList.remove("active"));
-    tabPanels.forEach(panel => panel.classList.remove("active"));
-    item.classList.add("active");
-    const tabId = item.getAttribute("data-tab");
-    document.getElementById(tabId).classList.add("active");
-  });
+    $(".sidebar li").on("click", function () {
+        let tabId = $(this).data("tab");
+
+        $(".sidebar li").removeClass("active");
+       $(this).addClass("active");
+        $(".tab-panel").removeClass("active").hide();
+        $("#" + tabId).addClass("active").show();
+    });
+
+
+    $(".tab-panel").hide();
+    $(".tab-panel.active").show();
 });
+
 
 
 
