@@ -9,7 +9,7 @@ body {
   font-family: "Gabarito", sans-serif;
 }
 
-/* --- CARD --- */
+
 .sign-up-container {
   width: 90%;
   max-width: 480px;
@@ -26,14 +26,13 @@ body {
   100% { opacity: 1; transform: translateY(0)    scale(1);    }
 }
 
-/* --- LOGO --- */
+
 .sign-up-logo-img {
   width: 200px;
   display: block;
   margin: 0 auto 1.5rem;
 }
 
-/* --- HEADINGS --- */
 .sign-up-title {
   text-align: center;
   color: #0ca371;
@@ -57,20 +56,19 @@ body {
   margin-bottom: 1.6rem;
 }
 
-/* --- FORM LAYOUT --- */
 .sign-up-form {
   display: flex;
   flex-direction: column;
   margin-right: 30px;
 }
 
-/* Field wrapper */
+
 .sign-up-field {
   position: relative;
   margin-bottom: 1.2rem;
 }
 
-/* INPUT */
+
 .sign-up-input {
   width: 100%;
   padding: 0.9rem 0.9rem 0.4rem;
@@ -82,14 +80,12 @@ body {
   background: transparent;
 }
 
-/* Focus Glow */
 .sign-up-input:focus {
   border-color: #0ca371;
   box-shadow: 0 0 0 3px rgba(12, 163, 113, 0.15);
   border: none;
 }
 
-/* FLOATING LABEL */
 .sign-up-label {
   position: absolute;
   top: 0.5rem;
@@ -100,7 +96,6 @@ body {
   transition: 0.25s ease;
 }
 
-/* Float effect */
 .sign-up-input:focus + .sign-up-label,
 .sign-up-input:not(:placeholder-shown) + .sign-up-label {
   top: 0.3rem;
