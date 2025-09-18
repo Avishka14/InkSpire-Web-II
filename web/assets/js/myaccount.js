@@ -95,3 +95,99 @@ async function loadUserDataFields(){
     }
  
 }
+
+
+async function updateUserBaseInfo(){
+    
+       let userId = document.cookie 
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+  
+    if(userId){
+    
+    const data = JSON.stringify({
+       firstName : document.getElementById("fName").value, 
+       laststName:  document.getElementById("Lname").value
+    });
+    
+    const response = await fetch(
+      `http://localhost:8080/InkSpire/UpdateUserData?id=${encodeURIComponent(userId)}`,
+            {
+                method: "POST",
+                body: data,
+                header: {
+                    "Content-Type": "application/json"
+                }
+            }
+    
+     );
+    
+     if(response.ok){
+         
+         const json =  await response.json();
+         
+         if(json.status){
+             $(".sv-btn").notify( json.message, "success");
+             loadUserDataFields();
+         }else{
+               $(".sv-btn").notify( json.message, "error");
+         }
+
+         
+     }else{
+            $(".section").notify("Metwork Error Please try again Later", "error");
+     }
+     
+       }else{
+         $(".section").notify("Please Log In Again!", "error");
+    }
+    
+}
+
+async function updateUserEmail(){
+    
+       let userId = document.cookie 
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+  
+    if(userId){
+    
+    const data = JSON.stringify({
+       email : document.getElementById("email").value
+    });
+    
+    const response = await fetch(
+      `http://localhost:8080/InkSpire/UpdateUserEmail?id=${encodeURIComponent(userId)}`,
+            {
+                method: "POST",
+                body: data,
+                header: {
+                    "Content-Type": "application/json"
+                }
+            }
+    
+     );
+    
+     if(response.ok){
+         
+         const json =  await response.json();
+         
+         if(json.status){
+             $(".e-btn").notify( json.message, "success");
+             loadUserDataFields();
+         }else{
+               $(".e-btn").notify( json.message, "error");
+         }
+
+         
+     }else{
+            $(".section").notify("Metwork Error Please try again Later", "error");
+     }
+     
+       }else{
+         $(".section").notify("Please Log In Again!", "error");
+    }
+    
+}
