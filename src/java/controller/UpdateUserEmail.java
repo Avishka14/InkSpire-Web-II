@@ -6,44 +6,38 @@ import com.google.gson.JsonObject;
 import hibernate.HibernateUtill;
 import hibernate.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import model.Util;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 
-@WebServlet(name = "UpdateUserData", urlPatterns = {"/UpdateUserData"})
-public class UpdateUserData extends HttpServlet {
+@WebServlet(name = "UpdateUserEmail", urlPatterns = {"/UpdateUserEmail"})
+public class UpdateUserEmail extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
-          Gson gson = new Gson();
+ 
+         Gson gson = new Gson();
           JsonObject updateName = gson.fromJson(request.getReader(), JsonObject.class);
           
-          String newFirstName = updateName.get("firstName").getAsString();
-          String newLastName = updateName.get("laststName").getAsString();
+          String email = updateName.get("email").getAsString();
           
          JsonObject responseObject = new JsonObject();
          responseObject.addProperty("status", false);
          
-           if (newFirstName.isEmpty()) {
-            responseObject.addProperty("message", "Enter your First Name!");
+           if (email.isEmpty()) {
+            responseObject.addProperty("message", "Enter your Email Address!");
 
-        } else if (!Util.isString(newLastName)) {
-            responseObject.addProperty("message", "Only English Letters Accepted!");
+        } else if (!Util.isEmailValid(email)) {
+            responseObject.addProperty("message", "Please Enter a Valid E-Mail Address!");
       
-        }else if (newLastName.isEmpty()) {
-            responseObject.addProperty("message", "Enter your Last Name!");
-
-        } else if (!Util.isString(newLastName)) {
-            responseObject.addProperty("message", "Only English Letters Accepted!");
-  
+            
         }else{
             
 
@@ -59,19 +53,18 @@ public class UpdateUserData extends HttpServlet {
 
                         User user = (User) hibernateSession.get(User.class, id);
 
-                        user.setFirstName(newFirstName);
-                        user.setLastName(newLastName);
+                        user.setEmail(email);
                         hibernateSession.update(user);
                         transaction.commit();
 
                         responseObject.addProperty("status", true);
-                        responseObject.addProperty("message", "Name updated successfully!");
+                        responseObject.addProperty("message", "E-Mail updated successfully!");
                         hibernateSession.close();
 
                     } catch (Exception e) {
 
                         e.printStackTrace();
-                        responseObject.addProperty("message", "Error updating Names");
+                        responseObject.addProperty("message", "Error updating E-Mail");
                     }
 
                 } 
@@ -85,10 +78,10 @@ public class UpdateUserData extends HttpServlet {
         String responseText = gson.toJson(responseObject);
         response.setContentType("application/json");
         response.getWriter().write(responseText);
-        
-        
+    
+    
     }
-  
+
     
-    
+   
 }

@@ -22,5 +22,9 @@ public class Util {
        return sb.toString();
    }
    
+   public static boolean isString(String text){
+       return text.matches("^[A-Za-z]+$");
+   }
+   
     
 }
