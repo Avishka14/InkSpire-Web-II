@@ -28,7 +28,7 @@ label {
 }
 
 select, textarea {
-    width: 100%;
+    width: 30%;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -193,6 +193,10 @@ button:active {
 }
 
 
+.verify-h3{
+    color: #5EA4E8;
+}
+
 /* Responsive */
 @media(max-width: 850px) {
     .account-layout {
@@ -216,4 +220,154 @@ button:active {
     .main-content {
         padding: 15px;
     }
+}
+
+
+/* Overlay */
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.45);
+  z-index: 9999;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.popup-overlay.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Recovery Card */
+.recovery-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 28px 24px;
+  width: auto;
+  max-width: 420px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  position: relative;
+  animation: fadeInUp .35s ease forwards;
+}
+
+/* Close Button */
+.close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: transparent;
+  border: none;
+  font-size: 10px;
+  cursor: pointer;
+  color: #444;
+  transition: color 0.2s;
+}
+.close-btn:hover { color: white; background-color: red;}
+
+/* Titles */
+.recovery-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #111;
+}
+
+.recovery-subtitle {
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Fields */
+.recovery-field {
+  position: relative;
+  margin-bottom: 18px;
+}
+
+.recovery-input {
+  width: 80%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.recovery-input:focus {
+  border-color: #0ca371;
+  box-shadow: 0 0 0 3px rgba(12,163,113,0.15);
+}
+
+.recovery-label {
+  position: absolute;
+  top: 38%;
+  left: 14px;
+  transform: translateY(-50%);
+  font-size: 13px;
+  color: #777;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  background: #fff;
+  padding: 0 4px;
+}
+.recovery-input:focus + .recovery-label,
+.recovery-input:not(:placeholder-shown) + .recovery-label {
+  top: -7px;
+  font-size: 11px;
+  color: #0ca371;
+}
+
+/* Buttons */
+.recovery-btn {
+  width: 50%;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+
+.btn-grey {
+  background: #f1f1f1;
+  color: #333;
+}
+.btn-grey:hover {
+  background: #e2e2e2;
+}
+
+.btn-green {
+  background: #0ca371;
+  color: #fff;
+}
+.btn-green:hover {
+  background: #0a8a5f;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
+
+.back-btn-link-a {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #0ca371;
+  text-decoration: none;
+}
+.back-btn-link-a:hover { text-decoration: underline; }
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
 }
