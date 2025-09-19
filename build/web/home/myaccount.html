@@ -28,7 +28,7 @@
             <aside class="sidebar">
                 <ul>
                     <li class="active" data-tab="details"><i class="bi bi-person"></i> Details</li>
-                    <li data-tab="address"><i class="bi bi-geo-alt"></i> Address Book</li>
+                    <li data-tab="address" onclick="loadCitySelection(); loadUserAddress();" ><i class="bi bi-geo-alt"></i> Address Book</li>
                     <li data-tab="orders"><i class="bi bi-bag"></i> Orders</li>
                     <li data-tab="payment"><i class="bi bi-credit-card"></i> Payment Info</li>
                     <li data-tab="messages"><i class="bi bi-chat-dots"></i> Messages</li>
@@ -65,29 +65,38 @@
                         <br/>
                         <button onclick="updateUserEmail();" class="e-btn">Update Email</button>
                     </div>
+                    
+                     <div class="section-b">
+                        <h2>Contact Info</h2>
+                        <label>Mobile Phone Number</label>
+                        <input  id="mobileNumber">
+                        <br/>
+                        <button onclick="updateUserContact();" class="c-btn">Update Number</button>
+                    </div>
+
                 </div>
 
                 <!-- Address Book -->
                 <div id="address" class="tab-panel">
-                    <h1>My Address Book</h1>
-                    <form>
+                    <h1>My Address</h1>
                         <label>Street</label>
-                        <input type="text" placeholder="123 Main St">
+                        <input type="text" placeholder="123 Main St" id="line1">
+
+                        <label>Address Line 2</label>
+                        <input type="text" placeholder="Katugasthota" id="line2">
+
                         <label>City</label>
-                        <input type="text" placeholder="City">
+                        <select id="city-select">
+                            <option value="">Select</option>
+                        </select>
+
                         <label>Postal Code</label>
-                        <input type="text" placeholder="12345">
-                        <label>Country</label>
-                        <input type="text" placeholder="Country">
-                        <button>Add Address</button>
-                        <button type="button" class="danger">Remove Address</button>
-                    </form>
-                    <div class="section">
-                        <h2>Saved Addresses</h2>
-                        <div class="list-box">
-                            <strong>123 Main St</strong> Springfield, 12345, USA
-                        </div>
-                    </div>
+                        <input type="text" placeholder="12345" id="postl-code">
+
+
+                        <br/>
+                        <button onclick="updateUserAddress();" class="a-btn">Update Address</button>
+
                 </div>
 
                 <!-- Orders -->
@@ -176,6 +185,8 @@
 
             </main>
         </div>
+
+
 
         <div id="footer-section"> </div>
 

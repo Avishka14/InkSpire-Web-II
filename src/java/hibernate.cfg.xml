@@ -18,5 +18,7 @@
     <mapping class="hibernate.ListingApproval" />
     <mapping class="hibernate.Offers" />
     <mapping class="hibernate.OfferType" />
+    <mapping class="hibernate.City" />
+    <mapping class="hibernate.ShippingAddress" />
   </session-factory>
 </hibernate-configuration>

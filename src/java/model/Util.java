@@ -26,5 +26,9 @@ public class Util {
        return text.matches("^[A-Za-z]+$");
    }
    
+   public static boolean isMobileValid(String numb){
+       return numb.matches("^[0-9]{10}$");
+   }
+   
     
 }

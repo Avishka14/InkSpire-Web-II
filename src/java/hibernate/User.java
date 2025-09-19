@@ -35,6 +35,9 @@ public class User implements Serializable {
 
     @Column(name = "reg_date", nullable = false)
     private Date regDate;
+    
+    @Column(name = "contact", length = 12, nullable = false)
+    private String contact;
 
     public int getId() {
         return id;
@@ -82,5 +85,13 @@ public class User implements Serializable {
 
     public void setRegDate(Date regDate) {
         this.regDate = regDate;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
     }
 }
