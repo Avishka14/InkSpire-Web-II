@@ -378,7 +378,181 @@ async function updateUserAddress(){
     } else {
         $(".address").notify("Please Log In Again!", "error");
     }
+ 
     
+}
+
+
+async function loadSellerInfo(){
+    
+    
+    let userId = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+
+    if (userId) {
+
+        const response = await fetch(`http://localhost:8080/InkSpire/LoadSellerBaseInfo?id=${encodeURIComponent(userId)}`);
+
+        if (response.ok) {
+
+            const json = await response.json();
+
+            if (json.status) {
+
+                if (json.seller) {
+                    console.log(json.seller);
+                    document.getElementById("list-box2").style.display = "block";
+                    document.getElementById("list-box").style.display = "none";
+                  
+                    document.getElementById("seller-name-input").value = json.seller?.sellerName || "Seller Name not Found";
+                    document.getElementById("seller-date-input").value = json.seller?.regDate || "Reg Date not Found";
+
+                    
+
+                } else {
+
+                    document.getElementById("list-box2").style.display = "none";
+                    document.getElementById("list-box").style.display = "block";
+
+                }
+
+            } else {
+                $(".seller-tab").notify(json.message, "error");
+            }
+
+
+        } else {
+            $(".seller-tab").notify("Network Error Please try again Later", "error");
+        }
+
+
+    } else {
+        $(".seller-tab").notify("Network Error Please try again Later", "error");
+    }
+
+
+    
+    
+}
+
+
+function openPopup() {
+  document.getElementById("popupOverlay").classList.add("active");
+}
+function closePopup() {
+  document.getElementById("popupOverlay").classList.remove("active");
+}
+
+async function sendMail() {
+
+    const data = {
+        email: document.getElementById("email-seller").value
+    };
+
+    const mailAddress = JSON.stringify(data);
+
+    console.log(mailAddress);
+
+    const response = await fetch("http://localhost:8080/InkSpire/MailServlet", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: mailAddress
+    });
+
+    if (response.ok) {
+        const result = await response.json();
+
+        if (result.status) {
+            
+             $(".btn-grey").notify("Code Has send to your email!", "success");
+            
+        } else {
+             $(".btn-grey").notify("Invalid E-Mail Address", "error");
+        }
+    } else {
+        $(".btn-grey").notify("Something went wrong Please try again Later", "error");
+    }
+
+}
+
+async function verifyCode(){
+    
+    
+    const userCode = document.getElementById("code").value;
+    
+    console.log(userCode);
+    
+    const response = await fetch("http://localhost:8080/InkSpire/VerifyCodeServlet", {
+        
+        method:"POST",
+        headers:{
+            "Content-Type":"application/x-www-form-urlencoded"
+        },
+        body:"userCode=" + encodeURIComponent(userCode),
+        credentials :"include"
+    });
+    
+    const result = await response.text();
+    
+    if(result === "Verification successful!"){
+     document.getElementById("get-code-section").style.display = "none";
+     document.getElementById("password-section").style.display = "block";
+   
+    }else{
+         $("btncode").notify("Verification Code is Invalid !", "error");
+    }
+    
+    
+}
+
+async function activateSellerAccount(){
+    
+         let userId = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+
+    if (userId) {
+
+        const data = JSON.stringify({
+            username: document.getElementById("username").value
+        });
+
+        const response = await fetch(
+                `http://localhost:8080/InkSpire/VerifySellerAccount?id=${encodeURIComponent(userId)}`,
+                {
+                    method: "POST",
+                    body: data,
+                    header: {
+                        "Content-Type": "applicatidon/json"
+                    }
+                }
+
+        );
+
+        if (response.ok) {
+
+            const json = await response.json();
+
+            if (json.status) {
+                $(".btnac").notify("Seller Account Acivated Successfully", "success");
+
+            } else {
+                $(".btnac").notify(json.message, "error");
+            }
+
+
+        } else {
+            $(".btnac").notify("Network Error Please try again Later", "error");
+        }
+
+    } else {
+        $(".btnac").notify("Please Log In Again!", "error");
+    }
     
     
 }

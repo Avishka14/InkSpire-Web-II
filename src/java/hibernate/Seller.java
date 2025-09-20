@@ -31,8 +31,8 @@ public class Seller implements Serializable{
     @Column(name = "reg_date" )
     private Date reg_date;
     
-    @Column(name = "verification_code" , nullable = false , length = 15)
-    private String verificationCode;
+    @Column(name = "verification")
+    private int verificationCode;
 
     public Seller() {
     }
@@ -69,11 +69,11 @@ public class Seller implements Serializable{
         this.reg_date = reg_date;
     }
 
-    public String getVerificationCode() {
+    public int getVerificationCode() {
         return verificationCode;
     }
 
-    public void setVerificationCode(String verificationCode) {
+    public void setVerificationCode(int verificationCode) {
         this.verificationCode = verificationCode;
     }
     

@@ -32,7 +32,7 @@
                     <li data-tab="orders"><i class="bi bi-bag"></i> Orders</li>
                     <li data-tab="payment"><i class="bi bi-credit-card"></i> Payment Info</li>
                     <li data-tab="messages"><i class="bi bi-chat-dots"></i> Messages</li>
-                    <li data-tab="seller"><i class="bi bi-shop"></i> Seller Account</li>
+                    <li data-tab="seller" onclick="loadSellerInfo();"><i class="bi bi-shop"></i> Seller Account</li>
                     <li data-tab="settings"><i class="bi bi-gear"></i> Settings</li>
                 </ul>
             </aside>
@@ -65,8 +65,8 @@
                         <br/>
                         <button onclick="updateUserEmail();" class="e-btn">Update Email</button>
                     </div>
-                    
-                     <div class="section-b">
+
+                    <div class="section-b">
                         <h2>Contact Info</h2>
                         <label>Mobile Phone Number</label>
                         <input  id="mobileNumber">
@@ -79,23 +79,23 @@
                 <!-- Address Book -->
                 <div id="address" class="tab-panel">
                     <h1>My Address</h1>
-                        <label>Street</label>
-                        <input type="text" placeholder="123 Main St" id="line1">
+                    <label>Street</label>
+                    <input type="text" placeholder="123 Main St" id="line1">
 
-                        <label>Address Line 2</label>
-                        <input type="text" placeholder="Katugasthota" id="line2">
+                    <label>Address Line 2</label>
+                    <input type="text" placeholder="Katugasthota" id="line2">
 
-                        <label>City</label>
-                        <select id="city-select">
-                            <option value="">Select</option>
-                        </select>
+                    <label>City</label>
+                    <select id="city-select">
+                        <option value="">Select</option>
+                    </select>
 
-                        <label>Postal Code</label>
-                        <input type="text" placeholder="12345" id="postl-code">
+                    <label>Postal Code</label>
+                    <input type="text" placeholder="12345" id="postl-code">
 
 
-                        <br/>
-                        <button onclick="updateUserAddress();" class="a-btn">Update Address</button>
+                    <br/>
+                    <button onclick="updateUserAddress();" class="a-btn">Update Address</button>
 
                 </div>
 
@@ -152,14 +152,25 @@
                 </div>
 
                 <!-- Seller Account -->
-                <div id="seller" class="tab-panel">
+                <div id="seller" class="tab-panel seller-tab">
                     <h1>Seller Account</h1>
-                    <div class="list-box">
-                        <strong>Status:</strong> Active <br>
-                        Balance: $1250 <br>
-                        Products Listed: 12
+                    <div class="list-box" id="list-box">
+                        <h2>You don't have Activated a Seller Profile</h2>
+                        <button onclick="openPopup();">Activate Seller Profile</button>
                     </div>
-                    <button>Go to Seller Profile</button>
+
+
+                    <div class="list-box list-box2" style="width: 50%;" id="list-box2">
+                        <label>Seller Name</label>
+                        <input type="text"  id="seller-name-input">
+
+                        <label>Registered Date</label>
+                        <input type="text"  id="seller-date-input" disabled>
+                        <br/>
+                        <button class="btn-grey">Update Seller Name</button>
+                        <button>Go to Seller Profile</button>
+                    </div>
+
                 </div>
 
                 <!-- Settings -->
@@ -186,6 +197,46 @@
             </main>
         </div>
 
+        <!-- Background Overlay -->
+        <div class="popup-overlay" id="popupOverlay">
+            <div class="recovery-card">
+                <button class="close-btn" onclick="closePopup()">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+
+                <div class="recovery-container">
+                    <h2 class="recovery-title">Activate Seller Profile</h2>
+                    <p class="recovery-subtitle">Create Your account and Start Selling</p>
+
+                    <!-- Email + Code Section -->
+                    <div id="get-code-section" >
+                        <div class="recovery-field">
+                            <input type="email" id="email-seller" class="recovery-input" placeholder=" " required>
+                            <label for="email" class="recovery-label">Email</label>
+                        </div>
+                        <button type="button" class="recovery-btn btn-grey" onclick="sendMail();">Get Code</button>
+
+                        <div class="recovery-field" style="margin-top: 1.3rem;">
+                            <input type="text" id="code" class="recovery-input" placeholder=" " required>
+                            <label for="code" class="recovery-label">Enter Code</label>
+                        </div>
+                        <button type="button" class="recovery-btn btn-green btncode" onclick="verifyCode();">Reset</button>
+                    </div>
+
+                    <!-- New Password Section -->
+                    <div id="password-section" class="hidden-section">
+                        <div class="recovery-field">
+                            <input type="text" id="username" class="recovery-input" placeholder=" " required>
+                            <label for="new-password" class="recovery-label">Enter Your Seller Name</label>
+                        </div>
+                        <button type="submit" class="recovery-btn btn-green btnac" onclick="activateSellerAccount();">Activate</button>
+                        <a class="back-btn-link-a" href="">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap Icons -->
 
 
         <div id="footer-section"> </div>
