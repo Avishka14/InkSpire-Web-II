@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -38,6 +39,10 @@ public class User implements Serializable {
     
     @Column(name = "contact", length = 12, nullable = false)
     private String contact;
+    
+    @OneToOne(mappedBy = "user")
+    private Seller seller;
+    
 
     public int getId() {
         return id;
@@ -93,5 +98,13 @@ public class User implements Serializable {
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public Seller getSeller() {
+        return seller;
+    }
+
+    public void setSeller(Seller seller) {
+        this.seller = seller;
     }
 }
