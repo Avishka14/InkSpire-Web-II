@@ -528,7 +528,7 @@ async function activateSellerAccount(){
                     method: "POST",
                     body: data,
                     header: {
-                        "Content-Type": "applicatidon/json"
+                        "Content-Type": "application/json"
                     }
                 }
 
@@ -552,6 +552,55 @@ async function activateSellerAccount(){
 
     } else {
         $(".btnac").notify("Please Log In Again!", "error");
+    }
+    
+    
+}
+
+
+async function updateSellerName(){
+    
+         let userId = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+
+    if (userId) {
+
+        const data = JSON.stringify({
+            sellerName: document.getElementById("seller-name-input").value
+        });
+
+        const response = await fetch(
+                `http://localhost:8080/InkSpire/UpdateSellerName?id=${encodeURIComponent(userId)}`,
+                {
+                    method: "POST",
+                    body: data,
+                    header: {
+                        "Content-Type": "application/json"
+                    }
+                }
+
+        );
+
+        if (response.ok) {
+
+            const json = await response.json();
+
+            if (json.status) {
+                $(".btn-sel-tt").notify("Seller Name Change Successfully", "success");
+
+            } else {
+                $(".btn-sel-tt").notify(json.message, "error");
+            }
+
+
+        } else {
+            $(".btn-sel-tt").notify("Network Error Please try again Later", "error");
+        }
+
+    } else {
+        $(".btn-sel-tt").notify("Please Log In Again!", "error");
     }
     
     
