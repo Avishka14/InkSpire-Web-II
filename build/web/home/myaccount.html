@@ -178,19 +178,17 @@
                     <h1>Account Settings</h1>
                     <div class="section">
                         <h2>Reset Password</h2>
-                        <form>
                             <label>Current Password</label>
-                            <input type="password">
+                            <input type="password" id="currentPass">
+                            
                             <label>New Password</label>
-                            <input type="password">
+                            <input type="password" id="newPassw">
+                            
                             <label>Confirm New Password</label>
-                            <input type="password">
-                            <button>Reset Password</button>
-                        </form>
-                    </div>
-                    <div class="section">
-                        <h2>Delete Account</h2>
-                        <button class="danger">Delete My Account</button>
+                            <input type="password" id="confPass">
+                            <br/>
+                            <button class="btn-c-pass" onclick="ChangeUserPassword();">Reset Password</button>
+                            <a class="fp-a" href="http://localhost:8080/InkSpire/account/passwordrecover.html">Forget Password?</a>
                     </div>
                 </div>
 

@@ -300,7 +300,7 @@ async function loadUserAddress() {
                         let newOption = document.createElement("option");
                         newOption.value = cityId;
                         newOption.text = cityFromJson;
-            
+
                         citySelect.appendChild(newOption);
                     }
 
@@ -331,9 +331,9 @@ async function loadUserAddress() {
 }
 
 
-async function updateUserAddress(){
-    
-     let shipId = document.cookie
+async function updateUserAddress() {
+
+    let shipId = document.cookie
             .split("; ")
             .find(row => row.startsWith("shippingAdId"))
             ?.split("=")[1];
@@ -378,14 +378,14 @@ async function updateUserAddress(){
     } else {
         $(".address").notify("Please Log In Again!", "error");
     }
- 
-    
+
+
 }
 
 
-async function loadSellerInfo(){
-    
-    
+async function loadSellerInfo() {
+
+
     let userId = document.cookie
             .split("; ")
             .find(row => row.startsWith("userId"))
@@ -405,11 +405,11 @@ async function loadSellerInfo(){
                     console.log(json.seller);
                     document.getElementById("list-box2").style.display = "block";
                     document.getElementById("list-box").style.display = "none";
-                  
+
                     document.getElementById("seller-name-input").value = json.seller?.sellerName || "Seller Name not Found";
                     document.getElementById("seller-date-input").value = json.seller?.regDate || "Reg Date not Found";
 
-                    
+
 
                 } else {
 
@@ -433,16 +433,16 @@ async function loadSellerInfo(){
     }
 
 
-    
-    
+
+
 }
 
 
 function openPopup() {
-  document.getElementById("popupOverlay").classList.add("active");
+    document.getElementById("popupOverlay").classList.add("active");
 }
 function closePopup() {
-  document.getElementById("popupOverlay").classList.remove("active");
+    document.getElementById("popupOverlay").classList.remove("active");
 }
 
 async function sendMail() {
@@ -467,11 +467,11 @@ async function sendMail() {
         const result = await response.json();
 
         if (result.status) {
-            
-             $(".btn-grey").notify("Code Has send to your email!", "success");
-            
+
+            $(".btn-grey").notify("Code Has send to your email!", "success");
+
         } else {
-             $(".btn-grey").notify("Invalid E-Mail Address", "error");
+            $(".btn-grey").notify("Invalid E-Mail Address", "error");
         }
     } else {
         $(".btn-grey").notify("Something went wrong Please try again Later", "error");
@@ -479,39 +479,39 @@ async function sendMail() {
 
 }
 
-async function verifyCode(){
-    
-    
+async function verifyCode() {
+
+
     const userCode = document.getElementById("code").value;
-    
+
     console.log(userCode);
-    
+
     const response = await fetch("http://localhost:8080/InkSpire/VerifyCodeServlet", {
-        
-        method:"POST",
-        headers:{
-            "Content-Type":"application/x-www-form-urlencoded"
+
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
         },
-        body:"userCode=" + encodeURIComponent(userCode),
-        credentials :"include"
+        body: "userCode=" + encodeURIComponent(userCode),
+        credentials: "include"
     });
-    
+
     const result = await response.text();
-    
-    if(result === "Verification successful!"){
-     document.getElementById("get-code-section").style.display = "none";
-     document.getElementById("password-section").style.display = "block";
-   
-    }else{
-         $("btncode").notify("Verification Code is Invalid !", "error");
+
+    if (result === "Verification successful!") {
+        document.getElementById("get-code-section").style.display = "none";
+        document.getElementById("password-section").style.display = "block";
+
+    } else {
+        $("btncode").notify("Verification Code is Invalid !", "error");
     }
-    
-    
+
+
 }
 
-async function activateSellerAccount(){
-    
-         let userId = document.cookie
+async function activateSellerAccount() {
+
+    let userId = document.cookie
             .split("; ")
             .find(row => row.startsWith("userId"))
             ?.split("=")[1];
@@ -553,14 +553,14 @@ async function activateSellerAccount(){
     } else {
         $(".btnac").notify("Please Log In Again!", "error");
     }
-    
-    
+
+
 }
 
 
-async function updateSellerName(){
-    
-         let userId = document.cookie
+async function updateSellerName() {
+
+    let userId = document.cookie
             .split("; ")
             .find(row => row.startsWith("userId"))
             ?.split("=")[1];
@@ -602,6 +602,57 @@ async function updateSellerName(){
     } else {
         $(".btn-sel-tt").notify("Please Log In Again!", "error");
     }
-    
-    
+
+
+}
+
+
+async function ChangeUserPassword() {
+
+    let userId = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+
+    if (userId) {
+
+        const data = JSON.stringify({
+            oldPass: document.getElementById("currentPass").value,
+            newPas: document.getElementById("newPassw").value,
+            conPass: document.getElementById("confPass").value
+        });
+
+                const response = await fetch(
+                `http://localhost:8080/InkSpire/UpdateUserPassword?id=${encodeURIComponent(userId)}`,
+                {
+                    method: "POST",
+                    body: data,
+                    header: {
+                        "Content-Type": "application/json"
+                    }
+                }
+
+        );
+
+        if (response.ok) {
+
+            const json = await response.json();
+
+            if (json.status) {
+                $(".btn-c-pass").notify(json.message, "success");
+
+            } else {
+                $(".btn-c-pass").notify(json.message, "error");
+            }
+
+
+        } else {
+            $(".btn-c-pass").notify("Network Error Please try again Later", "error");
+        }
+
+
+
+    } else {
+        $(".btn-c-pass").notify("Please Log In Again!", "error");
+    }
 }
