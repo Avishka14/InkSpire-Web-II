@@ -57,6 +57,7 @@ public class LoadDailyDeals extends HttpServlet {
             productJson.addProperty("productName", product.getTitle());
             productJson.addProperty("productCategory", category.getValue());
             productJson.addProperty("productPrice", price );
+            productJson.addProperty("id", listing.getId() );
              
             String baseUrl = request.getScheme() + "://" 
                              +request.getServerName() + ":"

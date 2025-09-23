@@ -62,6 +62,7 @@ public class LoadLatestProducts extends HttpServlet {
             productJson.addProperty("productName", product.getTitle());
             productJson.addProperty("productCategory", category.getValue());
             productJson.addProperty("productPrice", String.valueOf(listing.getPrice()));
+            productJson.addProperty("id", listing.getId());
             
               String baseUrl = request.getScheme() + "://"
                     + request.getServerName() + ":"

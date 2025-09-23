@@ -14,10 +14,10 @@ async function loadSection(file, targetId) {
 }
 
 
- function loadHtml() {
-   loadSection("Header.html", "header-div");
-   loadSection("footer.html", "footer-content");
-   loadCategories();
+function loadHtml() {
+    loadSection("Header.html", "header-div");
+    loadSection("footer.html", "footer-content");
+    loadCategories();
 
 }
 
@@ -64,61 +64,61 @@ function sideNav() {
         if (e.key === "Escape")
             closeMenu();
     });
-}  
-
-
-async function loadCategories(){
-    
-    const response = await fetch("http://localhost:8080/InkSpire/LoadCategory");
-    
-    if(response.ok){
-        
-        const json = await response.json();
-        
-        if(json.status){
-            
-          const ul =  document.getElementById("category-ul");
-            
-            json.categoryList.forEach(item => {
-               const li = document.createElement("li");
-               li.value = item.id;
-               li.innerHTML = `<i class="bi bi-book"></i> ${item.value}`;
-               ul.appendChild(li);
-                           
-            });
-            
-        }else{
-             $.notify("Network Error Please Try again later!", "error");
-        }
-
-    }else{
-         $.notify("Network Error Please Try again later!", "error");
-    }
-    
 }
 
 
-async function loadDailyDeals(){
-    
-    const response = await fetch("http://localhost:8080/InkSpire/LoadDailyDeals");
-    
-    if(response.ok){
-        
+async function loadCategories() {
+
+    const response = await fetch("http://localhost:8080/InkSpire/LoadCategory");
+
+    if (response.ok) {
+
         const json = await response.json();
-        
-        
-        if(json.dailyDeals && json.dailyDeals.length > 0){
-              renderProducts(json.dailyDeals);
-        }else{
-              $.notify("Daily Deals not Found !", "error");
+
+        if (json.status) {
+
+            const ul = document.getElementById("category-ul");
+
+            json.categoryList.forEach(item => {
+                const li = document.createElement("li");
+                li.value = item.id;
+                li.innerHTML = `<i class="bi bi-book"></i> ${item.value}`;
+                ul.appendChild(li);
+
+            });
+
+        } else {
+            $.notify("Network Error Please Try again later!", "error");
         }
-        
-        
-    }else{
-          $.notify("Network Error Please Try again later!", "error");
+
+    } else {
+        $.notify("Network Error Please Try again later!", "error");
     }
-    
-    
+
+}
+
+
+async function loadDailyDeals() {
+
+    const response = await fetch("http://localhost:8080/InkSpire/LoadDailyDeals");
+
+    if (response.ok) {
+
+        const json = await response.json();
+
+
+        if (json.dailyDeals && json.dailyDeals.length > 0) {
+            renderProducts(json.dailyDeals);
+        } else {
+            $.notify("Daily Deals not Found !", "error");
+        }
+
+
+    } else {
+        $.notify("Network Error Please Try again later!", "error");
+    }
+
+
 }
 
 function renderProducts(products) {
@@ -140,7 +140,7 @@ function renderProducts(products) {
                     <button class="add-to-cart">
                         <i class="bi bi-heart-fill"></i> Add to Cart
                     </button>
-                    <button class="buy-btn">Buy Now</button>
+               <button class="buy-btn" onclick="loadSingleView('${product.id}');" >Buy</button>
                 </div>
             </div>
         `;
@@ -150,29 +150,29 @@ function renderProducts(products) {
 }
 
 
-async function loadLatestArrivals(){
-     
-       const limit = 12;
-       const response = await fetch(`http://localhost:8080/InkSpire/LoadLatestProducts?limit=${limit}`);
-     
-        if(response.ok){
-        
+async function loadLatestArrivals() {
+
+    const limit = 12;
+    const response = await fetch(`http://localhost:8080/InkSpire/LoadLatestProducts?limit=${limit}`);
+
+    if (response.ok) {
+
         const json = await response.json();
-        
-        
-        if(json.latestListings && json.latestListings.length > 0){
-              renderLatestProducts(json.latestListings);
-        }else{
-              $.notify("Latest Arrivals not Found !", "error");
+
+
+        if (json.latestListings && json.latestListings.length > 0) {
+            renderLatestProducts(json.latestListings);
+        } else {
+            $.notify("Latest Arrivals not Found !", "error");
         }
-        
-        
-    }else{
-          $.notify("Network Error Please Try again later!", "error");
+
+
+    } else {
+        $.notify("Network Error Please Try again later!", "error");
     }
-     
-     
-    
+
+
+
 }
 
 function renderLatestProducts(products) {
@@ -199,7 +199,7 @@ function renderLatestProducts(products) {
                     <button class="add-to-cart">
                         <i class="bi bi-heart-fill"></i> Add to Cart
                     </button>
-                    <button class="buy-btn">Buy Now</button>
+              <button class="buy-btn" onclick="loadSingleView('${product.id}');" >Buy</button>
                 </div>
             </div>
         `;
