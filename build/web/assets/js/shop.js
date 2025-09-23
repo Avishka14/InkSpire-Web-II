@@ -75,7 +75,7 @@ function renderLatestShopProducts(products , grid) {
           <span class="shop-price">Rs. ${product.productPrice}</span>
           <div class="shop-product-actions">
               <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add</button>
-              <button class="shop-buy-now">Buy</button>
+              <button class="shop-buy-now" onclick="loadSingleView('${product.id}');" >Buy</button>
           </div>
       </div>
     `;

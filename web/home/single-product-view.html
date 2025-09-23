@@ -8,34 +8,29 @@
         <link rel="stylesheet" href="../assets/style/single-view-product.css">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <!-- Notify.js (element-based, works without Bootstrap) -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
     </head>
     <body onload="loadHtml(); loadDailyDeals();">
 
         <div id="header-div"> </div>
 
-
         <section class="product-details">
             <div class="product-details-container">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/400x400" alt="Product Image">
+                    <img  alt="Product Image" id="img-s-p">
                 </div>
                 <div class="product-info">
-                    <h2 class="product-title">Handcrafted Wooden Lamp</h2>
-                    <p class="seller-name">Sold by: <strong>CraftsHouse</strong></p>
-                    <p class="product-desc">
-                        This handcrafted wooden lamp adds a warm, rustic charm to any living space. 
-                        Made from sustainable oak wood, each piece is unique with natural wood grain details.
+                    <h2 class="product-title" id="title-s-p"></h2>
+                    <p class="seller-name">Sold by: <strong id="seller-s-p"></strong></p>
+                    <p class="product-desc" id="desc-s-p">
                     </p>
-                    <p class="price">$49.99</p>
+                    <p class="price" id="price-s-p"></p>
                     <span class="stock-status">In Stock</span>
 
                     <div class="product-actions">
                         <button class="add-to-cart"><i class="bi bi-cart-plus"></i> Add to Cart</button>
-                        <button class="buy-btn"><i class="bi bi-lightning-fill"></i> Buy Now</button>
+                        <button class="buy-btn"><i class="bi bi-lightning-fill"></i> Check Out</button>
                     </div>
                 </div>
             </div>
@@ -68,6 +63,24 @@
         <script src="../assets/js/home.js"></script>
 
         <script src="../assets/js/loader.js"></script>
+        <script src="../assets/js/product-view.js"></script>
+
+        <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const product = JSON.parse(localStorage.getItem("singleProduct"));
+            if (product) {
+                document.getElementById("title-s-p").textContent = product.title || "Title not Found";
+                document.getElementById("seller-s-p").textContent = product.seller || "Seller not Found";
+                document.getElementById("desc-s-p").textContent = product.desc || "Description not Found";
+                document.getElementById("price-s-p").textContent = "Rs " +product.price +" /="|| "Price not Found";
+                document.getElementById("img-s-p").src = product.imageUrl;
+            } else {
+                console.error("No product found in localStorage");
+            }
+        });
+        </script>
+
+
 
     </body>
 </html>

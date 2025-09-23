@@ -1,4 +1,3 @@
-
 package controller;
 
 import com.google.gson.Gson;
@@ -18,13 +17,12 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
-
 @WebServlet(name = "LoadUserAddress", urlPatterns = {"/LoadUserAddress"})
 public class LoadUserAddress extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-   
+
         Integer id = Integer.valueOf(request.getParameter("id"));
         JsonObject responseObject = new JsonObject();
         responseObject.addProperty("status", Boolean.FALSE);
@@ -50,25 +48,23 @@ public class LoadUserAddress extends HttpServlet {
                 addressData.addProperty("city", address.getCity().getName());
                 addressData.addProperty("cityId", address.getCity().getId());
                 addressData.addProperty("postal", address.getPostalCode());
-                
-                   Cookie addressId = new Cookie("shippingAdId", String.valueOf(address.getId()));
-                    addressId.setMaxAge(7 * 24 * 60 * 60); 
-                    addressId.setPath("/");
-                    response.addCookie(addressId);
+
+                Cookie addressId = new Cookie("shippingAdId", String.valueOf(address.getId()));
+                addressId.setMaxAge(7 * 24 * 60 * 60);
+                addressId.setPath("/");
+                response.addCookie(addressId);
 
                 responseObject.addProperty("status", true);
                 responseObject.add("address", addressData);
 
             }
-          session.close();
+            session.close();
         }
 
         String responseText = gson.toJson(responseObject);
         response.setContentType("application/json");
         response.getWriter().write(responseText);
-    
-    }
 
-    
+    }
 
 }
