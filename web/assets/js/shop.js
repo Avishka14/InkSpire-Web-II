@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", async function(){
 
 async function loadLatestShopArrivals(){
      
-       const limit = 18;
+       const limit = 12;
        const response = await fetch(`http://localhost:8080/InkSpire/LoadLatestProducts?limit=${limit}`);
      
         if(response.ok){

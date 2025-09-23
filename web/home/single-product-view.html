@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> | Buy Now</title>
+        <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="../assets/style/single-view-product.css">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <!-- Notify.js (element-based, works without Bootstrap) -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+    </head>
+    <body onload="loadHtml(); loadDailyDeals();">
+
+        <div id="header-div"> </div>
+
+
+        <section class="product-details">
+            <div class="product-details-container">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/400x400" alt="Product Image">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">Handcrafted Wooden Lamp</h2>
+                    <p class="seller-name">Sold by: <strong>CraftsHouse</strong></p>
+                    <p class="product-desc">
+                        This handcrafted wooden lamp adds a warm, rustic charm to any living space. 
+                        Made from sustainable oak wood, each piece is unique with natural wood grain details.
+                    </p>
+                    <p class="price">$49.99</p>
+                    <span class="stock-status">In Stock</span>
+
+                    <div class="product-actions">
+                        <button class="add-to-cart"><i class="bi bi-cart-plus"></i> Add to Cart</button>
+                        <button class="buy-btn"><i class="bi bi-lightning-fill"></i> Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr>
+
+
+        <!-- ================= Categories Section ================= -->
+        <section class="section-two-home">
+            <!-- Sidebar -->
+            <div class="category-tab">
+                <h3>📚 Categories</h3>
+                <ul id="category-ul">
+                </ul>
+            </div>
+
+
+            <!-- Products -->
+            <div class="products-wrapper">
+                <h1 class="section-heading">🔥 Daily Deals</h1>
+                <div class="product-grid" id="product-container">
+                    <!-- Product Card -->
+
+                </div>
+            </div>
+        </section>
+        <div id="footer-content"></div>
+
+        <script src="../assets/js/home.js"></script>
+
+        <script src="../assets/js/loader.js"></script>
+
+    </body>
+</html>
