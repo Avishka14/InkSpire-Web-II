@@ -1,4 +1,3 @@
-
 package controller;
 
 import com.google.gson.Gson;
@@ -27,11 +26,11 @@ public class LoadLatestProducts extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       
+
         Session session = HibernateUtill.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
-        
-         int limit = 12; 
+
+        int limit = 12;
         try {
             String limitParam = request.getParameter("limit");
             if (limitParam != null) {
@@ -41,30 +40,31 @@ public class LoadLatestProducts extends HttpServlet {
 
             limit = 12;
         }
-        
-        Criteria c = session.createCriteria(Listing.class , "i")
-                 .addOrder(Order.desc("i.listing_date"))
-                 .setMaxResults(limit);
-        
+
+        Criteria c = session.createCriteria(Listing.class, "i")
+                .addOrder(Order.desc("i.listing_date"))
+                .setMaxResults(limit);
+
         List<Listing> listings = c.list();
-        
+
         tx.commit();
         session.close();
-        
+
         JsonArray dealsArray = new JsonArray();
-        
-        for(Listing listing : listings){
-            
+
+        for (Listing listing : listings) {
+
             Product product = listing.getProduct();
             Category category = product.getCategory();
-            
+
             JsonObject productJson = new JsonObject();
             productJson.addProperty("productName", product.getTitle());
             productJson.addProperty("productCategory", category.getValue());
             productJson.addProperty("productPrice", String.valueOf(listing.getPrice()));
             productJson.addProperty("id", listing.getId());
-            
-              String baseUrl = request.getScheme() + "://"
+            productJson.addProperty("proId", product.getId());
+
+            String baseUrl = request.getScheme() + "://"
                     + request.getServerName() + ":"
                     + request.getServerPort()
                     + request.getContextPath();
@@ -72,7 +72,7 @@ public class LoadLatestProducts extends HttpServlet {
             String imagePath = "/ProductImageServlet/" + product.getId() + "/image1.png";
             File productImage = new File("C:/InkSpireUploads/product-images/" + product.getId() + "/image1.png");
 
-             String imageUrl;
+            String imageUrl;
             if (productImage.exists()) {
                 imageUrl = baseUrl + imagePath;
             } else {
@@ -81,17 +81,16 @@ public class LoadLatestProducts extends HttpServlet {
 
             productJson.addProperty("imageUrl", imageUrl);
             dealsArray.add(productJson);
-            
-            
+
         }
-        
-         response.setContentType("application/json");
+
+        response.setContentType("application/json");
         JsonObject responseObject = new JsonObject();
         responseObject.add("latestListings", dealsArray);
 
         Gson gson = new Gson();
         response.getWriter().write(gson.toJson(responseObject));
-        
+
     }
 
 }

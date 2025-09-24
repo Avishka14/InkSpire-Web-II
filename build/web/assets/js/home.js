@@ -137,7 +137,7 @@ function renderProducts(products) {
                 <span class="stock-status">In Stock</span>
                 <span class="price">Rs. ${product.productPrice}</span>
                 <div class="product-actions">
-                    <button class="add-to-cart">
+                    <button class="add-to-cart" onclick="addToCart('${product.proId}' , '${product.id}');">
                         <i class="bi bi-heart-fill"></i> Add to Cart
                     </button>
                <button class="buy-btn" onclick="loadSingleView('${product.id}');" >Buy</button>
@@ -196,7 +196,7 @@ function renderLatestProducts(products) {
                 <span class="stock-status">In Stock</span>
                 <span class="latest-price">Rs. ${product.productPrice}</span>
                 <div class="latest-actions">
-                    <button class="add-to-cart">
+                 <button class="add-to-cart" onclick="addToCart('${product.proId}' , '${product.id}');">
                         <i class="bi bi-heart-fill"></i> Add to Cart
                     </button>
               <button class="buy-btn" onclick="loadSingleView('${product.id}');" >Buy</button>
