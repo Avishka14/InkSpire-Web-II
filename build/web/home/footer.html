@@ -1,173 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-  </head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+            />
+    </head>
 
-  <style>
-    @import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;600;900&family=Love+Light&display=swap");
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;600;900&family=Love+Light&display=swap");
 
-    body {
-      font-family: "Gabarito", sans-serif;
-    }
-    .footer {
-      background: linear-gradient(180deg, #01180f, #02261b, #04553c);
-      padding: 2rem 1rem 1rem;
-      text-align: center;
-      color: #ffffff;
-    }
+        .footer {
+               /* Stick to viewport bottom */
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(180deg, #01180f, #02261b, #04553c);
+            padding: 2rem 1rem 1rem;
+            text-align: center;
+            color: #ffffff;
+            z-index: 1000;     /* Stay on top of other elements */
+        }
 
-    .footer-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
 
-    /* Logo */
-    .footer-logo img {
-      width: 120px;
-      margin-bottom: 0.5rem;
-    }
-    .footer-logo p {
-      font-size: 0.9rem;
-      color: #ffffff;
-    }
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-    /* Links & Categories */
-    .footer-links h3,
-    .footer-categories h3,
-    .footer-social h3 {
-      color: #22c55e;
-      margin-bottom: 0.8rem;
-      font-size: 1.1rem;
-    }
+        /* Logo */
+        .footer-logo img {
+            width: 120px;
+            margin-bottom: 0.5rem;
+        }
+        .footer-logo p {
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
 
-    .footer-links ul,
-    .footer-categories ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+        /* Links & Categories */
+        .footer-links h3,
+        .footer-categories h3,
+        .footer-social h3 {
+            color: #22c55e;
+            margin-bottom: 0.8rem;
+            font-size: 1.1rem;
+        }
 
-    .footer-links li,
-    .footer-categories li {
-      margin: 0.4rem 0;
-    }
+        .footer-links ul,
+        .footer-categories ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-    .footer-links a,
-    .footer-categories a {
-      text-decoration: none;
-      color: #ffffff;
-      font-size: 0.95rem;
-      transition: all 0.3s ease;
-      position: relative;
-    }
+        .footer-links li,
+        .footer-categories li {
+            margin: 0.4rem 0;
+        }
 
-    .footer-links a::after,
-    .footer-categories a::after {
-      content: "";
-      position: absolute;
-      width: 0%;
-      height: 2px;
-      left: 0;
-      bottom: -3px;
-      background: #22c55e;
-      transition: width 0.3s ease;
-    }
+        .footer-links a,
+        .footer-categories a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
 
-    .footer-links a:hover,
-    .footer-categories a:hover {
-      color: #22c55e;
-    }
+        .footer-links a::after,
+        .footer-categories a::after {
+            content: "";
+            position: absolute;
+            width: 0%;
+            height: 2px;
+            left: 0;
+            bottom: -3px;
+            background: #22c55e;
+            transition: width 0.3s ease;
+        }
 
-    .footer-links a:hover::after,
-    .footer-categories a:hover::after {
-      width: 100%;
-    }
+        .footer-links a:hover,
+        .footer-categories a:hover {
+            color: #22c55e;
+        }
 
-    /* Social */
-    .social-icons {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      font-size: 1.4rem;
-    }
+        .footer-links a:hover::after,
+        .footer-categories a:hover::after {
+            width: 100%;
+        }
 
-    .social-icons a {
-      color: #ffffff;
-      transition: transform 0.3s ease, color 0.3s ease;
-    }
+        /* Social */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            font-size: 1.4rem;
+        }
 
-    .social-icons a:hover {
-      color: #22c55e;
-      transform: translateY(-4px);
-    }
+        .social-icons a {
+            color: #ffffff;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
 
-    /* Bottom */
-    .footer-bottom {
-      margin-top: 2rem;
-      font-size: 0.85rem;
-      color: #ffffff;
-    }
-  </style>
+        .social-icons a:hover {
+            color: #22c55e;
+            transform: translateY(-4px);
+        }
 
-  <body>
+        /* Bottom */
+        .footer-bottom {
+            margin-top: 2rem;
+            font-size: 0.85rem;
+            color: #ffffff;
+        }
+    </style>
 
-    <footer class="footer">
-      <div class="footer-container">
-        <!-- Logo -->
-        <div class="footer-logo">
-            <img src="../assets/icons/logo.png" alt="InkSpire logo" />
-          <p>InkSpire – Inspiring Readers for 5+ Years</p>
-        </div>
+    <body>
 
-        <!-- Links -->
-        <div class="footer-links">
-          <h3>Quick Links</h3>
-          <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Shop</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Account</a></li>
-          </ul>
-        </div>
+        <footer class="footer">
+            <div class="footer-container">
+                <!-- Logo -->
+                <div class="footer-logo">
+                    <img src="../assets/icons/logo.png" alt="InkSpire logo" />
+                    <p>InkSpire – Inspiring Readers for 5+ Years</p>
+                </div>
 
-        <!-- Book Categories -->
-        <div class="footer-categories">
-          <h3>Categories</h3>
-          <ul>
-            <li><a href="#">Fiction</a></li>
-            <li><a href="#">Science</a></li>
-            <li><a href="#">History</a></li>
-            <li><a href="#">Children</a></li>
-            <li><a href="#">Biographies</a></li>
-          </ul>
-        </div>
+                <!-- Links -->
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Shop</a></li>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Account</a></li>
+                    </ul>
+                </div>
 
-        <!-- Social Media -->
-        <div class="footer-social">
-          <h3>Follow Us</h3>
-          <div class="social-icons">
-            <a href="#"><i class="bi bi-facebook"></i></a>
-            <a href="#"><i class="bi bi-instagram"></i></a>
-            <a href="#"><i class="bi bi-twitter"></i></a>
-            <a href="#"><i class="bi bi-youtube"></i></a>
-          </div>
-        </div>
-      </div>
+                <!-- Book Categories -->
+                <div class="footer-categories">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><a href="#">Fiction</a></li>
+                        <li><a href="#">Science</a></li>
+                        <li><a href="#">History</a></li>
+                        <li><a href="#">Children</a></li>
+                        <li><a href="#">Biographies</a></li>
+                    </ul>
+                </div>
 
-      <div class="footer-bottom">
-        <p>&copy; 2025 InkSpire. All rights reserved.</p>
-      </div>
-    </footer>
+                <!-- Social Media -->
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="bi bi-facebook"></i></a>
+                        <a href="#"><i class="bi bi-instagram"></i></a>
+                        <a href="#"><i class="bi bi-twitter"></i></a>
+                        <a href="#"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
 
-  </body>
+            <div class="footer-bottom">
+                <p>&copy; 2025 InkSpire. All rights reserved.</p>
+            </div>
+        </footer>
+
+    </body>
 </html>

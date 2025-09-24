@@ -1,0 +1,233 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    background: #f9fafb;
+    font-family: "Gabarito", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #111;
+    line-height: 1.6;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin: 2rem 0;
+}
+
+/* -------------------------
+   Cart Page Layout Full Height
+------------------------- */
+.cart-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+/* Cart Items & Summary */
+.cart-items {
+    flex: 1 1 70%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.cart-summary {
+    flex: 1 1 28%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    height: fit-content;
+}
+
+/* -------------------------
+   Cart Item
+------------------------- */
+.cart-item {
+    display: flex;
+    gap: 20px;
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.cart-item img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.cart-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.cart-item-info .product-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111;
+}
+
+.cart-item-info .price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #ff0055;
+}
+
+.cart-item-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-top: 8px;
+}
+
+.quantity-input {
+    width: 60px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    text-align: center;
+}
+
+.remove-btn {
+    background: #ff0055;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.25s ease;
+}
+
+.remove-btn:hover {
+    background: #ff3366;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255,0,85,0.2);
+}
+
+/* -------------------------
+   Cart Summary
+------------------------- */
+.cart-summary h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    border-left: 5px solid #0f9d58;
+    padding-left: 12px;
+    color: #111;
+}
+
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.summary-item.total {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #ff0055;
+    margin-top: 20px;
+}
+
+.checkout-btn {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #15fa61;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.checkout-btn:hover {
+    background: #0cc34f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(21,250,97,0.2);
+}
+
+/* -------------------------
+   Empty Cart Styles
+------------------------- */
+.cart-items.empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 300px;
+    gap: 20px;
+    text-align: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 40px 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.empty-cart-gif {
+    max-width: 650px;
+    width: 60%;
+    height: auto;
+}
+
+.empty-cart-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #111;
+}
+
+/* -------------------------
+   Responsive
+------------------------- */
+@media (max-width: 1200px) {
+    .cart-container {
+        flex-direction: column;
+        padding: 30px 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .cart-items, .cart-summary {
+        flex: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .empty-cart-gif {
+        width: 70%;
+    }
+    .empty-cart-text {
+        font-size: 1.2rem;
+    }
+}
