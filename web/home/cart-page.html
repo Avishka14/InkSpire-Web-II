@@ -8,44 +8,46 @@
         <link rel="stylesheet" href="../assets/style/cart-style.css">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
     </head>
-    <body onload="loadHtml();">
+    <body onload="loadHtml(); renderCart();">
 
         <div id="header-div"></div>
 
-        <!-- Cart Container -->
-        <div class="cart-container">
-            <!-- Active Cart Items -->
-            <div id="cart-items-container" class="cart-items"></div>
+        <!-- Active Cart Container -->
+        <div class="cart-container" id="cart-container">
+
+            <!-- Cart Items -->
+            <div id="cart-items-container" class="cart-items">
+                <!-- Cart items will be dynamically added here -->
+            </div>
 
             <!-- Cart Summary -->
-            <div class="cart-summary">
+            <div class="cart-summary" id="cart-summery">
                 <h3>Order Summary</h3>
                 <div class="summary-item">
                     <span>Subtotal</span>
-                    <span id="subtotal">$0.00</span>
+                    <span id="subtotal">Rs 0.00 /=</span>
                 </div>
                 <div class="summary-item">
                     <span>Shipping</span>
-                    <span>$10.00</span>
+                    <span>Rs 300.00 /=</span>
                 </div>
                 <div class="summary-item total">
                     <span>Total</span>
-                    <span id="total">$0.00</span>
+                    <span id="total">Rs 300.00 /=</span>
                 </div>
                 <button class="checkout-btn">Proceed to Checkout</button>
             </div>
         </div>
 
         <!-- Empty Cart -->
-        <div class="cart-container" id="empty-cart-container">
+        <div class="cart-container" id="empty-cart-container" style="display: none;">
             <div class="cart-items empty-cart">
                 <img src="../assets/icons/empty-cart.gif" alt="Empty Cart" class="empty-cart-gif">
                 <p class="empty-cart-text">Your Cart is Empty</p>
             </div>
         </div>
+
 
 
 
@@ -55,6 +57,8 @@
 
         <script src="../assets/js/loader.js"></script>
         <script src="../assets/js/cart-process.js"></script>
+              <script src="http://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
 
     </body>
 </html>
