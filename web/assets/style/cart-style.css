@@ -92,7 +92,7 @@ hr {
     color: #111;
 }
 
-.cart-item-info .price {
+.cart-item-info p {
     font-size: 1.1rem;
     font-weight: 700;
     color: #ff0055;
