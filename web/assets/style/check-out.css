@@ -1,0 +1,360 @@
+/* Link to Inter Font is required in the CSS file */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
+        
+:root {
+    --color-primary: #16a34a; /* Green */
+    --color-primary-dark: #148b40;
+    --color-background: #f4f6f9;
+    --color-text-dark: #1f2937;
+    --color-text-medium: #6b7280;
+    --color-border: #e5e7eb;
+    --color-card-bg: #ffffff;
+    --color-secondary-button: #e5e7eb;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color-background);
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-dark);
+}
+
+/* --- Global Layout and Cards --- */
+.check-out-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+.check-out-title {
+    text-align: center;
+    font-size: 2.5rem; /* 40px */
+    font-weight: 800;
+    margin-bottom: 2.5rem; /* 40px */
+}
+
+.check-out-card {
+    background-color: var(--color-card-bg);
+    border-radius: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+/* --- Responsive Layout (Mobile first) --- */
+.check-out-layout {
+    display: flex;
+    flex-direction: column; /* Stacked on mobile */
+    gap: 2rem;
+}
+
+/* Desktop/Tablet Layout */
+@media (min-width: 1024px) { 
+    .check-out-layout {
+        flex-direction: row; /* Side-by-side on desktop */
+        align-items: flex-start;
+    }
+    .check-out-main {
+        flex: 2; /* Takes 2/3 width */
+    }
+    .check-out-sidebar {
+        flex: 1; /* Takes 1/3 width */
+        position: sticky;
+        top: 2rem;
+    }
+}
+
+/* --- Step Indicator --- */
+.check-out-steps {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.check-out-step {
+    flex: 1;
+    padding: 0 0.5rem;
+}
+
+.check-out-step-number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 0.5rem;
+    border-radius: 50%;
+    font-weight: 700;
+    background-color: var(--color-secondary-button);
+    color: var(--color-text-medium);
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.check-out-step-number.active {
+    background-color: var(--color-primary); /* Green for active */
+    color: var(--color-card-bg);
+}
+
+.check-out-step-number.completed {
+    background-color: var(--color-primary-dark);
+    color: var(--color-card-bg);
+}
+
+.check-out-step-label {
+    font-size: 0.875rem; /* 14px */
+    color: var(--color-text-medium);
+    margin-top: 0.25rem;
+}
+
+/* Update label color for active step */
+.check-out-step-number.active ~ .check-out-step-label {
+     color: var(--color-text-dark) !important;
+}
+
+/* --- Forms and Inputs --- */
+.check-out-form-title {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    border-bottom: 2px solid var(--color-border);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.check-out-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.check-out-field label {
+    display: block;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: var(--color-text-dark);
+}
+
+.check-out-field input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.check-out-field input:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.2); /* Soft green shadow */
+}
+
+.check-out-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 768px) {
+    .check-out-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* --- Buttons --- */
+.check-out-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    gap: 1rem;
+}
+
+/* Alignment for step 2/3 where prev button exists */
+#check-out-step-2 .check-out-actions,
+#check-out-step-3 .check-out-actions {
+    justify-content: space-between;
+}
+
+.check-out-btn-primary, .check-out-btn-secondary {
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.check-out-btn-primary {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.check-out-btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    transform: translateY(-1px);
+}
+
+.check-out-btn-secondary {
+    background-color: var(--color-secondary-button);
+    color: var(--color-text-dark);
+}
+
+.check-out-btn-secondary:hover {
+    background-color: #d1d5db; /* Darker grey on hover */
+}
+
+/* --- Payment Section --- */
+.check-out-payment-box {
+    background-color: #ecfdf5; /* Very light green */
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid #a7f3d0; /* Light green border */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.check-out-payment-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-primary-dark);
+    display: flex;
+    align-items: center;
+}
+/* SVG Icon for Card Details */
+.check-out-payment-title::before {
+    content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%23148b40" width="20" height="20"><path fill-rule="evenodd" d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h12v6a2 2 0 002-2V6a2 2 0 00-2-2H4zm12 11V6h-2v1h-2v-1H4v9h12z" clip-rule="evenodd"></path></svg>');
+    margin-right: 0.5rem;
+}
+
+/* --- Order Summary (Sidebar) --- */
+.check-out-item-list {
+    max-height: 400px;
+    overflow-y: auto;
+    padding-right: 0.5rem; /* Space for scrollbar */
+}
+
+.check-out-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.check-out-item:last-child {
+    border-bottom: none;
+}
+
+.check-out-item-img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.check-out-item-details {
+    flex-grow: 1;
+}
+
+.check-out-item-name {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.check-out-item-price {
+    color: var(--color-text-medium);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.check-out-remove-btn {
+    color: #ef4444; /* Red for removal */
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.check-out-remove-btn:hover {
+    color: #dc2626;
+}
+
+/* --- Total Section --- */
+.check-out-total {
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    border-top: 2px dashed var(--color-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.check-out-total-label {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+}
+
+.check-out-total-value {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #b91c1c; /* A strong red for the price */
+}
+
+/* Utility for hiding steps */
+.hidden {
+    display: none !important;
+}
+
+
+#custom-message-box {
+    position: fixed;
+    z-index: 9999;
+    bottom: 20px;
+    right: 20px;
+}
+
+
+.check-out-field select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  background: #fff;
+  appearance: none; 
+}
+
+.check-out-field select:focus {
+  outline: none;
+  border-color: #0ca371;
+  box-shadow: 0 0 0 3px rgba(12, 163, 113, 0.15);
+}
+
+
+.check-out-field select {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 20 20' fill='none' stroke='%236b7280' stroke-width='2' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6 8l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px 16px;
+  padding-right: 40px;
+}
