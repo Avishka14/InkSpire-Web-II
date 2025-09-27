@@ -28,6 +28,7 @@ public class ViewCartServlet extends HttpServlet {
                 cartJson.addProperty("image", c.getImage());
                 cartJson.addProperty("price", c.getPrice());
                 cartJson.addProperty("productId", c.getProductId());
+                cartJson.addProperty("listingId", c.getListingId());
                 cartArray.add(cartJson);
             }
         }

@@ -28,17 +28,19 @@ public class AddToCart extends HttpServlet {
     public static class cartItem {
 
         private int productId;
+        private int listingId;
         private String title;
         private String image;
         private double price;
         private int userId;
 
-        public cartItem(int productId, String title, String image, double price, int userId) {
+        public cartItem(int productId , int listingId, String title, String image, double price, int userId) {
             this.productId = productId;
             this.title = title;
             this.image = image;
             this.price = price;
             this.userId = userId;
+            this.listingId = listingId;
         }
 
         public int getProductId() {
@@ -59,6 +61,14 @@ public class AddToCart extends HttpServlet {
 
         public int getUserId() {
             return userId;
+        }
+
+        public int getListingId() {
+            return listingId;
+        }
+
+        public void setListingId(int listingId) {
+            this.listingId = listingId;
         }
     }
 
@@ -141,6 +151,7 @@ public class AddToCart extends HttpServlet {
             } else {
                 cartItem item = new cartItem(
                         product.getId(),
+                        listing.getId(),
                         product.getTitle(),
                         imageUrl,
                         listing.getPrice(),
@@ -157,6 +168,7 @@ public class AddToCart extends HttpServlet {
             for (cartItem c : cart) {
                 JsonObject cartItemJson = new JsonObject();
                 cartItemJson.addProperty("productId", c.getProductId());
+                cartItemJson.addProperty("listingId", c.getListingId());
                 cartItemJson.addProperty("title", c.getTitle());
                 cartItemJson.addProperty("imageUrl", c.getImage());
                 cartItemJson.addProperty("price", c.getPrice());
