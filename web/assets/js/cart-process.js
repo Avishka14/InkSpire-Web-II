@@ -32,6 +32,11 @@ async function addToCart(productId, listingId) {
     }
 }
 
+
+let productArray = [];
+let subTotal = 0;
+let shipping = 300;
+
 async function renderCart(cartItemsFromServer = null) {
     const cartItemsContainer = document.getElementById("cart-items-container");
     const emptyCartContainer = document.getElementById("empty-cart-container");
@@ -48,7 +53,10 @@ async function renderCart(cartItemsFromServer = null) {
             cartItems = await response.json();
         }
 
+
         cartItemsContainer.innerHTML = "";
+        productArray = [];
+        subTotal = 0;
 
         if (!cartItems || cartItems.length === 0) {
             emptyCartContainer.style.display = "block";
@@ -61,10 +69,17 @@ async function renderCart(cartItemsFromServer = null) {
         cartItemsContainer.style.display = "block";
         cartSummary.style.display = "block";
 
-        let subtotal = 0;
-
         cartItems.forEach(item => {
-            subtotal += item.price;
+            subTotal += item.price;
+
+            subTotal += item.price;
+            productArray.push({
+                productId: item.productId,
+                listingId: item.listingId,
+                title: item.title,
+                price: item.price,
+                image: item.image
+            });
 
             const itemDiv = document.createElement("div");
             itemDiv.classList.add("cart-item");
@@ -79,8 +94,8 @@ async function renderCart(cartItemsFromServer = null) {
             cartItemsContainer.appendChild(itemDiv);
         });
 
-        document.getElementById("subtotal").textContent = `Rs ${subtotal.toFixed(2)} /=`;
-        document.getElementById("total").textContent = `Rs ${(subtotal + 300).toFixed(2)} /=`;
+        document.getElementById("subtotal").textContent = `Rs ${subTotal.toFixed(2)} /=`;
+        document.getElementById("total").textContent = `Rs ${(subTotal + shipping).toFixed(2)} /=`;
     } catch (err) {
         console.error("❌ Error loading cart:", err);
     }
@@ -98,11 +113,52 @@ async function removeFromCart(productId) {
 
         if (data.status) {
             console.log('Product removed:', data.message);
-            renderCart(); // refresh cart after removal
+            renderCart();
         } else {
             console.error('Error:', data.message);
         }
     } catch (error) {
         console.error('Request failed:', error);
     }
+}
+
+
+
+async function startCheckOut(){
+        
+    const data = JSON.stringify({
+        subTotal : subTotal,
+        shipping : shipping,
+        products : productArray,
+        user :  document.cookie
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1] || null,
+        total:subTotal+shipping
+    });
+    
+    console.log(data);
+    
+        const response = await fetch("http://localhost:8080/InkSpire/CheckOut", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: data
+        });
+        
+       if(response.ok){
+           
+           const json = await response.json();
+           
+           if(json.status){
+                console.log("ok");
+           }else{
+               console.log("failed");
+           }
+           
+           
+       }else{
+           console.log("ERRROR");
+       }
+    
+    
 }
