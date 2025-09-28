@@ -47,11 +47,12 @@ public class CheckOut extends HttpServlet {
             productList.add(new CheckoutItemDTO(listingId , productId ,  title , price , image));
         }
         
-        
-        CheckoutDataDTO checkoutData = new CheckoutDataDTO(userId, subtotal, shipping, total, productList);
+        List<CheckoutDataDTO> checkoutData = new ArrayList<>();
+        checkoutData.add(new CheckoutDataDTO(userId, subtotal, shipping, total, productList));
 
         HttpSession session = request.getSession();
-        session.setAttribute("checkoutgoods", checkoutData);
+        session.setAttribute("checkoutgoods", productList);
+        session.setAttribute("checkoutuser", checkoutData);
         
  
         responseObject.addProperty("status", Boolean.TRUE);
