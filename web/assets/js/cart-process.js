@@ -72,7 +72,6 @@ async function renderCart(cartItemsFromServer = null) {
         cartItems.forEach(item => {
             subTotal += item.price;
 
-            subTotal += item.price;
             productArray.push({
                 productId: item.productId,
                 listingId: item.listingId,
@@ -134,7 +133,7 @@ async function startCheckOut(){
             .split("; ")
             .find(row => row.startsWith("userId"))
             ?.split("=")[1] || null,
-        total:subTotal+shipping
+        total:subTotal
     });
     
     console.log(data);
@@ -150,8 +149,9 @@ async function startCheckOut(){
            const json = await response.json();
            
            if(json.status){
-                console.log("ok");
-           }else{
+               window.location.href = "http://localhost:8080/InkSpire/home/check-out.html";
+      
+        }else{
                console.log("failed");
            }
            
