@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import model.PayHereUtil;
 import javax.servlet.annotation.WebServlet;
@@ -10,35 +11,27 @@ import java.io.*;
 public class PaymentServlet extends HttpServlet {
 
     private final String MERCHANT_ID = "";
-    private final String MERCHANT_SECRET = "";
+    private final String MERCHANT_SECRET = "==";
     private final String CURRENCY = "LKR";
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String orderId = "ORDER_" + System.currentTimeMillis();
-        String amount = "100.00";
 
-        String hash = PayHereUtil.generatePayHereHash(MERCHANT_ID, orderId, amount, CURRENCY, MERCHANT_SECRET);
+        Gson gson = new Gson();
+        JsonObject dataObject = gson.fromJson(request.getReader(), JsonObject.class);
+
+        String firstName = dataObject.get("firstName").getAsString();
+        String lastName = dataObject.get("lastName").getAsString();
+        String email = dataObject.get("email").getAsString();
+        String address = dataObject.get("address").getAsString();
+        String total = dataObject.get("total").getAsString();
+        String user = dataObject.get("user").getAsString();
+        String listing = dataObject.get("listing").toString();
+
+        String orderId = "ORDER_" + System.currentTimeMillis();
+
+        String hash = PayHereUtil.generatePayHereHash(MERCHANT_ID, orderId, total, CURRENCY, MERCHANT_SECRET);
 
         JsonObject paymentResponse = new JsonObject();
-        paymentResponse.addProperty("sandbox", true);
-        paymentResponse.addProperty("merchant_id", MERCHANT_ID);
-        paymentResponse.addProperty("return_url", "http://localhost:8080/InkSpire/payhere/success.html");
-        paymentResponse.addProperty("cancel_url", "http://localhost:8080/InkSpire/payhere/cancel.html");
-        paymentResponse.addProperty("notify_url", "http://localhost:8080/InkSpire/notify");
-        paymentResponse.addProperty("order_id", orderId);
-        paymentResponse.addProperty("items", "Test Product");
-        paymentResponse.addProperty("amount", amount); 
-        paymentResponse.addProperty("currency", CURRENCY);
-        paymentResponse.addProperty("hash", hash);
-
-
-        paymentResponse.addProperty("first_name", "John");
-        paymentResponse.addProperty("last_name", "Doe");
-        paymentResponse.addProperty("email", "john@example.com");
-        paymentResponse.addProperty("phone", "0712345678");
-        paymentResponse.addProperty("address", "No.123, Main Street");
-        paymentResponse.addProperty("city", "Colombo");
-        paymentResponse.addProperty("country", "Sri Lanka");
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");

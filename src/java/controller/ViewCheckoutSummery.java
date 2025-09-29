@@ -32,6 +32,7 @@ public class ViewCheckoutSummery extends HttpServlet {
                 proJson.addProperty("title", dto.getTitle());
                 proJson.addProperty("price", dto.getPrice());
                 proJson.addProperty("img", dto.getImage());
+                proJson.addProperty("listingId", dto.getListingId());
                 summeryArray.add(proJson);
             }
 
