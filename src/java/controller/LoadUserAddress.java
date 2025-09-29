@@ -43,6 +43,7 @@ public class LoadUserAddress extends HttpServlet {
 
                 ShippingAddress address = (ShippingAddress) c.list().get(0);
                 JsonObject addressData = new JsonObject();
+                addressData.addProperty("id", address.getId());
                 addressData.addProperty("line1", address.getLine1());
                 addressData.addProperty("line2", address.getLine2());
                 addressData.addProperty("city", address.getCity().getName());
