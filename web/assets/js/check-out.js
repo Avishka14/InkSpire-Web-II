@@ -303,13 +303,17 @@ async function pay() {
             .split("; ")
             .find(row => row.startsWith("userId"))
             ?.split("=")[1];
+    
+    const address = document.getElementById("address1").value + document.getElementById("address2").value;
 
     const dataJson = JSON.stringify({
         firstName: document.getElementById("firstName").value,
         lastName: document.getElementById("lastName").value,
         email: document.getElementById("email").value,
-        address: document.getElementById("addressId").value,
-        total:totalPrice,
+        address: address,
+        contact: document.getElementById("contact").value,
+        city: document.querySelector("#city option:checked").textContent,
+        total:totalPrice+".00",
         listing:checkOutJs,
         user:userId
     });
