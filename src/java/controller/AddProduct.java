@@ -44,7 +44,6 @@ public class AddProduct extends HttpServlet {
         Transaction tx = null;
 
         try {
-            // === Validate request params ===
             String productId = request.getParameter("productId");
             String title = request.getParameter("title");
             String description = request.getParameter("description");
@@ -56,7 +55,6 @@ public class AddProduct extends HttpServlet {
             String approvalId = request.getParameter("approvalId");
             Part part1 = request.getPart("image1");
 
-            // 🚨 Ensure image is provided BEFORE saving product
             if (productId == null || title == null || categoryId == null || conditionId == null
                     || itemAvailabilityId == null || price == null || sellerId == null || approvalId == null
                     || part1 == null || part1.getSize() == 0) {
@@ -66,7 +64,7 @@ public class AddProduct extends HttpServlet {
                 return;
             }
 
-            // === Hibernate save ===
+
             session = HibernateUtill.getSessionFactory().openSession();
             tx = session.beginTransaction();
 
@@ -100,7 +98,7 @@ public class AddProduct extends HttpServlet {
             listing.setSeller(seller);
             session.save(listing);
 
-            // === Save image before commit ===
+
             File productFolder = new File(UPLOAD_DIR, productId);
             if (!productFolder.exists()) {
                 productFolder.mkdirs();
@@ -110,14 +108,14 @@ public class AddProduct extends HttpServlet {
             try {
                 savePartToFile(part1, imageFile);
             } catch (IOException ioEx) {
-                if (tx != null) tx.rollback(); // rollback product save if image fails
+                if (tx != null) tx.rollback(); 
                 responseObject.addProperty("status", false);
                 responseObject.addProperty("message", "Failed to save product image.");
                 response.getWriter().write(gson.toJson(responseObject));
                 return;
             }
 
-            // Commit only if image + product save worked
+
             tx.commit();
 
             responseObject.addProperty("status", true);

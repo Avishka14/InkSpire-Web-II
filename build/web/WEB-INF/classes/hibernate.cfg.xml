@@ -20,5 +20,8 @@
     <mapping class="hibernate.OfferType" />
     <mapping class="hibernate.City" />
     <mapping class="hibernate.ShippingAddress" />
+    <mapping class="hibernate.OrderStatus" />
+    <mapping class="hibernate.Invoice" />
+    <mapping class="hibernate.ListingInvoice" />
   </session-factory>
 </hibernate-configuration>

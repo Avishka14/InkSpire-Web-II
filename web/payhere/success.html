@@ -1,15 +1,86 @@
 <!DOCTYPE html>
-<!--
-Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this template
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>Success</div>
-    </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Success</title>
+  <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Love+Light&display=swap" rel="stylesheet">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #fefefe 0%, #e9f5ef 60%, #d1ecd7 100%);
+      font-family: "Gabarito", sans-serif;
+      margin: 0;
+    }
+
+    .success-container {
+      width: 90%;
+      max-width: 480px;
+      padding: 2.5rem 2rem 3rem;
+      background: #ffffff;
+      border-radius: 18px;
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.11);
+      animation: cardPop 0.7s ease-out both;
+      text-align: center;
+    }
+
+    @keyframes cardPop {
+      0%   { opacity: 0; transform: translateY(25px) scale(0.97); }
+      60%  { opacity: 1; transform: translateY(-6px) scale(1.02); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .success-icon {
+      font-size: 4rem;
+      color: #0ca371;
+      margin-bottom: 1rem;
+    }
+
+    .success-title {
+      font-size: 2.2rem;
+      color: #0ca371;
+      margin-bottom: 0.4rem;
+    }
+
+    .success-message {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 2rem;
+    }
+
+    .btn-home {
+      display: inline-block;
+      background: #0ca371;
+      color: #fff;
+      padding: 0.85rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
+    }
+
+    .btn-home:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 7px rgba(12, 163, 113, 0.25);
+      background: #08945e;
+    }
+
+    @media (max-width: 480px) {
+      .success-title {
+        font-size: 1.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="success-container">
+    <div class="success-icon">✔</div>
+    <h1 class="success-title">Payment Successful!</h1>
+    <p class="success-message">Thank you for your purchase. Your payment has been processed securely.</p>
+    <a href="http://localhost:8080/InkSpire/home/home.html" class="btn-home">Back to Home</a>
+  </div>
+</body>
 </html>
