@@ -129,9 +129,9 @@ async function loadCheckOutSummry() {
         const itemsContainer = document.getElementById("check-out-item-list");
 
         itemsContainer.innerHTML = "";
-         
+
         checkOutJs = [];
-       
+
         json.forEach((item, index) => {
 
             if (item.title && item.price) {
@@ -151,12 +151,12 @@ async function loadCheckOutSummry() {
           </div>
         `;
                 itemsContainer.appendChild(itemDiv);
-                
+
                 checkOutJs.push(item.listingId);
-                
+
             }
 
-             totalPrice = 0;
+            totalPrice = 0;
 
             if (item.total) {
                 const summeryDiv = document.createElement("div");
@@ -298,13 +298,14 @@ async function loadUserAddress() {
 }
 
 async function pay() {
-    
-        let userId = document.cookie
+
+    let userId = document.cookie
             .split("; ")
             .find(row => row.startsWith("userId"))
             ?.split("=")[1];
-    
+
     const address = document.getElementById("address1").value + document.getElementById("address2").value;
+    const addressId = document.getElementById("addressId").value;
 
     const dataJson = JSON.stringify({
         firstName: document.getElementById("firstName").value,
@@ -313,31 +314,63 @@ async function pay() {
         address: address,
         contact: document.getElementById("contact").value,
         city: document.querySelector("#city option:checked").textContent,
-        total:totalPrice+".00",
-        listing:checkOutJs,
-        user:userId
+        total: totalPrice + ".00",
+        listing: checkOutJs,
+        user: userId
     });
 
-   console.log(dataJson);
- 
+    console.log(dataJson);
 
-      try {
+
+    try {
         const res = await fetch('http://localhost:8080/InkSpire/api/payhere/hash', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: dataJson
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: dataJson
         });
 
         const data = await res.json();
 
         if (!window.payhere) {
-          alert("PayHere SDK not loaded");
-          return;
+            alert("PayHere SDK not loaded");
+            return;
         }
 
-        window.payhere.onCompleted = (orderId) => {
-          alert("Payment Completed! Order: " + orderId);
-          window.location.href = data.return_url + "?order_id=" + orderId;
+        window.payhere.onCompleted = async (orderId) => {
+            alert("Payment Completed! Order: " + orderId);
+
+            const dataJson = JSON.stringify({
+                orderId: orderId,
+                amount: totalPrice,
+                addressId: addressId,
+                userId: userId,
+                listing: checkOutJs
+
+            });
+
+            console.log(dataJson);
+
+            const response = await fetch("http://localhost:8080/InkSpire/UpdateOrderDb", {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: dataJson
+            });
+            
+            if(response.ok){
+                 
+                 const json = await response.json();
+                
+                 if(json.status){
+                      window.location.href = data.return_url + "?order_id=" + orderId;             
+             
+                }else{
+                      window.location.href = data.cancel_url + "?order_id=" + orderId;  
+                 }
+                
+            }else{
+                alert("Server  side error occured for: " + orderId +"please contact help");
+            }
+
         };
 
         window.payhere.onDismissed = () => alert("Payment Cancelled");
@@ -346,11 +379,12 @@ async function pay() {
 
         window.payhere.startPayment(data);
 
-      } catch (err) {
+
+
+    } catch (err) {
         console.error("Error starting payment:", err);
         alert("Something went wrong. Check console for details.");
-      }
-
-
+    }
 
 }
+
