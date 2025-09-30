@@ -55,6 +55,7 @@ public class LoadCategoryBooks extends HttpServlet {
                     productJson.addProperty("description", product.getDescription());
                     productJson.addProperty("price", listing.getPrice()); 
                     productJson.addProperty("category", product.getCategory().getValue());
+                    productJson.addProperty("listingId", listing.getId());
 
                     String baseUrl = request.getScheme() + "://"
                             + request.getServerName() + ":"

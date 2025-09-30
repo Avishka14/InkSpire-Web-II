@@ -24,7 +24,7 @@ import org.hibernate.criterion.Restrictions;
 @WebServlet(name = "AddToCart", value = "/AddToCart")
 public class AddToCart extends HttpServlet {
 
-    // ✅ Inner cart item class
+
     public static class cartItem {
 
         private int productId;

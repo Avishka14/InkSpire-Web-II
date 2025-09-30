@@ -29,7 +29,7 @@ function renderLatestFictionProducts(products, grid) {
   container.innerHTML = "";
 
   products.forEach(product => {
-    // support both backend JSON formats
+  
     const name = product.productName || product.title;
     const category = product.productCategory || product.category;
     const price = product.productPrice || product.price;
@@ -45,8 +45,8 @@ function renderLatestFictionProducts(products, grid) {
           <span class="shop-stock-status">In Stock</span>
           <span class="shop-price">Rs. ${price}</span>
           <div class="shop-product-actions">
-              <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add</button>
-              <button class="shop-buy-now">Buy</button>
+              <button class="shop-add-to-cart" onclick="addToCart('${product.id}' , '${product.listingId}');">  <i class="bi bi-heart-fill"></i> Add</button>
+              <button class="shop-buy-now" onclick="loadSingleView('${product.listingId}');" >Buy</button>
           </div>
       </div>
     `;

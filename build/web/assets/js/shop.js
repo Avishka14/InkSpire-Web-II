@@ -74,7 +74,7 @@ function renderLatestShopProducts(products , grid) {
           <span class="shop-stock-status">In Stock</span>
           <span class="shop-price">Rs. ${product.productPrice}</span>
           <div class="shop-product-actions">
-              <button class="shop-add-to-cart"><i class="bi bi-heart-fill"></i> Add</button>
+              <button class="shop-add-to-cart" onclick="addToCart('${product.proId}' , '${product.id}');"> <i class="bi bi-heart-fill"></i> Add</button>
               <button class="shop-buy-now" onclick="loadSingleView('${product.id}');" >Buy</button>
           </div>
       </div>
