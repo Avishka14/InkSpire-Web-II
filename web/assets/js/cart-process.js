@@ -162,3 +162,41 @@ async function startCheckOut(){
     
     
 }
+
+
+
+async function directCheckOut(productId, listingId) {
+    let userId = document.cookie
+        .split("; ")
+        .find(row => row.startsWith("userId"))
+        ?.split("=")[1];
+
+    if (!userId) {
+        console.log("User id is empty");
+        return;
+    }
+
+    try {
+        const response = await fetch("http://localhost:8080/InkSpire/AddToCart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ productId, listingId, userId })
+        });
+
+        const data = await response.json();
+
+        if (data.status) {
+            await renderCart(data.cart);
+            window.location.href= "http://localhost:8080/InkSpire/home/cart-page.html";
+
+        } else {
+            alert(data.message);
+        }
+    } catch (error) {
+        console.error("❌ Error adding to cart:", error);
+    }
+}
+
+

@@ -55,6 +55,7 @@ public class ProductView extends HttpServlet {
                     productData.addProperty("desc", product.getDescription());
                     productData.addProperty("seller", seller.getSellername());
                     productData.addProperty("price", listing.getPrice());
+                    productData.addProperty("listingId", listing.getId());
 
                     String baseUrl = request.getScheme() + "://"
                             + request.getServerName() + ":"

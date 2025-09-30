@@ -26,11 +26,16 @@
                     <p class="product-desc" id="desc-s-p">
                     </p>
                     <p class="price" id="price-s-p"></p>
+                    
+                    <input id="listing-id-input" style="display: none" >
+                    <input id="product-id-input" style="display: none" >
+                   
+                    
                     <span class="stock-status">In Stock</span>
 
                     <div class="product-actions">
                         <button class="add-to-cart"><i class="bi bi-cart-plus"></i> Add to Cart</button>
-                        <button class="buy-btn"><i class="bi bi-lightning-fill"></i> Check Out</button>
+                        <button class="buy-btn" onclick="loadId();" ><i class="bi bi-lightning-fill"></i> Check Out</button>
                     </div>
                 </div>
             </div>
@@ -64,6 +69,7 @@
 
         <script src="../assets/js/loader.js"></script>
         <script src="../assets/js/product-view.js"></script>
+       
 
         <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -72,14 +78,23 @@
                 document.getElementById("title-s-p").textContent = product.title || "Title not Found";
                 document.getElementById("seller-s-p").textContent = product.seller || "Seller not Found";
                 document.getElementById("desc-s-p").textContent = product.desc || "Description not Found";
+                document.getElementById("listing-id-input").textContent = product.listingId || "Null";
+                document.getElementById("product-id-input").textContent = product.id || "Null";
                 document.getElementById("price-s-p").textContent = "Rs " +product.price +" /="|| "Price not Found";
                 document.getElementById("img-s-p").src = product.imageUrl;
             } else {
                 console.error("No product found in localStorage");
             }
         });
+        
+        function loadId(){
+              const product = JSON.parse(localStorage.getItem("singleProduct"));
+              directCheckOut(product.id, product.listingId);
+        }
+        
         </script>
 
+         <script src="../assets/js/cart-process.js"></script>
 
 
     </body>
