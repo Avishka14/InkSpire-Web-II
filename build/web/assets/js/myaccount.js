@@ -656,3 +656,74 @@ async function ChangeUserPassword() {
         $(".btn-c-pass").notify("Please Log In Again!", "error");
     }
 }
+
+
+async function loadOrderHistory() {
+    let userId = document.cookie
+        .split("; ")
+        .find(row => row.startsWith("userId"))
+        ?.split("=")[1];
+
+    if (!userId) {
+        $(".btn-c-pass").notify("Please Log In Again!", "error");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8080/InkSpire/LoadOrders?id=${encodeURIComponent(userId)}`);
+        const data = await response.json();
+
+        if (!response.ok || data.code === "404") {
+            console.log("No orders found or network error.");
+            return;
+        }
+
+        const container = document.querySelector("#order-history-container");
+        if (!container) return; 
+        container.innerHTML = ""; 
+
+        data.invoices.forEach(invoice => {
+            const card = document.createElement("div");
+            card.className = "order-account-card";
+
+
+            let productsHTML = "";
+            invoice.products.forEach(product => {
+                productsHTML += `
+                    <div class="order-account-body">
+                        <img src="${product.imgUrl}" alt="${product.title}" class="shop-product-image"/>
+                        <div class="shop-product-content">
+                            <h2 class="shop-product-title">${product.title}</h2>
+                        </div>
+                    </div>
+                `;
+            });
+
+            const buttonHTML = invoice.status === "Waiting" 
+                ? `<button class="order-account-delivered" style="margin: 10px">Mark as Delivered</button>` 
+                : "";
+
+            card.innerHTML = `
+                <div class="order-account-header">
+                    <span class="order-account-date">Date: ${invoice.date}</span>
+                    <span class="order-account-status">Status: <span class="status">${invoice.status}</span></span>
+                </div>
+
+                ${productsHTML}
+
+                <div class="order-account-footer">
+                    <span class="order-account-amount">Amount: ${invoice.amount} /= (Included Shipping)</span>
+                    ${buttonHTML}
+                </div>
+            `;
+
+            container.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error(error);
+        $(".btn-c-pass").notify("Network Error. Please try again later", "error");
+    }
+}
+
+

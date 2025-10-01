@@ -29,7 +29,7 @@
                 <ul>
                     <li class="active" data-tab="details"><i class="bi bi-person"></i> Details</li>
                     <li data-tab="address" onclick="loadCitySelection(); loadUserAddress();" ><i class="bi bi-geo-alt"></i> Address Book</li>
-                    <li data-tab="orders"><i class="bi bi-bag"></i> Orders</li>
+                    <li data-tab="orders" onclick="loadOrderHistory();"><i class="bi bi-bag"></i> Orders</li>
                     <li data-tab="payment"><i class="bi bi-credit-card"></i> Payment Info</li>
                     <li data-tab="messages"><i class="bi bi-chat-dots"></i> Messages</li>
                     <li data-tab="seller" onclick="loadSellerInfo();"><i class="bi bi-shop"></i> Seller Account</li>
@@ -104,7 +104,7 @@
                     <h1>My Orders</h1>
 
                     <!-- Order Card -->
-                    <div class="order-account-card">
+                    <div class="order-account-card" id="order-history-container" >
                         <div class="order-account-header">
                             <span class="order-account-date">Date: 2025-08-20</span>
                             <span class="order-account-status">Status: <span class="status">Shipped</span></span>
