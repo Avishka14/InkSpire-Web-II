@@ -102,14 +102,33 @@
                 <!-- Orders -->
                 <div id="orders" class="tab-panel">
                     <h1>My Orders</h1>
-                    <div class="list-box">
-                        <strong>Order #1001</strong>
-                        Date: 2025-08-20 <br>
-                        Amount: $59.99 <br>
-                        Seller: GreenTech Ltd <br>
-                        Status: <span class="status">Shipped</span>
+
+                    <!-- Order Card -->
+                    <div class="order-account-card">
+                        <div class="order-account-header">
+                            <span class="order-account-date">Date: 2025-08-20</span>
+                            <span class="order-account-status">Status: <span class="status">Shipped</span></span>
+                        </div>
+
+                        <div class="order-account-body">
+                            <img src="${product.imageUrl}" alt="${name}" class="shop-product-image"/>
+                            <div class="shop-product-content">
+                                <h2 class="shop-product-title">fdf</h2>
+                                <span class="shop-price">fdf</span>
+                                <div class="shop-product-actions">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="order-account-footer">
+                            <span class="order-account-amount">Amount: $59.99</span>
+                            <button class="order-account-delivered" style="margin: 10px">Mark as Delivered</button>
+                        </div>
                     </div>
                 </div>
+                
+                
+
 
                 <!-- Payment Info -->
                 <div id="payment" class="tab-panel">
@@ -178,17 +197,17 @@
                     <h1>Account Settings</h1>
                     <div class="section">
                         <h2>Reset Password</h2>
-                            <label>Current Password</label>
-                            <input type="password" id="currentPass">
-                            
-                            <label>New Password</label>
-                            <input type="password" id="newPassw">
-                            
-                            <label>Confirm New Password</label>
-                            <input type="password" id="confPass">
-                            <br/>
-                            <button class="btn-c-pass" onclick="ChangeUserPassword();">Reset Password</button>
-                            <a class="fp-a" href="http://localhost:8080/InkSpire/account/passwordrecover.html">Forget Password?</a>
+                        <label>Current Password</label>
+                        <input type="password" id="currentPass">
+
+                        <label>New Password</label>
+                        <input type="password" id="newPassw">
+
+                        <label>Confirm New Password</label>
+                        <input type="password" id="confPass">
+                        <br/>
+                        <button class="btn-c-pass" onclick="ChangeUserPassword();">Reset Password</button>
+                        <a class="fp-a" href="http://localhost:8080/InkSpire/account/passwordrecover.html">Forget Password?</a>
                     </div>
                 </div>
 
