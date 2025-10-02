@@ -5,7 +5,7 @@ async function addToCart(productId, listingId) {
         ?.split("=")[1];
 
     if (!userId) {
-        console.log("User id is empty");
+        alert("Please Log in!");
         return;
     }
 
@@ -172,7 +172,7 @@ async function directCheckOut(productId, listingId) {
         ?.split("=")[1];
 
     if (!userId) {
-        console.log("User id is empty");
+        alert("Please Log In");
         return;
     }
 
