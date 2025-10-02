@@ -622,7 +622,7 @@ async function ChangeUserPassword() {
             conPass: document.getElementById("confPass").value
         });
 
-                const response = await fetch(
+        const response = await fetch(
                 `http://localhost:8080/InkSpire/UpdateUserPassword?id=${encodeURIComponent(userId)}`,
                 {
                     method: "POST",
@@ -657,15 +657,16 @@ async function ChangeUserPassword() {
     }
 }
 
+let invoiceId = "";
 
 async function loadOrderHistory() {
     let userId = document.cookie
-        .split("; ")
-        .find(row => row.startsWith("userId"))
-        ?.split("=")[1];
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
 
     if (!userId) {
-        $(".btn-c-pass").notify("Please Log In Again!", "error");
+        $("#my-orders").notify("Please Log In Again!", "error");
         return;
     }
 
@@ -679,13 +680,15 @@ async function loadOrderHistory() {
         }
 
         const container = document.querySelector("#order-history-container");
-        if (!container) return; 
-        container.innerHTML = ""; 
+        if (!container)
+            return;
+        container.innerHTML = "";
+        invoiceId = "";
 
         data.invoices.forEach(invoice => {
             const card = document.createElement("div");
             card.className = "order-account-card";
-
+            invoiceId = invoice.invoiceId;
 
             let productsHTML = "";
             invoice.products.forEach(product => {
@@ -699,9 +702,9 @@ async function loadOrderHistory() {
                 `;
             });
 
-            const buttonHTML = invoice.status === "Waiting" 
-                ? `<button class="order-account-delivered" style="margin: 10px">Mark as Delivered</button>` 
-                : "";
+            const buttonHTML = invoice.status === "Waiting"
+                    ? `<button class="order-account-delivered" style="margin: 10px" onclick="updateDelivry();">Mark as Delivered</button>`
+                    : "";
 
             card.innerHTML = `
                 <div class="order-account-header">
@@ -722,8 +725,69 @@ async function loadOrderHistory() {
 
     } catch (error) {
         console.error(error);
-        $(".btn-c-pass").notify("Network Error. Please try again later", "error");
+        $("#my-orders").notify("Network Error. Please try again later", "error");
     }
 }
 
+async function updateDelivry() {
 
+    let userId = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+
+    if (!userId) {
+        $("#my-orders").notify("Please Log In Again!", "error");
+        return;
+    }
+
+    const data = JSON.stringify({
+        user: userId,
+        invoice: invoiceId
+    });
+
+    try {
+
+        const response = await fetch(
+                "http://localhost:8080/InkSpire/UpdateDelivery",
+                {
+                    method: "POST",
+                    body: data,
+                    header: {
+                        "Content-Type": "application/json"
+                    }
+                }
+
+        );
+
+     if(response.ok){
+
+         const json = await response.json();
+         
+         if(json.status){
+             
+              $(".order-account-delivered").notify("Delivery Updated", "success");
+              loadOrderHistory();
+             
+         }else{
+             
+         }
+         
+         
+     }else{
+         $("#my-orders").notify("Network Error. Please try again later", "error");
+     }
+
+
+    } catch (error) {
+        console.error(error);
+       $("#my-orders").notify("Network Error. Please try again later", "error");
+    }
+
+
+}
+
+
+function notify(){
+    $("#my-orders").notify("Network Error. Please try again later", "error");
+}

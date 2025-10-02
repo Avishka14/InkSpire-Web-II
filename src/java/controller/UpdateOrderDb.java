@@ -42,12 +42,6 @@ public class UpdateOrderDb extends HttpServlet {
 
         JsonArray listingArray = dataObject.getAsJsonArray("listing");
 
-        System.out.println(orderId);
-        System.out.println(amount);
-        System.out.println(addressId);
-        System.out.println(userId);
-        System.out.println(listingArray);
-
         if (userId.equals("null")) {
             String responseText = gson.toJson(responseObject);
             response.setContentType("application/json");
