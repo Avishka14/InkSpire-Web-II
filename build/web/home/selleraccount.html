@@ -1,165 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seller Account</title>
-  <link rel="stylesheet" href="../assets/style/selleraccount.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-</head>
-<body onload="loadHeadFoot();">
-    
-    <div id="header-area"> </div>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
+        <title>Seller Account</title>
+        <link rel="stylesheet" href="../assets/style/selleraccount.css">
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/notify/0.4.2/notify.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    </head>
+    <body onload="loadHeadFoot(); loadSellerInfo();">
 
-  <!-- Breadcrumb -->
-  <div class="breadcrumb"><a href="#">Homepage</a> > Seller Account</div>
+        <div id="header-area"> </div>
 
-  <!-- Layout -->
-  <div class="account-layout">
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <ul>
-        <li class="active" data-tab="status"><i class="bi bi-speedometer2"></i> Status</li>
-        <li data-tab="listings"><i class="bi bi-box-seam"></i> Listings</li>
-        <li data-tab="edit"><i class="bi bi-pencil-square"></i> Edit Listing</li>
-        <li data-tab="messages"><i class="bi bi-chat-dots"></i> Messages</li>
-        <li data-tab="settings"><i class="bi bi-gear"></i> Settings</li>
-      </ul>
-    </aside>
+        <!-- Breadcrumb -->
+        <div class="breadcrumb"><a href="#">Homepage</a> > Seller Account</div>
 
-    <!-- Main Content -->
-    <main class="main-content">
+        <div class="seller-profile-not-layout" id="seller-profile-not-layout">
+            <div>
+                <h2>A seller account is required to list and sell products. Activate yours to get started.</h2>
+            </div>
 
-      <!-- Seller Status -->
-      <div id="status" class="tab-panel active">
-        <h1>Seller Dashboard</h1>
-        <div class="status-cards">
-          <div class="card"><h2>Total Sales</h2><p>152</p></div>
-          <div class="card"><h2>Total Earnings</h2><p>$12,450</p></div>
-          <div class="card"><h2>Total Customers</h2><p>98</p></div>
-          <div class="card"><h2>Products Listed</h2><p>12</p></div>
-          <div class="card"><h2>Pending Approvals</h2><p>3</p></div>
-          <div class="card"><h2>Seller Rating</h2><p>4.7 ★</p></div>
+            <div class="seller-profile-not-container">
+                <h2 class="seller-profile-not-title">Activate Seller Profile</h2>
+                <p class="seller-profile-not-subtitle">Create Your account and Start Selling</p>
+
+                <div id="get-code" >
+                    <div class="code-field">
+                        <label for="email-seller" class="seller-label">Email</label>
+                        <input type="email" id="email-seller" class="seller-input" placeholder=" " required>
+                    </div>
+                    <button type="button" class="grey-button" onclick="sendMail();">Get Code</button>
+
+                    <div class="seller-field" style="margin-top: 1.3rem;">                  
+                        <label for="code" class="seller-label">Enter Code</label>
+                        <input type="text" id="code" class="seller-input" placeholder=" " required>
+
+                    </div>
+                    <button type="button" class="bre-button btncode" onclick="verifyCode();">Reset</button>
+                </div>
+
+                <div id="seller-activate-section" class="hidden-section" style="display: none">
+                    <div class="seller-field">
+                       <label for="username" class="seller-label">Enter Your Seller Name</label>
+                       <input type="text" id="username" class="seller-input" placeholder=" " required>
+                    </div>
+                    <button type="submit" class="bre-button" onclick="activateSellerAccount();">Activate</button>
+                </div>
+            </div>
         </div>
 
-        <h2>Recent Listings</h2>
-        <div class="listings-grid">
-          <div class="listing-card">
-            <img src="https://via.placeholder.com/220x150" alt="Product">
-            <h3>Wireless Headphones</h3>
-            <p class="price">$59.99</p>
-            <p>Status: <span class="status approved">Approved</span></p>
-          </div>
-          <div class="listing-card">
-            <img src="https://via.placeholder.com/220x150" alt="Product">
-            <h3>Smart Watch</h3>
-            <p class="price">$120.00</p>
-            <p>Status: <span class="status pending">Pending</span></p>
-          </div>
+
+
+        <!-- Layout -->
+        <div class="account-layout" id="account-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <ul>
+                    <li class="active" data-tab="status"><i class="bi bi-speedometer2"></i> Status</li>
+                    <li data-tab="listings"><i class="bi bi-box-seam"></i> Listings</li>
+                    <li data-tab="edit"><i class="bi bi-pencil-square"></i> Edit Listing</li>
+                    <li data-tab="messages"><i class="bi bi-chat-dots"></i> Messages</li>
+                    <li data-tab="settings"><i class="bi bi-gear"></i> Settings</li>
+                </ul>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+
+                <!-- Seller Status -->
+                <div id="status" class="tab-panel active">
+                    <h1>Seller Dashboard</h1>
+                    <div class="status-cards">
+                        <div class="card"><h2>Total Sales</h2><p>152</p></div>
+                        <div class="card"><h2>Total Earnings</h2><p>$12,450</p></div>
+                        <div class="card"><h2>Total Customers</h2><p>98</p></div>
+                        <div class="card"><h2>Products Listed</h2><p>12</p></div>
+                        <div class="card"><h2>Pending Approvals</h2><p>3</p></div>
+                        <div class="card"><h2>Seller Rating</h2><p>4.7 ★</p></div>
+                    </div>
+
+                    <h2>Recent Listings</h2>
+                    <div class="listings-grid">
+                        <div class="listing-card">
+                            <img src="https://via.placeholder.com/220x150" alt="Product">
+                            <h3>Wireless Headphones</h3>
+                            <p class="price">$59.99</p>
+                            <p>Status: <span class="status approved">Approved</span></p>
+                        </div>
+                        <div class="listing-card">
+                            <img src="https://via.placeholder.com/220x150" alt="Product">
+                            <h3>Smart Watch</h3>
+                            <p class="price">$120.00</p>
+                            <p>Status: <span class="status pending">Pending</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Listings -->
+                <div id="listings" class="tab-panel">
+                    <h1>Manage Listings</h1>
+                    <div class="listing-form">
+                        <h2>Add New Listing</h2>
+                        <form>
+                            <label>Product Name</label>
+                            <input type="text" placeholder="Product Name">
+                            <label>Description</label>
+                            <textarea placeholder="Enter product description"></textarea>
+                            <label>Category</label>
+                            <select><option>Electronics</option><option>Fashion</option><option>Home</option><option>Other</option></select>
+                            <label>Condition</label>
+                            <select><option>New</option><option>Used</option></select>
+                            <label>Price ($)</label>
+                            <input type="number" placeholder="0.00">
+                            <label>Shipping Fee ($)</label>
+                            <input type="number" placeholder="0.00">
+                            <label>Upload Photos (up to 3)</label>
+                            <input type="file" accept="image/*" multiple>
+                            <button type="submit" class="bre-button">Add Listing</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Edit Listings -->
+                <div id="edit" class="tab-panel">
+                    <h1>Edit Listings</h1>
+
+                    <!-- Sorting -->
+                    <div class="sort-bar">
+                        <label for="sortSelect">Sort by:</label>
+                        <select id="sortSelect">
+                            <option value="name">Name (A–Z)</option>
+                            <option value="priceLowHigh">Price (Low → High)</option>
+                            <option value="priceHighLow">Price (High → Low)</option>
+                            <option value="status">Status</option>
+                        </select>
+                    </div>
+
+                    <!-- Listings Grid -->
+                    <div class="listings-grid" id="editListings">
+
+
+                        <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
+                            <img src="https://via.placeholder.com/220x150" alt="Product">
+                            <h3>Bluetooth Speaker</h3>
+                            <p class="price">$75.00</p>
+                            <p>Status: <span class="status approved">Approved</span></p>
+                            <button class="edit-btn bre-button">Edit</button>
+                            <button class="danger bre-button">Delete</button>
+                        </div>
+
+                        <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
+                            <img src="https://via.placeholder.com/220x150" alt="Product">
+                            <h3>Bluetooth Speaker</h3>
+                            <p class="price">$75.00</p>
+                            <p>Status: <span class="status approved">Approved</span></p>
+                            <button class="edit-btn bre-button">Edit</button>
+                            <button class="danger bre-button">Delete</button>
+                        </div>
+
+                        <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
+                            <img src="https://via.placeholder.com/220x150" alt="Product">
+                            <h3>Bluetooth Speaker</h3>
+                            <p class="price">$75.00</p>
+                            <p>Status: <span class="status approved">Approved</span></p>
+                            <button class="edit-btn bre-button">Edit</button>
+                            <button class="danger bre-button">Delete</button>
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <!-- Messages -->
+                <div id="messages" class="tab-panel">
+                    <h1>Messages</h1>
+                    <div class="messages-area" id="messagesArea">
+                        <div class="message received">Hello, I want to ask about the product availability.</div>
+                        <div class="message sent">Sure! This item is in stock and ready to ship.</div>
+                    </div>
+                    <div class="send-box">
+                        <input type="text" id="messageInput" placeholder="Type your message...">
+                        <button id="sendMessage"><i class="bi bi-send-fill "></i></button>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div id="settings" class="tab-panel">
+                    <h1>Seller Settings</h1>
+                    <button class="danger bre-button">Turn Off Seller Account</button>
+                </div>
+
+            </main>
         </div>
-      </div>
 
-      <!-- Listings -->
-      <div id="listings" class="tab-panel">
-        <h1>Manage Listings</h1>
-        <div class="listing-form">
-          <h2>Add New Listing</h2>
-          <form>
-            <label>Product Name</label>
-            <input type="text" placeholder="Product Name">
-            <label>Description</label>
-            <textarea placeholder="Enter product description"></textarea>
-            <label>Category</label>
-            <select><option>Electronics</option><option>Fashion</option><option>Home</option><option>Other</option></select>
-            <label>Condition</label>
-            <select><option>New</option><option>Used</option></select>
-            <label>Price ($)</label>
-            <input type="number" placeholder="0.00">
-            <label>Shipping Fee ($)</label>
-            <input type="number" placeholder="0.00">
-            <label>Upload Photos (up to 3)</label>
-            <input type="file" accept="image/*" multiple>
-            <button type="submit" class="bre-button">Add Listing</button>
-          </form>
-        </div>
-      </div>
 
-      <!-- Edit Listings -->
-      <div id="edit" class="tab-panel">
-        <h1>Edit Listings</h1>
+        <div id="footer-area"> </div>
 
-        <!-- Sorting -->
-        <div class="sort-bar">
-          <label for="sortSelect">Sort by:</label>
-          <select id="sortSelect">
-            <option value="name">Name (A–Z)</option>
-            <option value="priceLowHigh">Price (Low → High)</option>
-            <option value="priceHighLow">Price (High → Low)</option>
-            <option value="status">Status</option>
-          </select>
-        </div>
-
-        <!-- Listings Grid -->
-        <div class="listings-grid" id="editListings">
-    
-
-          <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
-            <img src="https://via.placeholder.com/220x150" alt="Product">
-            <h3>Bluetooth Speaker</h3>
-            <p class="price">$75.00</p>
-            <p>Status: <span class="status approved">Approved</span></p>
-            <button class="edit-btn bre-button">Edit</button>
-            <button class="danger bre-button">Delete</button>
-          </div>
-            
-              <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
-            <img src="https://via.placeholder.com/220x150" alt="Product">
-            <h3>Bluetooth Speaker</h3>
-            <p class="price">$75.00</p>
-            <p>Status: <span class="status approved">Approved</span></p>
-            <button class="edit-btn bre-button">Edit</button>
-            <button class="danger bre-button">Delete</button>
-          </div>
-            
-              <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
-            <img src="https://via.placeholder.com/220x150" alt="Product">
-            <h3>Bluetooth Speaker</h3>
-            <p class="price">$75.00</p>
-            <p>Status: <span class="status approved">Approved</span></p>
-            <button class="edit-btn bre-button">Edit</button>
-            <button class="danger bre-button">Delete</button>
-          </div>
-            
-            
-        </div>
-      </div>
-
-      <!-- Messages -->
-      <div id="messages" class="tab-panel">
-        <h1>Messages</h1>
-        <div class="messages-area" id="messagesArea">
-          <div class="message received">Hello, I want to ask about the product availability.</div>
-          <div class="message sent">Sure! This item is in stock and ready to ship.</div>
-        </div>
-        <div class="send-box">
-          <input type="text" id="messageInput" placeholder="Type your message...">
-          <button id="sendMessage"><i class="bi bi-send-fill "></i></button>
-        </div>
-      </div>
-
-      <!-- Settings -->
-      <div id="settings" class="tab-panel">
-        <h1>Seller Settings</h1>
-        <button class="danger bre-button">Turn Off Seller Account</button>
-      </div>
-
-    </main>
-  </div>
-  
-   <div id="footer-area"> </div>
-
-  <script src="../assets/js/selleraccount.js"></script>
-  <script src="../assets/js/home.js"></script>
-     <script src="../assets/js/loader.js"> </script>
-</body>
+        <script src="../assets/js/selleraccount.js"></script>
+        <script src="../assets/js/home.js"></script>
+        <script src="../assets/js/loader.js"></script>
+    </body>
 </html>
