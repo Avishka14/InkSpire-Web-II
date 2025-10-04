@@ -47,6 +47,11 @@ public class LoadSellerBaseInfo extends HttpServlet {
                 sellerData.addProperty("regDate", seller.getReg_date().toString());
                 responseObject.addProperty("status", true);
                 responseObject.add("seller", sellerData);
+                
+                Cookie userIdCookie = new Cookie("sellerId", String.valueOf(seller.getId()));
+                    userIdCookie.setMaxAge(7 * 24 * 60 * 60); 
+                    userIdCookie.setPath("/");
+                    response.addCookie(userIdCookie);
 
             }
             session.close();

@@ -59,7 +59,6 @@ async function saveProductAdmin() {
     const approvalId = "1";
     const image1 = document.getElementById("img1").files[0];
 
-    // 🚨 Frontend validation
     if (!title || !description || !categoryId || !conditionId || !price || !image1) {
         $.notify("All fields including product image are required.", "error");
         return;
