@@ -59,7 +59,7 @@
             <aside class="sidebar">
                 <ul>
                     <li class="active" data-tab="status"><i class="bi bi-speedometer2"></i> Status</li>
-                    <li data-tab="listings"><i class="bi bi-box-seam"></i> Listings</li>
+                    <li data-tab="listings" onclick="loadListingData();" ><i class="bi bi-box-seam"></i> Listings</li>
                     <li data-tab="edit"><i class="bi bi-pencil-square"></i> Edit Listing</li>
                     <li data-tab="messages"><i class="bi bi-chat-dots"></i> Messages</li>
                     <li data-tab="settings"><i class="bi bi-gear"></i> Settings</li>
@@ -103,23 +103,31 @@
                     <h1>Manage Listings</h1>
                     <div class="listing-form">
                         <h2>Add New Listing</h2>
-                        <form>
                             <label>Product Name</label>
-                            <input type="text" placeholder="Product Name">
+                            <input type="text" placeholder="Product Name" id="title" >
+                            
                             <label>Description</label>
-                            <textarea placeholder="Enter product description"></textarea>
+                            <textarea placeholder="Enter product description" id="description"></textarea>
+                            
                             <label>Category</label>
-                            <select><option>Electronics</option><option>Fashion</option><option>Home</option><option>Other</option></select>
-                            <label>Condition</label>
-                            <select><option>New</option><option>Used</option></select>
+                            <select id="category">
+                                <option>Select</option>
+                            </select>
+                            
+                            <label >Condition</label>
+                            <select id="condition">
+                                <option>Select</option>
+                            </select>
+                            
                             <label>Price ($)</label>
-                            <input type="number" placeholder="0.00">
-                            <label>Shipping Fee ($)</label>
-                            <input type="number" placeholder="0.00">
+                            <input type="number" placeholder="0.00" id="price">
+                            
+                            
                             <label>Upload Photos (up to 3)</label>
-                            <input type="file" accept="image/*" multiple>
-                            <button type="submit" class="bre-button">Add Listing</button>
-                        </form>
+                            <input type="file" accept="image/*" multiple id="img1">
+                            <button  class="bre-button adlst" onclick="addNewListing();">Add Listing</button>
+                            
+                            
                     </div>
                 </div>
 

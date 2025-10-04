@@ -54,6 +54,7 @@ public class AddProduct extends HttpServlet {
             String sellerId = request.getParameter("sellerId");
             String approvalId = request.getParameter("approvalId");
             Part part1 = request.getPart("image1");
+            
 
             if (productId == null || title == null || categoryId == null || conditionId == null
                     || itemAvailabilityId == null || price == null || sellerId == null || approvalId == null
