@@ -25,7 +25,7 @@ public class LoadCategoryBooks extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  String categoryIdParam = request.getParameter("categoryId");
+        String categoryIdParam = request.getParameter("categoryId");
         JsonObject responseObject = new JsonObject();
         responseObject.addProperty("status", Boolean.FALSE);
 
@@ -87,7 +87,6 @@ public class LoadCategoryBooks extends HttpServlet {
         }
 
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
         response.getWriter().write(new Gson().toJson(responseObject));
     
     

@@ -220,102 +220,102 @@ async function loadSellerInfo() {
 }
 
 
-async function loadListingData(){
-    
+async function loadListingData() {
+
     const response = await fetch("http://localhost:8080/InkSpire/LoadListingData");
-    
-    if(response.ok){
+
+    if (response.ok) {
         const json = await response.json();
-        
-        loadSelect("category" , json.categoryList , "value");
-        loadSelect("condition" , json.conditionList , "value");
-        
-    }else{
+
+        loadSelect("category", json.categoryList, "value");
+        loadSelect("condition", json.conditionList, "value");
+
+    } else {
         console.log("error");
     }
-    
+
 
 }
 
-function loadSelect(selectId , list , property){
-    
+function loadSelect(selectId, list, property) {
+
     const select = document.getElementById(selectId);
-    
-    list.forEach(item => {      
-       const option = document.createElement("option");
+
+    list.forEach(item => {
+        const option = document.createElement("option");
         option.value = item.id;
         option.innerHTML = item[property];
         select.appendChild(option);
-        
+
     });
-    
+
 }
 
 
 async function addNewListing() {
-    
-        let userId = document.cookie
+
+    let userId = document.cookie
             .split("; ")
             .find(row => row.startsWith("sellerId"))
             ?.split("=")[1];
 
     if (userId) {
 
-    const productId = Math.floor(100000 + Math.random() * 900000);
-    const title = document.getElementById("title").value.trim();
-    const description = document.getElementById("description").value.trim();
-    const categoryId = document.getElementById("category").value;
-    const conditionId = document.getElementById("condition").value;
-    const itemAvailabilityId = "1";
-    const price = document.getElementById("price").value.trim();
-    const sellerId = userId;
-    const approvalId = "2";
-    const image1 = document.getElementById("img1").files[0];
+        const productId = Math.floor(100000 + Math.random() * 900000);
+        const title = document.getElementById("title").value.trim();
+        const description = document.getElementById("description").value.trim();
+        const categoryId = document.getElementById("category").value;
+        const conditionId = document.getElementById("condition").value;
+        const itemAvailabilityId = "1";
+        const price = document.getElementById("price").value.trim();
+        const sellerId = userId;
+        const approvalId = "2";
+        const image1 = document.getElementById("img1").files[0];
 
-    if (!title || !description || !categoryId || !conditionId || !price || !image1) {
-        $(".adlst").notify("All fields including product image are required.", "error");
-        return;
-    }
-    const form = new FormData();
-    form.append("productId", productId);
-    form.append("title", title);
-    form.append("description", description);
-    form.append("categoryId", categoryId);
-    form.append("conditionId", conditionId);
-    form.append("itemAvailabilityId", itemAvailabilityId);
-    form.append("sellerId", sellerId);
-    form.append("price", price);
-    form.append("approvalId", approvalId);
-    form.append("image1", image1);
-
-    try {
-        const response = await fetch("http://localhost:8080/InkSpire/AddProduct", {
-            method: "POST",
-            body: form
-        });
-
-        if (!response.ok) {
-            $(".adlst").notify("Server error. Please try again later.", "error");
+        if (!title || !description || !categoryId || !conditionId || !price || !image1) {
+            $(".adlst").notify("All fields including product image are required.", "error");
             return;
         }
+        const form = new FormData();
+        form.append("productId", productId);
+        form.append("title", title);
+        form.append("description", description);
+        form.append("categoryId", categoryId);
+        form.append("conditionId", conditionId);
+        form.append("itemAvailabilityId", itemAvailabilityId);
+        form.append("sellerId", sellerId);
+        form.append("price", price);
+        form.append("approvalId", approvalId);
+        form.append("image1", image1);
 
-        const json = await response.json();
+        try {
+            const response = await fetch("http://localhost:8080/InkSpire/AddProduct", {
+                method: "POST",
+                body: form
+            });
 
-        if (json.status) {       
-           $(".adlst").notify("Listing added successfully!", "success");
-            clearProductForm();
-        } else if (json.message === "4004") {
-            $(".adlst").notify("All fields are required to add a listing", "error");
-        } else {
-            $(".adlst").notify(json.message || "Listing addition failed!", "error");
+            if (!response.ok) {
+                $(".adlst").notify("Server error. Please try again later.", "error");
+                return;
+            }
+
+            const json = await response.json();
+
+            if (json.status) {
+                $(".adlst").notify("Listing added successfully!", "success");
+                clearProductForm();
+            } else if (json.message === "4004") {
+                $(".adlst").notify("All fields are required to add a listing", "error");
+            } else {
+                $(".adlst").notify(json.message || "Listing addition failed!", "error");
+            }
+        } catch (error) {
+            console.error("Request failed:", error);
+            $(".adlst").notify("Network error. Please check your connection.", "error");
         }
-    } catch (error) {
-        console.error("Request failed:", error);
-        $(".adlst").notify("Network error. Please check your connection.", "error");
-    }
-    
-     } else {
-        $(".adlst").notify("Network Error Please try again Later", "error");
+
+    } else {
+        $(".adlst").notify("Seller Acccount Please try again Later", "error");
     }
 
 }
@@ -327,3 +327,74 @@ function clearProductForm() {
     document.getElementById("img1").value = "";
 }
 
+
+async function loadExistingListings() {
+
+    let sellerId = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("sellerId"))
+            ?.split("=")[1];
+
+    if (sellerId) {
+
+        const response = await fetch(`http://localhost:8080/InkSpire/LoadSellerListings?id=${sellerId}`);
+
+        if (response.ok) {
+
+            const json = await response.json();
+
+            if (json.status) {
+
+                console.log(json.listingList);
+
+                const container = document.querySelector(".pend-listings-grid");
+
+                if (!container) {
+                    console.error("No container element found for listings!");
+                    return;
+                }
+
+                container.innerHTML = "";
+
+                if (json.status && Array.isArray(json.listingList)) {
+                    json.listingList.forEach(listing => {
+                        const card = document.createElement("div");
+                        card.className = "listing-card";
+                        card.setAttribute("data-name", listing.title);
+                        card.setAttribute("data-price", listing.price);
+                        card.setAttribute("data-status", listing.status.toLowerCase());
+
+                        card.innerHTML = `
+                            <p class="date">Added Date and Time : <span>${new Date().toLocaleString()}</span></p>
+                            <img src="${listing.imageUrl}" alt="${listing.title}">
+                            <h3>${listing.title}</h3>
+                            <p class="price">LKR ${Number(listing.price || 0).toFixed(2)}</p>
+                            <p>Status: <span class="status ${listing.status.toLowerCase()}">${listing.status}</span></p>
+                            <div class="li-btn-con">
+                            <button class="edit-btn bre-button ">Edit</button>
+                            <button class="grey-button ">Mark as Unavailable</button>
+                            </div>
+
+                        `;
+
+                        container.appendChild(card);
+                    });
+                } else {
+                    $(".ti-ed-li").notify(json.message || "No listings found", "error");
+                }
+
+
+            } else {
+                $(".ti-ed-li").notify(json.message, "error");
+            }
+
+        } else {
+            $(".ti-ed-li").notify("Network Error Please try again Later", "error");
+        }
+
+
+    } else {
+        $(".ti-ed-li").notify("Seller Acccount Error Please try again Later", "error");
+    }
+
+}
