@@ -60,7 +60,7 @@
                 <ul>
                     <li class="active" data-tab="status"><i class="bi bi-speedometer2"></i> Status</li>
                     <li data-tab="listings" onclick="loadListingData();" ><i class="bi bi-box-seam"></i> Listings</li>
-                    <li data-tab="edit"><i class="bi bi-pencil-square"></i> Edit Listing</li>
+                    <li data-tab="edit" onclick="loadExistingListings();"><i class="bi bi-pencil-square"></i> Edit Listing</li>
                     <li data-tab="messages"><i class="bi bi-chat-dots"></i> Messages</li>
                     <li data-tab="settings"><i class="bi bi-gear"></i> Settings</li>
                 </ul>
@@ -133,49 +133,12 @@
 
                 <!-- Edit Listings -->
                 <div id="edit" class="tab-panel">
-                    <h1>Edit Listings</h1>
-
-                    <!-- Sorting -->
-                    <div class="sort-bar">
-                        <label for="sortSelect">Sort by:</label>
-                        <select id="sortSelect">
-                            <option value="name">Name (A–Z)</option>
-                            <option value="priceLowHigh">Price (Low → High)</option>
-                            <option value="priceHighLow">Price (High → Low)</option>
-                            <option value="status">Status</option>
-                        </select>
-                    </div>
+                    <h1 class="ti-ed-li">Edit Listings</h1>
 
                     <!-- Listings Grid -->
-                    <div class="listings-grid" id="editListings">
+                    <div class="pend-listings-grid" id="editListings">
 
 
-                        <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
-                            <img src="https://via.placeholder.com/220x150" alt="Product">
-                            <h3>Bluetooth Speaker</h3>
-                            <p class="price">$75.00</p>
-                            <p>Status: <span class="status approved">Approved</span></p>
-                            <button class="edit-btn bre-button">Edit</button>
-                            <button class="danger bre-button">Delete</button>
-                        </div>
-
-                        <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
-                            <img src="https://via.placeholder.com/220x150" alt="Product">
-                            <h3>Bluetooth Speaker</h3>
-                            <p class="price">$75.00</p>
-                            <p>Status: <span class="status approved">Approved</span></p>
-                            <button class="edit-btn bre-button">Edit</button>
-                            <button class="danger bre-button">Delete</button>
-                        </div>
-
-                        <div class="listing-card" data-name="Bluetooth Speaker" data-price="75" data-status="approved">
-                            <img src="https://via.placeholder.com/220x150" alt="Product">
-                            <h3>Bluetooth Speaker</h3>
-                            <p class="price">$75.00</p>
-                            <p>Status: <span class="status approved">Approved</span></p>
-                            <button class="edit-btn bre-button">Edit</button>
-                            <button class="danger bre-button">Delete</button>
-                        </div>
 
 
                     </div>
