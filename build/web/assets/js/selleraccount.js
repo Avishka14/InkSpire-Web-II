@@ -371,7 +371,7 @@ async function loadExistingListings() {
                             <p class="price">LKR ${Number(listing.price || 0).toFixed(2)}</p>
                             <p>Status: <span class="status ${listing.status.toLowerCase()}">${listing.status}</span></p>
                             <div class="li-btn-con">
-                            <button class="edit-btn bre-button ">Edit</button>
+                            <button class="edit-btn bre-button " onclick="openEditPopup(${listing.listingId});">Edit</button>
                             <button class="grey-button ">Mark as Unavailable</button>
                             </div>
 
@@ -396,5 +396,109 @@ async function loadExistingListings() {
     } else {
         $(".ti-ed-li").notify("Seller Acccount Error Please try again Later", "error");
     }
+
+}
+
+async function openEditPopup(listingId) {
+    await loadListingDataEditPage();
+    await loadListingEditData(listingId);
+
+    document.getElementById("editPopup").classList.add("active");
+
+    console.log(listingId);
+
+
+}
+
+function closeEditPopup() {
+    document.getElementById("editPopup").classList.remove("active");
+}
+
+
+async function loadListingDataEditPage() {
+
+    const response = await fetch("http://localhost:8080/InkSpire/LoadListingData");
+
+    if (response.ok) {
+        const json = await response.json();
+
+        loadSelect("category-pop-up", json.categoryList, "value");
+        loadSelect("condition-pop-up", json.conditionList, "value");
+
+    } else {
+        console.log("error");
+    }
+
+
+}
+
+
+async function loadListingEditData(listingId) {
+
+    const response = await fetch(`http://localhost:8080/InkSpire/ProductView?id=${listingId}`);
+
+    if (response.ok) {
+
+        const json = await response.json();
+
+        if (json.status) {
+
+            if (json.product) {
+                    
+               
+                document.getElementById("title-pop-up").value = json.product.title ;
+                document.getElementById("description-pop-up").value = json.product.desc ;
+                document.getElementById("price-pop-up").value = json.product.price ;
+
+
+                    const categorySelect = document.getElementById("category-pop-up");
+                    const categoryFromJson = json.product.category || "";
+                    const categoryId = json.product.categoryId;
+
+                    let optionExists = [...categorySelect.options].some(opt => opt.value === categoryFromJson);
+
+                    if (!optionExists && categoryFromJson) {
+                        let newOption = document.createElement("option");
+                        newOption.value = categoryId;
+                        newOption.text = categoryFromJson;
+
+                        categorySelect.appendChild(newOption);
+                    }
+
+                    categorySelect.value = categoryId;
+                    
+                    const conditionSelect = document.getElementById("condition-pop-up");
+                    const conditionFromJson = json.product.condition || "";
+                    const conditionId = json.product.conditionId;
+
+                    let optionExistsZ = [...conditionSelect.options].some(opt => opt.value === conditionFromJson);
+
+                    if (!optionExistsZ && conditionFromJson) {
+                        let newOption = document.createElement("option");
+                        newOption.value = conditionId;
+                        newOption.text = conditionFromJson;
+
+                        conditionSelect.appendChild(newOption);
+                    }
+
+                    conditionSelect.value = conditionId;
+                    
+                    
+            document.getElementById("img-ex").src = json.product.imageUrl ;
+
+
+            } else {
+                $(".ti-ed-li").notify(json.message, "error");
+            }
+
+        } else {
+            $(".ti-ed-li").notify("Listing Error Please try again Later", "error");
+        }
+
+
+    } else {
+        $(".ti-ed-li").notify("Network Error Please try again Later", "error");
+    }
+
 
 }
