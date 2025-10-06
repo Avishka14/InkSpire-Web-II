@@ -54,6 +54,10 @@ public class ProductView extends HttpServlet {
                     productData.addProperty("title", product.getTitle());
                     productData.addProperty("desc", product.getDescription());
                     productData.addProperty("seller", seller.getSellername());
+                    productData.addProperty("category", product.getCategory().getValue());
+                    productData.addProperty("categoryId", product.getCategory().getId());
+                    productData.addProperty("condition", product.getCondition().getValue());
+                    productData.addProperty("conditionId", product.getCondition().getId());
                     productData.addProperty("price", listing.getPrice());
                     productData.addProperty("listingId", listing.getId());
 

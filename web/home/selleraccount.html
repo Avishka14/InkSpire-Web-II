@@ -43,8 +43,8 @@
 
                 <div id="seller-activate-section" class="hidden-section" style="display: none">
                     <div class="seller-field">
-                       <label for="username" class="seller-label">Enter Your Seller Name</label>
-                       <input type="text" id="username" class="seller-input" placeholder=" " required>
+                        <label for="username" class="seller-label">Enter Your Seller Name</label>
+                        <input type="text" id="username" class="seller-input" placeholder=" " required>
                     </div>
                     <button type="submit" class="bre-button" onclick="activateSellerAccount();">Activate</button>
                 </div>
@@ -103,43 +103,40 @@
                     <h1>Manage Listings</h1>
                     <div class="listing-form">
                         <h2>Add New Listing</h2>
-                            <label>Product Name</label>
-                            <input type="text" placeholder="Product Name" id="title" >
-                            
-                            <label>Description</label>
-                            <textarea placeholder="Enter product description" id="description"></textarea>
-                            
-                            <label>Category</label>
-                            <select id="category">
-                                <option>Select</option>
-                            </select>
-                            
-                            <label >Condition</label>
-                            <select id="condition">
-                                <option>Select</option>
-                            </select>
-                            
-                            <label>Price ($)</label>
-                            <input type="number" placeholder="0.00" id="price">
-                            
-                            
-                            <label>Upload Photos (up to 3)</label>
-                            <input type="file" accept="image/*" multiple id="img1">
-                            <button  class="bre-button adlst" onclick="addNewListing();">Add Listing</button>
-                            
-                            
+                        <label>Product Name</label>
+                        <input type="text" placeholder="Product Name" id="title" >
+
+                        <label>Description</label>
+                        <textarea placeholder="Enter product description" id="description"></textarea>
+
+                        <label>Category</label>
+                        <select id="category">
+                            <option>Select</option>
+                        </select>
+
+                        <label >Condition</label>
+                        <select id="condition">
+                            <option>Select</option>
+                        </select>
+
+                        <label>Price ($)</label>
+                        <input type="number" placeholder="0.00" id="price" >
+
+
+                        <label>Upload Photos (up to 3)</label>
+                        <input type="file" accept="image/*" multiple id="img1">
+                        <br/>
+                        <button  class="bre-button adlst" onclick="addNewListing();">Add Listing</button>
+
                     </div>
                 </div>
 
                 <!-- Edit Listings -->
                 <div id="edit" class="tab-panel">
                     <h1 class="ti-ed-li">Edit Listings</h1>
-
+                                     
                     <!-- Listings Grid -->
                     <div class="pend-listings-grid" id="editListings">
-
-
-
 
                     </div>
                 </div>
@@ -165,6 +162,46 @@
 
             </main>
         </div>
+
+        <div class="pop-up-lsiting-edit-container" id="editPopup">
+
+            <div class="listing-form-z">
+                <span class="close-btn-z" onclick="closeEditPopup()">&times;</span>
+                <h2>Edit Your Listing</h2>
+                <label>Product Name</label>
+                <input type="text" placeholder="Product Name" id="title-pop-up" style="width: 80%" >
+
+                <label>Description</label>
+                <textarea placeholder="Enter product description" id="description-pop-up" style="width: 80%"></textarea>
+
+                <label>Category</label>
+                <select id="category-pop-up">
+                    <option>Select</option>
+                </select>
+
+                <label >Condition</label>
+                <select id="condition-pop-up">
+                    <option>Select</option>
+                </select>
+
+                <label>Price ($)</label>
+                <input type="number" placeholder="0.00" id="price-pop-up">
+                  
+                <div>
+                      <label>Product Image</label>
+                      <img id="img-ex" style="width: 170px" />
+                </div>
+                    
+
+                <label>Upload Product Image</label>
+                <input type="file" accept="image/*" id="img1-pop-up">
+                
+               <button class="bre-button adlst" onclick="updateListing();">Update Listing</button>
+
+            </div>
+
+        </div>
+
 
 
         <div id="footer-area"> </div>
