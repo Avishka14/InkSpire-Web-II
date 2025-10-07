@@ -449,6 +449,7 @@ async function loadListingEditData(listingId) {
                 document.getElementById("title-pop-up").value = json.product.title ;
                 document.getElementById("description-pop-up").value = json.product.desc ;
                 document.getElementById("price-pop-up").value = json.product.price ;
+                document.getElementById("listingId-pop").value = json.product.listingId ;
 
 
                     const categorySelect = document.getElementById("category-pop-up");
@@ -501,4 +502,74 @@ async function loadListingEditData(listingId) {
     }
 
 
+}
+
+
+async function updatListingProductData(){
+    
+     let sellerIdC = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("sellerId"))
+            ?.split("=")[1];
+
+    if (sellerIdC) {
+
+        const listingId = document.getElementById("listingId-pop").value.trim();
+        const title = document.getElementById("title-pop-up").value.trim();
+        const description = document.getElementById("description-pop-up").value.trim();
+        const categoryId = document.getElementById("category-pop-up").value;
+        const conditionId = document.getElementById("condition-pop-up").value;
+        const itemAvailabilityId = "1";
+        const price = document.getElementById("price-pop-up").value.trim();
+        const sellerId = sellerIdC;
+        const approvalId = "2";
+        const image1 = document.getElementById("img1-pop-up").files[0];
+
+        if (!title || !description || !categoryId || !conditionId || !price || !image1) {
+            $(".adlst").notify("All fields including product image are required.", "error");
+            return;
+        }       
+        
+        const form = new FormData();
+        form.append("listingId", listingId);
+        form.append("title", title);
+        form.append("description", description);
+        form.append("categoryId", categoryId);
+        form.append("conditionId", conditionId);
+        form.append("itemAvailabilityId", itemAvailabilityId);
+        form.append("sellerId", sellerId);
+        form.append("price", price);
+        form.append("approvalId", approvalId);
+        form.append("image1", image1);
+
+        try {
+            const response = await fetch("http://localhost:8080/InkSpire/UpdateListingProductData", {
+                method: "POST",
+                body: form
+            });
+
+            if (!response.ok) {
+                $(".adlst-pop-up").notify("Server error. Please try again later.", "error");
+                return;
+            }
+
+            const json = await response.json();
+
+            if (json.status) {
+                $(".adlst-pop-up").notify("Listing Update successfully! Please Refresh", "success");
+          
+            } else if (json.message === "4004") {
+                $(".adlst-pop-up").notify("All fields are required to add a listing", "error");
+            } else {
+                $(".adlst-pop-up").notify(json.message || "Listing Update failed!", "error");
+            }
+    
+        } catch (error) {
+            console.error("Request failed:", error);
+            $(".adlst-pop-up").notify("Network error. Please check your connection.", "error");
+        }
+
+    } else {
+        $(".adlst-pop-up").notify("Seller Acccount Please try again Later", "error");
+    }
 }

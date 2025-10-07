@@ -57,30 +57,34 @@ public class LoadLatestProducts extends HttpServlet {
             Product product = listing.getProduct();
             Category category = product.getCategory();
 
-            JsonObject productJson = new JsonObject();
-            productJson.addProperty("productName", product.getTitle());
-            productJson.addProperty("productCategory", category.getValue());
-            productJson.addProperty("productPrice", String.valueOf(listing.getPrice()));
-            productJson.addProperty("id", listing.getId());
-            productJson.addProperty("proId", product.getId());
+            if (listing.getListingId().getId() == 1) {
 
-            String baseUrl = request.getScheme() + "://"
-                    + request.getServerName() + ":"
-                    + request.getServerPort()
-                    + request.getContextPath();
+                JsonObject productJson = new JsonObject();
+                productJson.addProperty("productName", product.getTitle());
+                productJson.addProperty("productCategory", category.getValue());
+                productJson.addProperty("productPrice", String.valueOf(listing.getPrice()));
+                productJson.addProperty("id", listing.getId());
+                productJson.addProperty("proId", product.getId());
 
-            String imagePath = "/ProductImageServlet/" + product.getId() + "/image1.png";
-            File productImage = new File("C:/InkSpireUploads/product-images/" + product.getId() + "/image1.png");
+                String baseUrl = request.getScheme() + "://"
+                        + request.getServerName() + ":"
+                        + request.getServerPort()
+                        + request.getContextPath();
 
-            String imageUrl;
-            if (productImage.exists()) {
-                imageUrl = baseUrl + imagePath;
-            } else {
-                imageUrl = baseUrl + "/ProductImageServlet/null-image/404.webp";
+                String imagePath = "/ProductImageServlet/" + product.getId() + "/image1.png";
+                File productImage = new File("C:/InkSpireUploads/product-images/" + product.getId() + "/image1.png");
+
+                String imageUrl;
+                if (productImage.exists()) {
+                    imageUrl = baseUrl + imagePath;
+                } else {
+                    imageUrl = baseUrl + "/ProductImageServlet/null-image/404.webp";
+                }
+
+                productJson.addProperty("imageUrl", imageUrl);
+                dealsArray.add(productJson);
+
             }
-
-            productJson.addProperty("imageUrl", imageUrl);
-            dealsArray.add(productJson);
 
         }
 
