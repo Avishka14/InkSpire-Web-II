@@ -168,6 +168,9 @@
             <div class="listing-form-z">
                 <span class="close-btn-z" onclick="closeEditPopup()">&times;</span>
                 <h2>Edit Your Listing</h2>
+                
+                 <input id="listingId-pop" style="display: none" >
+                 
                 <label>Product Name</label>
                 <input type="text" placeholder="Product Name" id="title-pop-up" style="width: 80%" >
 
@@ -196,7 +199,7 @@
                 <label>Upload Product Image</label>
                 <input type="file" accept="image/*" id="img1-pop-up">
                 
-               <button class="bre-button adlst" onclick="updateListing();">Update Listing</button>
+               <button class="bre-button adlst-pop-up" onclick="updatListingProductData();">Update Listing</button>
 
             </div>
 
