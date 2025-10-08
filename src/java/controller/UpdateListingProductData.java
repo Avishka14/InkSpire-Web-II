@@ -26,7 +26,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
 @MultipartConfig
 @WebServlet(name = "UpdateListingProductData", urlPatterns = {"/UpdateListingProductData"})
 public class UpdateListingProductData extends HttpServlet {
@@ -57,11 +56,12 @@ public class UpdateListingProductData extends HttpServlet {
             String approvalId = request.getParameter("approvalId");
             Part part1 = request.getPart("image1");
 
+            System.out.println(sellerId);
+
             if (listingId == null || title == null || categoryId == null || conditionId == null
-                    || itemAvailabilityId == null || price == null || sellerId == null || approvalId == null
-                    || part1 == null || part1.getSize() == 0) {
+                    || itemAvailabilityId == null || price == null || sellerId == null || approvalId == null) {
                 responseObject.addProperty("status", false);
-                responseObject.addProperty("message", "Missing required parameters or product image.");
+                responseObject.addProperty("message", "Missing required parameters");
                 response.getWriter().write(gson.toJson(responseObject));
                 return;
             }
@@ -96,34 +96,38 @@ public class UpdateListingProductData extends HttpServlet {
 
             Integer productId = product.getId();
 
-            File productFolder = new File(UPLOAD_DIR, productId.toString());
+            if (part1 != null) {
 
-            if (!productFolder.exists() || !productFolder.isDirectory()) {
-                responseObject.addProperty("status", false);
-                responseObject.addProperty("message", "Product folder not found for update.");
-                response.getWriter().write(gson.toJson(responseObject));
-                return;
-            }
+                File productFolder = new File(UPLOAD_DIR, productId.toString());
 
-            File imageFile = new File(productFolder, "image1.png");
-
-            try {
-
-                if (imageFile.exists()) {
-                    imageFile.delete();
+                if (!productFolder.exists() || !productFolder.isDirectory()) {
+                    responseObject.addProperty("status", false);
+                    responseObject.addProperty("message", "Product folder not found for update.");
+                    response.getWriter().write(gson.toJson(responseObject));
+                    return;
                 }
 
-                savePartToFile(part1, imageFile);
+                File imageFile = new File(productFolder, "image1.png");
 
-                responseObject.addProperty("status", true);
-                responseObject.addProperty("message", "Product image updated successfully.");
+                try {
 
-            } catch (IOException ioEx) {
-                if (tx != null) {
-                    tx.rollback();
+                    if (imageFile.exists()) {
+                        imageFile.delete();
+                    }
+
+                    savePartToFile(part1, imageFile);
+
+                    responseObject.addProperty("status", true);
+                    responseObject.addProperty("message", "Product image updated successfully.");
+
+                } catch (IOException ioEx) {
+                    if (tx != null) {
+                        tx.rollback();
+                    }
+                    responseObject.addProperty("status", false);
+                    responseObject.addProperty("message", "Failed to update product image.");
                 }
-                responseObject.addProperty("status", false);
-                responseObject.addProperty("message", "Failed to update product image.");
+
             }
 
             session.update(listing);
@@ -134,30 +138,6 @@ public class UpdateListingProductData extends HttpServlet {
             responseObject.addProperty("message", "Product added successfully.");
             response.getWriter().write(gson.toJson(responseObject));
 
-        } catch (NumberFormatException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            responseObject.addProperty("status", false);
-            responseObject.addProperty("message", "Invalid number format in request parameters.");
-            response.getWriter().write(new Gson().toJson(responseObject));
-        } catch (HibernateException e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            responseObject.addProperty("status", false);
-            responseObject.addProperty("message", "Database error while Updating product.");
-            response.getWriter().write(new Gson().toJson(responseObject));
-        } catch (Exception e) {
-            if (tx != null) {
-                tx.rollback();
-            }
-            e.printStackTrace();
-            responseObject.addProperty("status", false);
-            responseObject.addProperty("message", "Unexpected error: " + e.getMessage());
-            response.getWriter().write(new Gson().toJson(responseObject));
         } finally {
             if (session != null && session.isOpen()) {
                 session.close();

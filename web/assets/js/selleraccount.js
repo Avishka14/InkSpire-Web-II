@@ -444,48 +444,48 @@ async function loadListingEditData(listingId) {
         if (json.status) {
 
             if (json.product) {
-                    
-               
-                document.getElementById("title-pop-up").value = json.product.title ;
-                document.getElementById("description-pop-up").value = json.product.desc ;
-                document.getElementById("price-pop-up").value = json.product.price ;
-                document.getElementById("listingId-pop").value = json.product.listingId ;
 
 
-                    const categorySelect = document.getElementById("category-pop-up");
-                    const categoryFromJson = json.product.category || "";
-                    const categoryId = json.product.categoryId;
+                document.getElementById("title-pop-up").value = json.product.title;
+                document.getElementById("description-pop-up").value = json.product.desc;
+                document.getElementById("price-pop-up").value = json.product.price;
+                document.getElementById("listingId-pop").value = json.product.listingId;
 
-                    let optionExists = [...categorySelect.options].some(opt => opt.value === categoryFromJson);
 
-                    if (!optionExists && categoryFromJson) {
-                        let newOption = document.createElement("option");
-                        newOption.value = categoryId;
-                        newOption.text = categoryFromJson;
+                const categorySelect = document.getElementById("category-pop-up");
+                const categoryFromJson = json.product.category || "";
+                const categoryId = json.product.categoryId;
 
-                        categorySelect.appendChild(newOption);
-                    }
+                let optionExists = [...categorySelect.options].some(opt => opt.value === categoryFromJson);
 
-                    categorySelect.value = categoryId;
-                    
-                    const conditionSelect = document.getElementById("condition-pop-up");
-                    const conditionFromJson = json.product.condition || "";
-                    const conditionId = json.product.conditionId;
+                if (!optionExists && categoryFromJson) {
+                    let newOption = document.createElement("option");
+                    newOption.value = categoryId;
+                    newOption.text = categoryFromJson;
 
-                    let optionExistsZ = [...conditionSelect.options].some(opt => opt.value === conditionFromJson);
+                    categorySelect.appendChild(newOption);
+                }
 
-                    if (!optionExistsZ && conditionFromJson) {
-                        let newOption = document.createElement("option");
-                        newOption.value = conditionId;
-                        newOption.text = conditionFromJson;
+                categorySelect.value = categoryId;
 
-                        conditionSelect.appendChild(newOption);
-                    }
+                const conditionSelect = document.getElementById("condition-pop-up");
+                const conditionFromJson = json.product.condition || "";
+                const conditionId = json.product.conditionId;
 
-                    conditionSelect.value = conditionId;
-                    
-                    
-            document.getElementById("img-ex").src = json.product.imageUrl ;
+                let optionExistsZ = [...conditionSelect.options].some(opt => opt.value === conditionFromJson);
+
+                if (!optionExistsZ && conditionFromJson) {
+                    let newOption = document.createElement("option");
+                    newOption.value = conditionId;
+                    newOption.text = conditionFromJson;
+
+                    conditionSelect.appendChild(newOption);
+                }
+
+                conditionSelect.value = conditionId;
+
+
+                document.getElementById("img-ex").src = json.product.imageUrl;
 
 
             } else {
@@ -505,9 +505,11 @@ async function loadListingEditData(listingId) {
 }
 
 
-async function updatListingProductData(){
-    
-     let sellerIdC = document.cookie
+async function updatListingProductData() {
+
+
+
+    let sellerIdC = document.cookie
             .split("; ")
             .find(row => row.startsWith("sellerId"))
             ?.split("=")[1];
@@ -524,12 +526,8 @@ async function updatListingProductData(){
         const sellerId = sellerIdC;
         const approvalId = "2";
         const image1 = document.getElementById("img1-pop-up").files[0];
+       
 
-        if (!title || !description || !categoryId || !conditionId || !price || !image1) {
-            $(".adlst").notify("All fields including product image are required.", "error");
-            return;
-        }       
-        
         const form = new FormData();
         form.append("listingId", listingId);
         form.append("title", title);
@@ -540,7 +538,11 @@ async function updatListingProductData(){
         form.append("sellerId", sellerId);
         form.append("price", price);
         form.append("approvalId", approvalId);
-        form.append("image1", image1);
+       
+ 
+        if(image1){
+             form.append("image1", image1);
+        }
 
         try {
             const response = await fetch("http://localhost:8080/InkSpire/UpdateListingProductData", {
@@ -555,15 +557,17 @@ async function updatListingProductData(){
 
             const json = await response.json();
 
+
             if (json.status) {
+
                 $(".adlst-pop-up").notify("Listing Update successfully! Please Refresh", "success");
-          
+
             } else if (json.message === "4004") {
                 $(".adlst-pop-up").notify("All fields are required to add a listing", "error");
             } else {
                 $(".adlst-pop-up").notify(json.message || "Listing Update failed!", "error");
             }
-    
+
         } catch (error) {
             console.error("Request failed:", error);
             $(".adlst-pop-up").notify("Network error. Please check your connection.", "error");
