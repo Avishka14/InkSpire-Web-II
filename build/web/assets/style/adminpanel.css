@@ -83,6 +83,27 @@ input:focus, select:focus, textarea:focus {
 .bre-button.full { width: 100%; }
 .bre-button.small { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
 
+
+.grey-button {
+  padding: 12px 20px;
+  background: #9D9E9C;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: transform .2s ease, box-shadow .2s ease, background .2s;
+}
+.grey-button:hover {
+  background: #767675;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,.12);
+}
+
+.grey-button.full { width: 100%; }
+.grey-button.small { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+
 /* Layout */
 .account-layout { display: flex; min-height: calc(100vh - 100px); padding: 0 15px; }
 .sidebar {
@@ -244,4 +265,42 @@ input:focus, select:focus, textarea:focus {
   .listings-grid { grid-template-columns: 1fr; }
   .offers-layout { grid-template-columns: 1fr; }
   input, select, textarea { width: 100%; }
+}
+
+.pop-up-lsiting-view-container {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.pop-up-lsiting-view-container.active {
+  display: flex; /* Show popup when active */
+}
+
+.viewx-form-z {
+  background: #fff;
+  padding: 25px 30px;
+  border-radius: 10px;
+  width: 400px;
+  position: relative;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.close-btn-z {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 24px;
+  color: #555;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.close-btn-z:hover {
+  color: #000;
 }
