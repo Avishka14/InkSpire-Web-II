@@ -367,7 +367,7 @@ async function loadListingApprovalAdmin() {
                     <div class="button-group">
                         <button class="grey-button" onclick="loadView('${listingData}')">View</button>
                         <button class="bre-button" onclick="quickApprove('${listingData}')">Approve</button>
-                        <button class="danger bre-button" onclick="declineListing(${listing.listingId});">Decline</button>
+                        <button class="danger bre-button" onclick="quickDecline('${listingData}');">Decline</button>
                     </div>
                 `;
 
@@ -409,10 +409,7 @@ async function quickApprove(listingStr) {
     console.log("Listing ID:", listing.listingId);
 
   const response =   await fetch(`http://localhost:8080/InkSpire/ListingApprove?id=${encodeURIComponent(listing.listingId)}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        }
+        method: "POST"
     });
     
     if(response.ok){
@@ -420,7 +417,34 @@ async function quickApprove(listingStr) {
         const json = await response.json();
         
         if(json.status){
-              $.notify("Listing Approval Success!", "error");
+              $.notify("Listing Approval Success!", "success");
+              loadListingApprovalAdmin();
+        }else{
+              $.notify(json.message, "error");
+        }
+        
+    }else{
+          $.notify("Network error. Please check your connection.", "error");
+    }
+
+
+}
+
+async function quickDecline(listingStr) {
+
+    const listing = JSON.parse(decodeURIComponent(listingStr));
+    console.log("Listing ID:", listing.listingId);
+
+  const response =   await fetch(`http://localhost:8080/InkSpire/ListingDecline?id=${encodeURIComponent(listing.listingId)}`, {
+        method: "POST"
+    });
+    
+    if(response.ok){
+        
+        const json = await response.json();
+        
+        if(json.status){
+              $.notify("Listing Decline Success!", "success");
               loadListingApprovalAdmin();
         }else{
               $.notify(json.message, "error");
