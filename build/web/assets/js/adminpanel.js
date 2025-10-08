@@ -389,26 +389,46 @@ async function loadListingApprovalAdmin() {
 function loadView(listingStr) {
     const listing = JSON.parse(decodeURIComponent(listingStr));
     console.log("Listing ID:", listing.listingId);
-    
+
     document.getElementById("viewPopUp").classList.add("active");
-    
+
     document.getElementById("seller-viewx-up").value = listing.seller || "Seller Not Found";
     document.getElementById("title-viewx-up").value = listing.title || "Title Not Found";
     document.getElementById("description-viewx-up").value = listing.desc || "Description Not Found";
     document.getElementById("price-viewx-up").value = listing.price || "Price Not Found";
-    document.getElementById("img-viewx").src = listing.imageUrl ;
-    document.getElementById("category-viewx-up").innerHTML = listing.category ;
-    document.getElementById("condition-viewx-up").innerHTML = listing.condition ;
+    document.getElementById("img-viewx").src = listing.imageUrl;
+    document.getElementById("category-viewx-up").innerHTML = listing.category;
+    document.getElementById("condition-viewx-up").innerHTML = listing.condition;
 
 }
 
 
-async function quickApprove(listingStr){
-    
+async function quickApprove(listingStr) {
+
     const listing = JSON.parse(decodeURIComponent(listingStr));
     console.log("Listing ID:", listing.listingId);
+
+  const response =   await fetch(`http://localhost:8080/InkSpire/ListingApprove?id=${encodeURIComponent(listing.listingId)}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
     
-    
-    
-    
+    if(response.ok){
+        
+        const json = await response.json();
+        
+        if(json.status){
+              $.notify("Listing Approval Success!", "error");
+              loadListingApprovalAdmin();
+        }else{
+              $.notify(json.message, "error");
+        }
+        
+    }else{
+          $.notify("Network error. Please check your connection.", "error");
+    }
+
+
 }
