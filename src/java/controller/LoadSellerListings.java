@@ -54,6 +54,7 @@ public class LoadSellerListings extends HttpServlet {
                 productJson.addProperty("listingId", listing.getId());
                 productJson.addProperty("status", listing.getListingId().getValue());
                 productJson.addProperty("availability", product.getAvailability().getValue());
+                productJson.addProperty("availabilityId", product.getAvailability().getId());
 
                 String baseUrl = request.getScheme() + "://"
                         + request.getServerName() + ":"

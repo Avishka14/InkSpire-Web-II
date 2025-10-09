@@ -365,17 +365,22 @@ async function loadExistingListings() {
                         card.setAttribute("data-status", listing.status.toLowerCase());
 
                         card.innerHTML = `
-                            <p class="date">Added Date and Time : <span>${new Date().toLocaleString()}</span></p>
-                            <img src="${listing.imageUrl}" alt="${listing.title}">
-                            <h3>${listing.title}</h3>
-                            <p class="price">LKR ${Number(listing.price || 0).toFixed(2)}</p>
-                            <p>Status: <span class="status ${listing.status.toLowerCase()}">${listing.status}</span></p>
-                            <div class="li-btn-con">
-                            <button class="edit-btn bre-button " onclick="openEditPopup(${listing.listingId});">Edit</button>
-                            <button class="grey-button ">Mark as Unavailable</button>
-                            </div>
+                                <p class="date">Added Date and Time : <span>${new Date().toLocaleString()}</span></p>
+                                <img src="${listing.imageUrl}" alt="${listing.title}">
+                                <h3>${listing.title}</h3>
+                                <p class="price">LKR ${Number(listing.price || 0).toFixed(2)}</p>
+                                <p>Status: <span class="status ${listing.status.toLowerCase()}">${listing.status}</span></p>
+                                <p>Status: <span class="Availability ${listing.availability.toLowerCase()}">${listing.availability}</span></p>
+                                <div class="li-btn-con">
+                                <button class="edit-btn bre-button" onclick="openEditPopup(${listing.listingId});">Edit</button>
+                             ${
+                                listing.availabilityId == 3
+                                ? `<button class="bre-button" onclick="makeListingAvailable(${listing.listingId});">Mark as Available</button>`
+                                : `<button class="grey-button" onclick="makeListingUnavailable(${listing.listingId});">Mark as Unavailable</button>`
+                            }
+                                 </div>
+                            `;
 
-                        `;
 
                         container.appendChild(card);
                     });
@@ -507,8 +512,6 @@ async function loadListingEditData(listingId) {
 
 async function updatListingProductData() {
 
-
-
     let sellerIdC = document.cookie
             .split("; ")
             .find(row => row.startsWith("sellerId"))
@@ -526,7 +529,7 @@ async function updatListingProductData() {
         const sellerId = sellerIdC;
         const approvalId = "2";
         const image1 = document.getElementById("img1-pop-up").files[0];
-       
+
 
         const form = new FormData();
         form.append("listingId", listingId);
@@ -538,10 +541,10 @@ async function updatListingProductData() {
         form.append("sellerId", sellerId);
         form.append("price", price);
         form.append("approvalId", approvalId);
-       
- 
-        if(image1){
-             form.append("image1", image1);
+
+
+        if (image1) {
+            form.append("image1", image1);
         }
 
         try {
@@ -576,4 +579,57 @@ async function updatListingProductData() {
     } else {
         $(".adlst-pop-up").notify("Seller Acccount Please try again Later", "error");
     }
+}
+
+
+async function makeListingUnavailable(listingId) {
+    
+    console.log(listingId);
+
+    const response = await fetch(`http://localhost:8080/InkSpire/UpdateListingStatus?id=${encodeURIComponent(listingId)}`, {
+        method: "POST"
+    });
+    
+    if(response.ok){
+        
+        const json = await response.json();
+        
+        if(json.status){
+              alert("Success");
+              loadExistingListings();
+      
+        }else{
+             alert("an Error in the Listing");
+        }
+        
+    }else{
+        alert("Network Error Please try again Later");
+    }
+
+}
+
+async function makeListingAvailable(listingId) {
+    
+    console.log(listingId);
+
+    const response = await fetch(`http://localhost:8080/InkSpire/UpdateListingStatusPositive?id=${encodeURIComponent(listingId)}`, {
+        method: "POST"
+    });
+    
+    if(response.ok){
+        
+        const json = await response.json();
+        
+        if(json.status){
+              alert("Success");
+              loadExistingListings();
+      
+        }else{
+             alert("an Error in the Listing");
+        }
+        
+    }else{
+        alert("Network Error Please try again Later");
+    }
+
 }
