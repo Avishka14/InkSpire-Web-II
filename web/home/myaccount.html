@@ -80,10 +80,10 @@
                 <div id="address" class="tab-panel">
                     <h1>My Address</h1>
                     <label>Street</label>
-                    <input type="text" placeholder="123 Main St" id="line1">
+                    <input type="text" placeholder="Ex :123 Main St" id="line1">
 
                     <label>Address Line 2</label>
-                    <input type="text" placeholder="Katugasthota" id="line2">
+                    <input type="text" placeholder="Ex :Katugasthota" id="line2">
 
                     <label>City</label>
                     <select id="city-select">
@@ -91,11 +91,12 @@
                     </select>
 
                     <label>Postal Code</label>
-                    <input type="text" placeholder="12345" id="postl-code">
+                    <input type="text" placeholder="Ex :12345" id="postl-code">
 
 
                     <br/>
-                    <button onclick="updateUserAddress();" class="a-btn">Update Address</button>
+                    <button onclick="updateUserAddress();" class="a-btn" id="address-id-btn">Update Address</button>
+                    <button onclick="addUserAddress();" class="a-btn2" id="address-id-btn-new">Add Address</button>
 
                 </div>
 

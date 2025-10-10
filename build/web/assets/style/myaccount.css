@@ -504,3 +504,19 @@ button.danger:hover {
 }
 
 }
+
+.a-btn2{
+    display: none;
+}
+
+.a-btn2.active{
+    display: block;
+}
+
+.a-btn{
+    display: block;
+}
+
+.a-btn.active{
+    display: none;
+}

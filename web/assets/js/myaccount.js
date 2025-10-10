@@ -128,7 +128,6 @@ async function updateUserBaseInfo() {
 
             if (json.status) {
                 $(".sv-btn").notify(json.message, "success");
-                loadUserDataFields();
             } else {
                 $(".sv-btn").notify(json.message, "error");
             }
@@ -309,22 +308,76 @@ async function loadUserAddress() {
                     document.getElementById("postl-code").value = json.address?.postal || "Postal Code Not Found";
 
                 } else {
-                    $(".address").notify("Please Log In Again!", "error");
+                    $(".a-btn2").notify("Please Log In Again!", "error");
                 }
 
 
             } else {
-                $(".address").notify(json.message, "error");
+                $(".a-btn2").notify(json.message, "error");
+                document.getElementById("address-id-btn-new").classList.add("active");
+                document.getElementById("address-id-btn").classList.add("active");
             }
 
 
         } else {
-            $(".address").notify("Network Error Please try again Later", "error");
+            $(".a-btn").notify("Network Error Please try again Later", "error");
         }
 
 
     } else {
-        $(".address").notify("Network Error Please try again Later", "error");
+        $(".a-btn").notify("Network Error Please try again Later", "error");
+    }
+
+
+}
+
+
+async function addUserAddress() {
+
+    let userId = document.cookie
+            .split("; ")
+            .find(row => row.startsWith("userId"))
+            ?.split("=")[1];
+
+    if (userId) {
+
+        const data = JSON.stringify({
+            line1: document.getElementById("line1").value,
+            line2: document.getElementById("line2").value,
+            city: document.getElementById("city-select").value,
+            postal: document.getElementById("postl-code").value
+        });
+
+        const response = await fetch(
+                `http://localhost:8080/InkSpire/AddUserAddress?id=${encodeURIComponent(userId)}`,
+                {
+                    method: "POST",
+                    body: data,
+                    header: {
+                        "Content-Type": "applicatidon/json"
+                    }
+                }
+
+        );
+
+        if (response.ok) {
+
+            const json = await response.json();
+
+            if (json.status) {
+                $(".a-btn2").notify(json.message, "success");
+                
+            } else {
+                $(".a-btn2").notify(json.message, "error");
+            }
+
+
+        } else {
+            $(".a-btn2").notify("Network Error Please try again Later", "error");
+        }
+
+    } else {
+        $(".a-btn2").notify("Please Log In Again!", "error");
     }
 
 

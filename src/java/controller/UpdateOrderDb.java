@@ -62,7 +62,7 @@ public class UpdateOrderDb extends HttpServlet {
             User user = (User) hibernateSession.get(User.class, Integer.parseInt(userId));
 
             OrderStatus orderStatus = new OrderStatus();
-            orderStatus.setId(1);
+            orderStatus.setId(2);
 
             Invoice invoice = new Invoice();
             invoice.setId(orderId);
