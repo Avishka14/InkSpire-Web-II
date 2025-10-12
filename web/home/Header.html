@@ -6,7 +6,6 @@
         <title>Responsive Header — Slide Menu</title>
         <style>
             @import url("https://fonts.googleapis.com/css2?family=Gabarito:wght@400;600;900&family=Love+Light&display=swap");
-
             :root {
                 --accent1: #ffffff;
                 --accent2: #ffffff;
@@ -14,7 +13,6 @@
                 --text-light: #9c9c9c;
                 --text-dark: #2f2f2f;
             }
-
             body {
                 margin: 0;
                 font-family: "Gabarito", sans-serif;
@@ -22,8 +20,6 @@
                 background: #f6f7fb;
                 transition: background 0.3s ease;
             }
-
-            /* Header */
             .header {
                 position: fixed;
                 top: 0;
@@ -38,7 +34,6 @@
                 box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
                 z-index: 1200;
             }
-
             .header-logo {
                 display: flex;
                 align-items: center;
@@ -47,15 +42,12 @@
                 height: 48px;
                 display: block;
             }
-
-            /* Desktop nav */
             .header-links {
                 margin-left: auto;
                 display: flex;
                 align-items: center;
                 gap: 18px;
             }
-
             .header-list {
                 list-style: none;
                 margin: 0;
@@ -64,7 +56,6 @@
                 gap: 26px;
                 align-items: center;
             }
-
             .head-li {
                 color: var(--text-light);
                 font-size: 18px;
@@ -74,11 +65,9 @@
                 animation: fadeInUp 0.6s ease-in-out;
                 transition: color 0.3s ease;
             }
-
             .head-li:hover {
                 color: var(--gold);
             }
-
             .head-li::after {
                 content: "";
                 position: absolute;
@@ -89,36 +78,29 @@
                 background: var(--gold);
                 transition: width 0.3s ease-in-out;
             }
-
             .head-li:hover::after {
                 width: 100%;
             }
-
             .head-li a {
                 text-decoration: none;
                 color: var(--text-light);
             }
-
             .cart-link {
                 font-size: 1.8rem;
                 display: inline-block;
                 transition: transform 0.3s ease, color 0.3s ease;
-                color: #111; /* default color */
+                color: #111; 
             }
-
             .cart-link:hover {
-                color: #15fa61;           /* change color on hover */
-                transform: scale(1.2) rotate(10deg); /* grow and tilt */
+                color: #15fa61;        
+                transform: scale(1.2) rotate(10deg); 
             }
-
             .header-hr {
                 width: 1px;
                 height: 24px;
                 background: var(--text-light);
                 margin: 0 12px;
             }
-
-            /* Hamburger toggle */
             .nav-toggle {
                 display: none;
                 margin-left: 12px;
@@ -128,8 +110,6 @@
                 font-size: 26px;
                 cursor: pointer;
             }
-
-            /* Side menu */
             .side-menu {
                 position: fixed;
                 top: 0;
@@ -147,7 +127,6 @@
             .side-menu.open {
                 transform: translateX(0);
             }
-
             .side-menu .close-btn {
                 background: transparent;
                 border: 0;
@@ -161,11 +140,9 @@
                 padding: 36px 0 0 0;
                 margin: 0;
             }
-
             .side-menu li {
                 margin: 20px;
             }
-
             .side-menu li a {
                 color: var(--text-light);
                 font-size: 18px;
@@ -192,8 +169,6 @@
             .side-menu li a:hover::after {
                 width: 100%;
             }
-
-            /* Overlay */
             .overlay {
                 position: fixed;
                 inset: 0;
@@ -207,16 +182,13 @@
                 opacity: 1;
                 pointer-events: auto;
             }
-
             .logo-mini {
                 width: 150px;
             }
-
             .wtr-side {
                 color: var(--text-light);
             }
 
-            /* Animations */
             @keyframes fadeInUp {
                 from {
                     opacity: 0;
@@ -237,8 +209,6 @@
                     transform: translateX(0);
                 }
             }
-
-            /* Responsive */
             @media (max-width: 768px) {
                 .header-list {
                     display: none;
@@ -261,7 +231,6 @@
             </div>
 
             <nav class="header-links" role="navigation" aria-label="Main navigation">
-                <!-- Cart icon -->
                 <a href="cart-page.html" class="cart-link" title="Cart">🛒</a>
                 <div class="header-hr"></div>
                 <ul class="header-list">
@@ -272,7 +241,6 @@
                     <li class="head-li"><a href="about.html"> About </a></li>
                 </ul>
             </nav>
-
             <button
                 class="nav-toggle"
                 aria-label="Open menu"
@@ -285,7 +253,6 @@
         </header>
 
         <div class="overlay" id="overlay" aria-hidden="true"></div>
-
         <aside class="side-menu" id="sideMenu" aria-hidden="true">
             <img class="logo-mini" src="../assets/icons/logo.png" alt="logo" />
             <button class="close-btn" id="closeMenu" aria-label="Close menu">✕</button>
@@ -299,7 +266,6 @@
             <hr />
             <p class="wtr-side">Developed By Avishka Chamod</p>
         </aside>
-
         <script src="../assets/js/home.js"></script>
     </body>
 </html>

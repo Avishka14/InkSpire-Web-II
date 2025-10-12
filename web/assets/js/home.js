@@ -82,7 +82,8 @@ async function loadCategories() {
             json.categoryList.forEach(item => {
                 const li = document.createElement("li");
                 li.value = item.id;
-                li.innerHTML = `<i class="bi bi-book"></i> ${item.value}`;
+                li.innerHTML = `<i class="bi bi-book" onclick="loadSingleCategoryView('${item.id}')"></i> ${item.value}`;
+
                 ul.appendChild(li);
 
             });
@@ -206,4 +207,14 @@ function renderLatestProducts(products) {
 
         container.appendChild(card);
     });
+}
+
+
+async function loadSingleCategoryView(id){
+    
+//        const response = await fetch(`http://localhost:8080/InkSpire/LoadLatestProducts?id=${id}`);
+
+console.log(id);
+console.log("ok");
+    
 }
