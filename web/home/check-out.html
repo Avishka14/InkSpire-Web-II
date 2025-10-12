@@ -7,20 +7,15 @@
         <link rel="shortcut icon" href="../assets/icons/icon.ico" type="image/x-icon" />
         <link rel = "stylesheet" href="../assets/style/check-out.css">
         <script src="https://www.payhere.lk/lib/payhere.js"></script>
-        <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
-            />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"  />
     </head>
     <body onload="loadCheckOutSummry(); loadUserData(); loadUserAddress();">
     <div class="check-out-container">
-      <h1 class="check-out-title">InkSpire - Secure Checkout</h1>
+     <h1 class="check-out-title">InkSpire - Secure Checkout</h1>
 
       <div class="check-out-layout">
-        <!-- Left Side: Checkout Steps and Forms -->
         <div class="check-out-main">
           <div class="check-out-card">
-            <!-- Step Indicator -->
             <div id="check-out-steps" class="check-out-steps">
               <div class="check-out-step">
                 <span id="step-1-status" class="check-out-step-number active"
@@ -37,11 +32,9 @@
                 <p class="check-out-step-label">Payment</p>
               </div>
             </div>
-
             <!-- Step 1: User Data -->
             <form id="check-out-step-1" class="check-out-form">
               <h2 class="check-out-form-title">1. Personal Information</h2>
-
               <div class="check-out-grid">
                 <div class="check-out-field">
                   <label for="firstName">First Name</label>
@@ -64,13 +57,7 @@
               </div>
 
               <div class="check-out-actions">
-                <button
-                  type="button"
-                  onclick="nextStep(2)"
-                  class="check-out-btn-primary"
-                >
-                  Next Section
-                </button>
+                <button  type="button"  onclick="nextStep(2)"   class="check-out-btn-primary" >  Next Section </button>
               </div>
             </form>
 
@@ -152,7 +139,6 @@
             <h2 class="check-out-form-title">Order Summary</h2>
 
             <div id="check-out-item-list" class="check-out-item-list">
-              <!-- Cart Item 2 -->
               <div class="check-out-item" id="check-out-item">
                 <img
                   src="https://placehold.co/80x100/1e293b/ffffff?text=Book2"
@@ -174,7 +160,6 @@
               </div>
             </div>
 
-            <!-- Total Price -->
             <div class="check-out-total">
               <span class="check-out-total-label">Total Price:</span>
               <span id="total-price" class="check-out-total-value"></span>

@@ -12,7 +12,6 @@
     </head>
     <body onload="loadListingApprovalAdmin(); loadListingData(); loadOffers(); loadSelectorOffers();">
 
-        <!-- Header -->
         <header>
             <div class="left">
                 <i class="bi bi-arrow-left-circle" onclick="history.back()"></i>
@@ -26,7 +25,6 @@
 
         <!-- Layout -->
         <div class="account-layout">
-            <!-- Sidebar -->
             <aside class="sidebar">
                 <ul>
                     <li class="active" data-tab="listings"><i class="bi bi-box-seam"></i> Listings</li>
@@ -39,17 +37,17 @@
                 </ul>
             </aside>
 
-            <!-- Main Content -->
+
             <main class="main-content">
 
-                <!-- Listing Management -->
+
                 <div id="listings" class="tab-panel active">
                     <h1>Listing Management</h1>
                     <div class="listings-grid" id="listings-grid">
                     </div>
                 </div>
 
-                <!-- Stats -->
+
                 <div id="stats" class="tab-panel">
                     <h1>Platform Statistics</h1>
                     <div class="status-cards">
@@ -61,7 +59,6 @@
                     </div>
                 </div>
 
-                <!-- User Management -->
                 <div id="users" class="tab-panel">
                     <h1>User Management</h1>
                     <table class="user-table">
@@ -76,24 +73,19 @@
                 </div>
 
 
-                <!-- Offers -->
                 <div id="offers" class="tab-panel">
                     <h1>Offers Management</h1>
                     <div class="offers-layout">
-                        <!-- Left Column: Offer Management -->
                         <div class="offers-left">
-                            <!-- Add Offer Form -->
                             <div class="listing-form">
                                 <h2>Add Offer</h2>
                                 <label>Offer Name</label>
                                 <input type="text" id="offerValue" placeholder="Enter value ">
                                 <button type="submit" class="bre-button full" onclick="addNewOffers();">Add Offer</button>
                             </div>
-                            <!-- Offer List -->
                             <h2>Existing Offers</h2>
                             <div id="offersList" class="offers-grid"></div>
                         </div>
-                        <!-- Right Column: Assign Product -->
                         <div class="offers-right">
                             <div class="listing-form">
                                 <h2>Assign Product to Offer</h2>
@@ -109,7 +101,6 @@
                     </div>
                 </div>
 
-                <!-- Utility Manager -->
                 <div id="utility" class="tab-panel">
                     <h1>Utility Manager</h1>
                     <h2>Add New Category</h2>
@@ -120,7 +111,6 @@
                     <button class="bre-button">Upload</button>
                 </div>
 
-                <!-- Add Listings -->
                 <div id="addlisting" class="tab-panel">
                     <h1>Add Admin Listing</h1>
                     <div class="listing-form">
@@ -144,11 +134,9 @@
                     </div>
                 </div>
 
-                <!-- Listing Manager -->
                 <div id="listingmanager" class="tab-panel">
                     <h1>Listing Manager</h1>
 
-                    <!-- Search Section -->
                     <div class="listing-form">
                         <h2>Search Listing</h2>
                         <label>Enter Listing ID</label>
@@ -156,7 +144,6 @@
                         <button class="bre-button">Load Listing</button>
                     </div>
 
-                    <!-- Details Section -->
                     <div class="listing-form" id="listingDetails">
                         <h2>Listing Details</h2>
                         <label>Product Title</label>
@@ -233,7 +220,7 @@
 
         </div>
 
-        <!-- Footer -->
+
         <footer>
             Developed By Avishka Chamod
         </footer>
